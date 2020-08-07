@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.presistence.question;
+package com.developer.smmmousavi.clinic.presistence.dao;
 
 import com.developer.smmmousavi.clinic.model.Question;
 
@@ -14,18 +14,18 @@ import static androidx.room.OnConflictStrategy.REPLACE;
 public interface QuestionDAO {
 
     @Insert(onConflict = IGNORE)
-    long[] insertRecipes(Question... questions);
+    long[] insertQuestion(Question... questions);
     // in case of success: {id1, id2, id3, id4}
     // in case of failure: {-1, id2, -1, -1}
 
     @Insert(onConflict = REPLACE)
-    void insertRecipe(Question recipe);
+    void insertQuestion(Question recipe);
 
     @Update
-    void updateRecipe(Question recipe);
+    void updateQuestion(Question recipe);
 
     @Delete
-    void deleteRecipe(Question recipe);
+    void deleteQuestion(Question recipe);
 
     /*@Query("UPDATE recipes SET title = :title, publisher = :publisher, image_url = :imageUrl, social_rank = :social_rank "
         + "WHERE recipe_id = :recipeId ")

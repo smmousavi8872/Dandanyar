@@ -28,6 +28,14 @@ public class Category extends BaseModel {
         mTitle = title;
     }
 
+    public long getId() {
+        return mId;
+    }
+
+    public String getTitle() {
+        return mTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

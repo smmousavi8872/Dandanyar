@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.presistence.question;
+package com.developer.smmmousavi.clinic.presistence.db;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
