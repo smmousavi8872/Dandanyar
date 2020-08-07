@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.fragments.main.di;
+package com.developer.smmmousavi.clinic.ui.fragments.survays.di;
 
 import com.developer.smmmousavi.clinic.helper.RecyclerViewHelper;
 import com.developer.smmmousavi.clinic.model.Survay;
@@ -8,7 +8,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class MainFragmentModule {
+public class SurvaysFragmentModule {
 
     @Provides
     RecyclerViewHelper provideRecyclerViewHelper() {

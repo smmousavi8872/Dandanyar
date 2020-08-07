@@ -59,6 +59,10 @@
   <string name="splash_chant">کلینیک؛ پزشک اختصاصی شما</string>
   <string name="splash_version">version: 1.0.0</string>
   <string name="main_choose_surva_title">نوع پرسش نامه خود را انتخاب کنید</string>
-  <string name="main_choose_survay_text_detail">از گروه پرسشنامه های زیر، هرکدام که مناسب برای شرایط شما است انتخاب کنید.</string>
+  <string name="main_choose_survay_text_detail">از گروه پرسشنامه های زیر، هرکدام که برای شرایط شما  مناسب است را انتخاب کنید.</string>
+  <string name="toolbar_clinic_title">کلینیک</string>
+  <string name="toolbar_dentistry_title">پرسشنامه دندانپزشکی</string>
+  <string name="categories_choose_dentistry_survay">نوع پرسش نامه دندانپزشکی را انتخاب نمایید</string>
+  <string name="toolbar_questions_title">پرسش ها</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.fragments.main;
+package com.developer.smmmousavi.clinic.ui.fragments.survays;
 
 
 import android.app.Application;
@@ -15,19 +15,19 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-public class MainFragmentVM extends BaseViewModel {
+public class SurvaysFragmentVM extends BaseViewModel {
 
     @Inject
-    public MainFragmentVM(@NonNull Application application) {
+    public SurvaysFragmentVM(@NonNull Application application) {
         super(application);
     }
 
     /**
-    *@HardCoded
-    */
+     * @HardCoded TODO: should recieve survay from server
+     */
     public LiveData<List<Survay>> getSurvays() {
         List<Survay> survays = new ArrayList<>();
-        Survay survay = new Survay("دندانپزشکی", "");
+        Survay survay = new Survay("پرسشنامه", "دندانپزشکی", "");
         survays.add(survay);
         return new MutableLiveData<>(survays);
     }

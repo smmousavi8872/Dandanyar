@@ -38,21 +38,19 @@ public class CategoryRepository {
         mCategoryDAO = Database.getInstance(context).geCategoryDao();
     }
 
-    public LiveData<Resource<List<Category>>> getCategories(final String query, final int pageNumber) {
+    public LiveData<Resource<List<Category>>> getCategories() {
         return new NetworkBoundResource<List<Category>, CategoriesResponse>(AppExecutors.getInstance()) {
 
             @Override
             protected void saveCallResult(@NonNull CategoriesResponse item) {
 
                 if (item.getCategories() != null) {
-                    //  recipe list will be null if the api key is expired
                     Category[] categoryArr = new Category[item.getCategories().size()];
                     int index = 0;
                     for (long rowId : mCategoryDAO.insertCategories(item.getCategories().toArray(categoryArr))) {
+                        // if category already exists.
                         if (rowId == -1) {
                             Log.d(TAG, "saveCallResult: CONFLICT... This recipe is already in the cache");
-                            // if the recipe already exists... I don't want to set the ingredients or timestamp b/c
-                            // they will be erased
                             mCategoryDAO.updateCategory(
                                 categoryArr[index].getId(),
                                 categoryArr[index].getTitle()

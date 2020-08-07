@@ -3,11 +3,9 @@ package com.developer.smmmousavi.clinic.ui.activities.main;
 import android.content.Context;
 import android.content.Intent;
 
-import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.ui.activities.drawer.BaseDrawerActivity;
-import com.developer.smmmousavi.clinic.ui.fragments.main.MainFragment;
-
-import androidx.fragment.app.Fragment;
+import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
+import com.developer.smmmousavi.clinic.ui.fragments.survays.SurvaysFragment;
 
 public class MainDrawerActivity extends BaseDrawerActivity {
 
@@ -17,22 +15,19 @@ public class MainDrawerActivity extends BaseDrawerActivity {
     }
 
     @Override
-    public int getFragmentId() {
-        return R.id.flDrawerContentFragmentContainer;
-    }
-
-    @Override
-    public Fragment getFragmentObject() {
-        return MainFragment.newInstance();
+    public BaseDaggerFragment getFragmentObject() {
+        return SurvaysFragment.newInstance();
     }
 
     @Override
     public String getFragmentTag() {
-        return MainFragment.TAG;
+        return SurvaysFragment.TAG;
     }
 
     @Override
     public boolean isToolbarVisible() {
         return true;
     }
+
+
 }

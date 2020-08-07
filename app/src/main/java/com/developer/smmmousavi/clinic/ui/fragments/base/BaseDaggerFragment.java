@@ -32,27 +32,28 @@ public class BaseDaggerFragment extends DaggerFragment {
     }
 
     public void replaceFragment(@IdRes int containerId,
+                                FragmentManager fm,
                                 @NonNull Fragment newFragment,
                                 @NonNull String newTag,
                                 @AnimatorRes @AnimRes int enterAnimId,
                                 @AnimatorRes @AnimRes int exitAnimId,
                                 boolean popPrevious) {
 
-        Fragment foundFragment = mFm.findFragmentByTag(newTag);
+        Fragment foundFragment = fm.findFragmentByTag(newTag);
         if (popPrevious) {
-            int frgCount = mFm.getBackStackEntryCount();
+            int frgCount = fm.getBackStackEntryCount();
             if (frgCount > 0)
-                mFm.popBackStack();
+                fm.popBackStack();
         }
 
         if (foundFragment == null)
-            mFm.beginTransaction()
+            fm.beginTransaction()
                 .setCustomAnimations(enterAnimId, exitAnimId)
                 .replace(containerId, newFragment, newTag)
                 .addToBackStack(newTag)
                 .commit();
         else
-            mFm.beginTransaction()
+            fm.beginTransaction()
                 .setCustomAnimations(enterAnimId, exitAnimId)
                 .replace(containerId, newFragment, newTag)
                 .commit();

@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.fragments.main;
+package com.developer.smmmousavi.clinic.ui.fragments.survays;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,8 +9,11 @@ import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.factory.viewmodel.ViewModelProviderFactory;
 import com.developer.smmmousavi.clinic.helper.RecyclerViewHelper;
 import com.developer.smmmousavi.clinic.model.Survay;
+import com.developer.smmmousavi.clinic.ui.activities.main.MainDrawerActivity;
 import com.developer.smmmousavi.clinic.ui.adapter.SurvaiesRvAdapter;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
+import com.developer.smmmousavi.clinic.ui.fragments.categories.CategoriesFragment;
+import com.developer.smmmousavi.clinic.ui.viewholder.survay.SurvayItemClickListener;
 
 import java.util.List;
 
@@ -25,10 +28,10 @@ import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MainFragment#newInstance} factory method to
+ * Use the {@link SurvaysFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends BaseDaggerFragment {
+public class SurvaysFragment extends BaseDaggerFragment implements SurvayItemClickListener {
 
     public static final String TAG = "MainDrawerFragmentTAG";
 
@@ -42,15 +45,15 @@ public class MainFragment extends BaseDaggerFragment {
     @Inject
     ViewModelProviderFactory mProviderFactory;
 
-    private MainFragmentVM mViewModel;
+    private SurvaysFragmentVM mViewModel;
 
-    public MainFragment() {
+    public SurvaysFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance() {
-        MainFragment fragment = new MainFragment();
+    public static SurvaysFragment newInstance() {
+        SurvaysFragment fragment = new SurvaysFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -68,7 +71,7 @@ public class MainFragment extends BaseDaggerFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_main, container, false);
+        View v = inflater.inflate(R.layout.fragment_survays, container, false);
         ButterKnife.bind(this, v);
         initViewModle();
         subscribeObserver();
@@ -76,7 +79,7 @@ public class MainFragment extends BaseDaggerFragment {
     }
 
     private void initViewModle() {
-        mViewModel = ViewModelProviders.of(this, mProviderFactory).get(MainFragmentVM.class);
+        mViewModel = ViewModelProviders.of(this, mProviderFactory).get(SurvaysFragmentVM.class);
     }
 
     private void subscribeObserver() {
@@ -86,6 +89,16 @@ public class MainFragment extends BaseDaggerFragment {
     private void initSurvaysRv(List<Survay> survays) {
         LinearLayoutManager mLM = mRvHelper.getLinearLayoutManager(getContext(), RecyclerViewHelper.Orientation.VERTICAL, false);
         mSurvaysRvAdapter.setItemList(survays);
+        mSurvaysRvAdapter.setSurvayItemClickListener(this);
         mRvSurvays = mRvHelper.buildRecyclerView(mLM, mRvSurvays, mSurvaysRvAdapter);
+    }
+
+    @Override
+    public void onItemClicked(long survayId) {
+        ((MainDrawerActivity) getActivity()).replaceContentFragment(CategoriesFragment.newInstance(survayId),
+            CategoriesFragment.TAG,
+            R.anim.activity_left_to_right,
+            R.anim.activity_left_to_right2,
+            true);
     }
 }

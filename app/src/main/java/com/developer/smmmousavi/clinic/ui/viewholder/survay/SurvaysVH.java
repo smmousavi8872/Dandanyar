@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.viewholder;
+package com.developer.smmmousavi.clinic.ui.viewholder.survay;
 
 import android.view.View;
 
@@ -11,7 +11,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import butterknife.BindView;
 
-public class SurvaiesVH<T extends Survay> extends BaseViewHolder<T> {
+public class SurvaysVH<T extends Survay> extends BaseViewHolder<T> {
 
     @BindView(R.id.txtSurvayTitle)
     AppCompatTextView mTxtSurvayTitle;
@@ -20,12 +20,21 @@ public class SurvaiesVH<T extends Survay> extends BaseViewHolder<T> {
     @BindView(R.id.imgSurvayIcon)
     AppCompatImageView mImgSurvayIcon;
 
-    public SurvaiesVH(@NonNull View itemView) {
+
+    private Survay mItem;
+    private SurvayItemClickListener mItemClickListener;
+
+    public void setItemClickListener(SurvayItemClickListener itemClickListener) {
+        mItemClickListener = itemClickListener;
+    }
+
+    public SurvaysVH(@NonNull View itemView) {
         super(itemView);
     }
 
     @Override
     public void onBind(T item) {
+        mItem = item;
         mTxtSurvayTitle.setText(item.getTitle());
         mTxtSurvayDescription.setText(item.getDescription());
         //TODO: icon should recieve from server
@@ -33,7 +42,6 @@ public class SurvaiesVH<T extends Survay> extends BaseViewHolder<T> {
 
     @Override
     public void onClick(View view) {
-
-
+        mItemClickListener.onItemClicked(mItem.getId());
     }
 }

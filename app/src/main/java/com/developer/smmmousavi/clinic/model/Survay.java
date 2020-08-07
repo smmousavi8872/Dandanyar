@@ -7,8 +7,9 @@ public class Survay extends BaseModel {
     private String mDescription;
     private String mIconUrl;
 
-    public Survay(String title, String iconUrl) {
+    public Survay(String title, String description, String iconUrl) {
         mTitle = title;
+        mDescription = description;
         mIconUrl = iconUrl;
     }
 

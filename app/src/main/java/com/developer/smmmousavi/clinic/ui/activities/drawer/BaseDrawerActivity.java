@@ -10,9 +10,16 @@ import android.view.View;
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.ui.activities.base.BaseDaggerCompatActivity;
 import com.developer.smmmousavi.clinic.ui.activities.signupsignin.signinsignup.SignInSignUpActivity;
+import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
+import com.developer.smmmousavi.clinic.ui.fragments.categories.CategoriesFragment;
+import com.developer.smmmousavi.clinic.ui.fragments.questions.QuestionsFragment;
+import com.developer.smmmousavi.clinic.ui.fragments.survays.SurvaysFragment;
+import com.developer.smmmousavi.clinic.util.Animations;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.AnimRes;
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -24,7 +31,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener, OnBackPressedListener, SetOnContentFragmentInsert, SetOnToolbarVisibility {
+    implements NavigationView.OnNavigationItemSelectedListener, OnBackPressedListener, SetOnContentFragmentInsert, SetOnToolbarProperties {
+
+    @IdRes
+    private static final int sFragmentContainerId = R.id.flDrawerContentFragmentContainer;
 
     @BindView(R.id.navbarView)
     NavigationView mNavigationView;
@@ -34,9 +44,12 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     AppBarLayout mToolabrLayout;
     @BindView(R.id.imgToolbarClose)
     AppCompatImageView mToolbarClose;
+    @BindView(R.id.txtToolbarTitle)
+    AppCompatTextView mTxtToolbarTitle;
 
     private AppCompatTextView mTxtSignupButton;
     private OnBackPressedListener mOnBackPressedListener;
+    private BaseDaggerFragment mHostedFrgament;
 
     public NavigationView getNavigationView() {
         return mNavigationView;
@@ -69,8 +82,43 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     private void initToolbar() {
         if (!isToolbarVisible())
             mToolabrLayout.setVisibility(View.GONE);
-        //TODO: should set the shopping basket count to mTxtShoppingBasketBadge, using SharedPrefUtils
-        //should implement search icon functionality in toolbar
+        if (mHostedFrgament instanceof SurvaysFragment) {
+            mToolbarClose.setOnClickListener(view -> {
+                finish();
+            });
+            mTxtToolbarTitle.setText(R.string.toolbar_clinic_title);
+        } else if (mHostedFrgament instanceof CategoriesFragment) {
+            mToolbarClose.setOnClickListener(view -> {
+                replaceBySurvaysFragment();
+            });
+            mTxtToolbarTitle.setText(R.string.toolbar_dentistry_title);
+        } else if (mHostedFrgament instanceof QuestionsFragment) {
+            mToolbarClose.setOnClickListener(view -> {
+                replaceByCategories();
+            });
+            mTxtToolbarTitle.setText(R.string.toolbar_questions_title);
+        }
+        Animations.setAnimation(R.anim.hint_in, mTxtToolbarTitle);
+    }
+
+    private void replaceBySurvaysFragment() {
+        replaceContentFragment(SurvaysFragment.newInstance(),
+            SurvaysFragment.TAG,
+            R.anim.activity_right_to_left,
+            R.anim.activity_right_to_left2,
+            true);
+    }
+
+    /**
+     * @HardCoded
+     * TODO: categoryId should recieve from server
+     */
+    private void replaceByCategories() {
+        replaceContentFragment(CategoriesFragment.newInstance(0),
+            CategoriesFragment.TAG,
+            R.anim.activity_right_to_left,
+            R.anim.activity_right_to_left2,
+            true);
     }
 
 
@@ -170,17 +218,32 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
 
 
     public void insertContentFragment(SetOnContentFragmentInsert contentSet) {
-        int containerId = contentSet.getFragmentId();
-        Fragment fragmentObject = contentSet.getFragmentObject();
+        mHostedFrgament = contentSet.getFragmentObject();
         String fragmentTag = contentSet.getFragmentTag();
 
-        Fragment foundFragment = mFm.findFragmentById(containerId);
+        Fragment foundFragment = mFm.findFragmentById(sFragmentContainerId);
 
         if (foundFragment == null) {
             mFm.beginTransaction()
-                .add(containerId, fragmentObject, fragmentTag)
+                .add(sFragmentContainerId, mHostedFrgament, fragmentTag)
                 .commit();
         }
+    }
+
+    public void replaceContentFragment(BaseDaggerFragment newFragment,
+                                       String tag,
+                                       @AnimRes int enterAnimId,
+                                       @AnimRes int exitAnimId,
+                                       boolean popPrevious) {
+        mHostedFrgament = newFragment;
+        newFragment.replaceFragment(sFragmentContainerId,
+            mFm,
+            newFragment,
+            tag,
+            enterAnimId,
+            exitAnimId,
+            popPrevious);
+        initToolbar();
     }
 
     @OnClick(R.id.imgToolbarNavbarButton)
@@ -189,25 +252,15 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
         setOnBackPressedListener(this);
     }
 
-    @OnClick(R.id.imgToolbarClose)
-    void setToolbarClose() {
-        finish();
-    }
-
-
     @Override
     public void onBackPressed() {
-        //Dirty Code
-        //Find a better solution
-       /* HomeDrawerFragment homeDrawerFragment = (HomeDrawerFragment) getSupportFragmentManager().findFragmentByTag(HomeDrawerFragment.TAG);
-        if (mOnBackPressedListener != null) {
-            if (isDrawerOpen() || homeDrawerFragment.getBottomSheetBehavior().getState() == BottomSheetBehavior.STATE_EXPANDED)
-                mOnBackPressedListener.onBack();
-            else
-                super.onBackPressed();
-            mOnBackPressedListener = null;
-        } else*/
-        super.onBackPressed();
+        if (mHostedFrgament instanceof SurvaysFragment) {
+            super.onBackPressed();
+        } else if (mHostedFrgament instanceof CategoriesFragment) {
+            replaceBySurvaysFragment();
+        } else if(mHostedFrgament instanceof QuestionsFragment) {
+            replaceByCategories();
+        }
     }
 
     @Override

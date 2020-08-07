@@ -1,14 +1,10 @@
 package com.developer.smmmousavi.clinic.ui.activities.drawer;
 
-import androidx.annotation.IdRes;
-import androidx.fragment.app.Fragment;
+import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
 
 public interface SetOnContentFragmentInsert {
 
-    @IdRes
-    int getFragmentId();
-
-    Fragment getFragmentObject();
+    BaseDaggerFragment getFragmentObject();
 
     String getFragmentTag();
 }
