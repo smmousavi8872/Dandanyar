@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <group
+    android:id="@+id/navMenuHeaderContiane"
+    android:checkableBehavior="single">
+    <item
+      android:id="@+id/navbarMenuHome"
+      android:icon="@drawable/ic_home_black_24dp"
+      android:title="@string/navbarMenuHome" />
+    <item
+      android:id="@+id/navbarMenuCatList"
+      android:icon="@drawable/ic_list_black_24dp"
+      android:title="@string/navbarMenuProductCatList" />
+
+  </group>
+
+</menu>

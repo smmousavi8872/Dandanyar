@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/colorAccent"
+  tools:context=".ui.fragments.splash.SplashFragment">
+
+  <androidx.appcompat.widget.AppCompatImageView
+    android:layout_margin="16dp"
+    android:id="@+id/imUniLogo"
+    android:layout_width="144dp"
+    android:layout_height="144dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/uni_logo" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:textColor="@color/pureWhite"
+    android:layout_marginTop="32dp"
+    android:textSize="24dp"
+    android:fontFamily="@font/iran_sans_mobile_bold"
+    android:text="@string/splash_chant"
+    app:layout_constraintTop_toBottomOf="@id/imUniLogo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+  <androidx.appcompat.widget.AppCompatTextView
+    android:id="@+id/txtLoadingContent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/splash_loading_text"
+    android:textColor="@color/pureWhite"
+    android:textSize="20dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/splashLoading" />
+
+  <com.github.ybq.android.spinkit.SpinKitView
+    android:id="@+id/splashLoading"
+    style="@style/SpinKitView.Large.FoldingCube"
+    android:layout_width="72dp"
+    android:layout_height="72dp"
+    android:layout_marginBottom="128dp"
+    android:padding="16dp"
+    app:SpinKit_Color="@color/pureWhite"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+
+  <androidx.appcompat.widget.AppCompatTextView
+    android:id="@+id/txtVersion"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:textColor="@color/colorPrimaryDark"
+    android:text="@string/splash_version"
+    android:padding="8dp"
+    android:fontFamily="@font/roboto_light"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

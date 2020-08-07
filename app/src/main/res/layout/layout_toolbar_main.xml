@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/abAppBar"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+  <androidx.appcompat.widget.Toolbar
+    android:id="@+id/tbMainToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary"
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:popupTheme="@style/Theme.AppCompat.Light"
+    app:titleTextColor="@android:color/white">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layoutDirection="rtl">
+
+      <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgToolbarNavbarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:padding="8dp"
+        app:srcCompat="@drawable/ic_navbar_white" />
+
+      <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgToolbarSearch"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp"
+        app:srcCompat="@drawable/abc_ic_search_api_material"
+        tools:ignore="PrivateResource" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/imgToolbarLogo"
+        android:layout_width="wrap_content"
+        android:layout_toEndOf="@id/imgToolbarNavbarButton"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:paddingStart="16dp"
+        android:paddingEnd="8dp"
+        android:fontFamily="@font/iran_sans_mobile_bold"
+        android:text="کلینیک"
+        android:textColor="@color/pureWhite"
+        android:textSize="21dp" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtToolbarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/imgToolbarNavbarButton"
+        android:paddingStart="16dp"
+        android:paddingEnd="24dp"
+        android:textColor="@color/pureWhite"
+        android:textSize="18dp"
+        android:visibility="gone"
+        tools:text="لیست دسته بندی ها" />
+    </RelativeLayout>
+  </androidx.appcompat.widget.Toolbar>
+</com.google.android.material.appbar.AppBarLayout>
