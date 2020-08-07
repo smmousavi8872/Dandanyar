@@ -1,11 +1,14 @@
 package com.developer.smmmousavi.clinic.ui.activities.base;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.developer.smmmousavi.clinic.R;
 
+import androidx.annotation.ColorRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import dagger.android.support.DaggerAppCompatActivity;
 
@@ -17,6 +20,20 @@ public class BaseDaggerCompatActivity extends DaggerAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFm = getSupportFragmentManager();
+
+        setStateBarColor(R.color.pureBlack, R.color.secondBackground);
+    }
+
+
+    protected void setStateBarColor(@ColorRes int textColor, @ColorRes int backgroundColor) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            // Navigation bar the soft bottom of some phones like nexus and some Samsung note series
+            getWindow()
+                .setNavigationBarColor(ContextCompat.getColor(this, textColor));
+            //status bar or the time bar at the top
+            getWindow()
+                .setStatusBarColor(ContextCompat.getColor(this, backgroundColor));
+        }
     }
 
 

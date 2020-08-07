@@ -1,7 +1,6 @@
 package com.developer.smmmousavi.clinic.ui.activities.drawer;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -16,7 +15,6 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -57,8 +55,6 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
         setContentView(R.layout.activity_base_drawer);
         ButterKnife.bind(this);
 
-        setStateBarColor();
-
         insertContentFragment(this);
 
         initNavView();
@@ -66,16 +62,6 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
         initToolbar();
     }
 
-    private void setStateBarColor() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            // Navigation bar the soft bottom of some phones like nexus and some Samsung note series
-            getWindow()
-                .setNavigationBarColor(ContextCompat.getColor(this, R.color.pureWhite));
-            //status bar or the time bar at the top
-            getWindow()
-                .setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        }
-    }
 
 
     private void initToolbar() {

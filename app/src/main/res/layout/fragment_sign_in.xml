@@ -4,6 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:background="@color/secondBackground"
   android:focusable="true"
   android:focusableInTouchMode="true"
   tools:context=".ui.fragments.signinsignup.SignInFragment">
@@ -12,11 +13,11 @@
     android:id="@+id/viewSignUpInDigishopUnderline"
     android:layout_width="wrap_content"
     android:layout_height="1dp"
-    android:layout_below="@id/txtSignUpInDigishop"
-    android:layout_alignStart="@id/txtSignUpInDigishop"
-    android:layout_alignEnd="@id/txtSignUpInDigishop"
+    android:layout_below="@id/txtSignUpInClinic"
+    android:layout_alignStart="@id/txtSignUpInClinic"
+    android:layout_alignEnd="@id/txtSignUpInClinic"
     android:layout_marginTop="-10dp"
-    android:background="@color/primaryGreen" />
+    android:background="@color/colorAccent" />
 
   <View
     android:id="@+id/viewForgotPasswordUnderline"
@@ -42,7 +43,7 @@
     android:theme="@style/blueCheckBoxStyle" />
 
   <androidx.appcompat.widget.AppCompatTextView
-    android:id="@+id/txtSignUpInDigishop"
+    android:id="@+id/txtSignUpInClinic"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/txtForgotPassword"
@@ -51,7 +52,7 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:text="@string/registerInDigishop"
-    android:textColor="@color/primaryGreen"
+    android:textColor="@color/colorAccent"
     android:textSize="16dp" />
 
   <androidx.appcompat.widget.AppCompatTextView
@@ -73,14 +74,14 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:layout_alignParentBottom="true"
-    android:background="@color/primaryGreen"
+    android:background="@color/colorAccent"
     android:imeOptions="actionSend|flagNoEnterAction">
 
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
       android:layout_gravity="center_horizontal"
-      android:background="@color/primaryBlue"
+      android:background="@color/colorAccent"
       android:gravity="center"
       android:orientation="horizontal"
       android:padding="8dp">
@@ -122,7 +123,7 @@
       android:drawableStart="@drawable/ic_email_gray_24dp"
       android:inputType="textEmailAddress"
       android:paddingTop="16dp"
-      android:textColor="@color/lightNavyBlue"
+      android:textColor="@color/colorPrimaryDark"
       android:textDirection="rtl"
       android:textSize="15dp"
       android:theme="@style/blueEditTextStyle" />
@@ -147,7 +148,7 @@
       android:layout_marginEnd="32dp"
       android:drawableStart="@drawable/ic_lock_gray_24dp"
       android:inputType="textPassword"
-      android:textColor="@color/lightNavyBlue"
+      android:textColor="@color/colorPrimaryDark"
       android:textDirection="rtl"
       android:textSize="15dp"
       android:theme="@style/blueEditTextStyle" />

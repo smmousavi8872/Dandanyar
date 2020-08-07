@@ -15,6 +15,6 @@
 
   <include
     android:id="@+id/includeToolbarSignInSignOutActivity"
-    layout="@layout/layout_shopping_basket_toolabr" />
+    layout="@layout/layout_signin_toolabr" />
 
 </RelativeLayout>

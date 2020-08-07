@@ -4,7 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@color/colorPrimary"
+  android:background="@color/secondBackground"
   android:gravity="start"
   android:orientation="vertical"
   android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -99,7 +99,7 @@
       android:paddingRight="12dp"
       android:paddingBottom="4dp"
       android:text="@string/singin_and_signup"
-      android:textColor="#fff" />
+      android:textColor="@color/colorAccent" />
 
   </RelativeLayout>
 

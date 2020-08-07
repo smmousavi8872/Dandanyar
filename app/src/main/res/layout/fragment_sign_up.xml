@@ -4,6 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:background="@color/secondBackground"
   android:focusable="true"
   android:focusableInTouchMode="true"
   tools:context=".ui.fragments.signinsignup.SignUpFragment">
@@ -36,14 +37,14 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:layout_alignParentBottom="true"
-    android:background="@color/primaryGreen"
+    android:background="@color/colorAccent"
     android:imeOptions="actionSend|flagNoEnterAction">
 
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
       android:layout_gravity="center_horizontal"
-      android:background="@color/primaryGreen"
+      android:background="@color/colorAccent"
       android:gravity="center"
       android:orientation="horizontal"
       android:padding="8dp">
@@ -60,7 +61,7 @@
         android:id="@+id/txtDoneSignUpInDigishop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up_in_digishop"
+        android:text="@string/sign_up_in"
         android:textColor="@color/pureWhite"
         android:textSize="19dp" />
     </LinearLayout>
@@ -86,7 +87,7 @@
       android:inputType="textEmailAddress"
       android:paddingTop="16dp"
       android:textSize="15dp"
-      android:textColor="@color/lightNavyBlue"
+      android:textColor="@color/colorPrimaryDark"
       android:textDirection="rtl"
       android:theme="@style/greenEditTextStyle" />
   </com.google.android.material.textfield.TextInputLayout>
@@ -110,7 +111,7 @@
       android:layout_marginStart="32dp"
       android:layout_marginEnd="32dp"
       android:drawableStart="@drawable/ic_lock_gray_24dp"
-      android:textColor="@color/lightNavyBlue"
+      android:textColor="@color/colorPrimaryDark"
       android:textDirection="rtl"
       android:theme="@style/greenEditTextStyle" />
   </com.google.android.material.textfield.TextInputLayout>

@@ -3,6 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/abAppBar"
+  app:elevation="0dp"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -11,7 +12,7 @@
     android:id="@+id/tbShoppingToolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/colorPrimary"
+    android:background="@color/secondBackground"
     app:popupTheme="@style/Theme.AppCompat.Light"
     app:titleTextColor="@android:color/white">
 
@@ -20,7 +21,7 @@
       android:layout_height="match_parent">
 
       <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgToolbarCloseShoppingBasket"
+        android:id="@+id/imgToolbarClose"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_alignParentEnd="true"
@@ -36,17 +37,17 @@
         android:id="@+id/txtToolbarTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/imgToolbarCloseShoppingBasket"
-        android:layout_alignBottom="@id/imgToolbarCloseShoppingBasket"
+        android:layout_alignTop="@id/imgToolbarClose"
+        android:layout_alignBottom="@id/imgToolbarClose"
         android:layout_marginStart="-1dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="0dp"
-        android:layout_toStartOf="@id/imgToolbarCloseShoppingBasket"
+        android:layout_toStartOf="@id/imgToolbarClose"
         android:fontFamily="@font/iran_sans_bold"
         android:gravity="center_vertical"
-        android:text="@string/your_shopping_basket"
-        android:textColor="@color/pureWhite"
+        android:text="@string/sign_in_to_digishop"
+        android:textColor="@color/colorAccent"
         android:textSize="18dp" />
 
 

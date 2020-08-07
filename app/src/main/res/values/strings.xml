@@ -4,7 +4,7 @@
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="navbarMenuHome">خانه</string>
-  <string name="navbarMenuProductCatList">لیست دسته بندی غذاها</string>
+  <string name="navbarMenuProductCatList">لیست دسته بندی ها</string>
   <string name="navbarMenuShoppingBasket">سبد خرید</string>
   <string name="navbarMenuSpecialOffer">پیشنهاد ویژه کلینیک</string>
   <string name="navbarMenuMostSoled">پرفروش ترین‌ها</string>
@@ -43,7 +43,7 @@
   <string name="userLoginEmailOrMobile">شماره موبایل یا ایمیل</string>
   <string name="userLoginPassword">کلمه عبور</string>
   <string name="userLoginForgotPassword">کلمه عبورم را فراموش کرده‌ام!</string>
-  <string name="sign_up_in_digishop">ثبت نام در کلینیک</string>
+  <string name="sign_up_in">ثبت نام در کلینیک</string>
   <string name="signed_up_with_email_in_before">اگر قبلا با ایمیل ثبت‌نام کرده‌اید، نیاز به ثبت‌نام مجدد با شماره همراه ندارید</string>
   <string name="remembser_me">مرا به خاطر بسپار</string>
   <string name="sign_in_to_digishop">ورود به کلینیک</string>

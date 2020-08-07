@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.presistence.recipe;
+package com.developer.smmmousavi.clinic.presistence.question;
 
 import com.developer.smmmousavi.clinic.model.Question;
 
@@ -11,7 +11,7 @@ import static androidx.room.OnConflictStrategy.IGNORE;
 import static androidx.room.OnConflictStrategy.REPLACE;
 
 @Dao
-public interface RecipeDAO {
+public interface QuestionDAO {
 
     @Insert(onConflict = IGNORE)
     long[] insertRecipes(Question... questions);

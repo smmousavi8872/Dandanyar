@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.presistence.recipe;
+package com.developer.smmmousavi.clinic.presistence.question;
 
 import android.content.Context;
 
@@ -12,19 +12,19 @@ import androidx.room.TypeConverters;
 
 @Database(entities = {Question.class}, version = 1)
 @TypeConverters({ListConverter.class})
-public abstract class RecipeDatabase extends RoomDatabase {
+public abstract class QuestionDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "recipes_db";
 
-    public abstract RecipeDAO getRecipeDao();
+    public abstract QuestionDAO getRecipeDao();
 
-    private static RecipeDatabase sInstance;
+    private static QuestionDatabase sInstance;
 
-    public static RecipeDatabase getInstance(final Context context) {
+    public static QuestionDatabase getInstance(final Context context) {
         if (sInstance == null)
             sInstance = Room.databaseBuilder(
                 context.getApplicationContext(),
-                RecipeDatabase.class,
+                QuestionDatabase.class,
                 DATABASE_NAME).build();
         return sInstance;
     }

@@ -33,7 +33,7 @@ public class SignInFragment extends BaseDaggerFragment {
     AppCompatTextView mTxtForgotPassword;
     @BindView(R.id.chkShowPassword)
     AppCompatCheckBox mChkShowPassword;
-    @BindView(R.id.txtSignUpInDigishop)
+    @BindView(R.id.txtSignUpInClinic)
     AppCompatTextView mTxtSignUp;
 
     public static SignInFragment newInstance() {
@@ -59,10 +59,10 @@ public class SignInFragment extends BaseDaggerFragment {
         return v;
     }
 
-    @OnClick(R.id.txtSignUpInDigishop)
+    @OnClick(R.id.txtSignUpInClinic)
     public void setOnSignUpListenter(View v) {
         SignInSignUpActivity parentActivity = (SignInSignUpActivity) getActivity();
-        parentActivity.repalceFramgen(SignUpFragment.newInstance());
+        parentActivity.repalceFramgen(SignUpFragment.newInstance(), R.string.sign_up_in);
     }
 
     @OnClick(R.id.chkShowPassword)
