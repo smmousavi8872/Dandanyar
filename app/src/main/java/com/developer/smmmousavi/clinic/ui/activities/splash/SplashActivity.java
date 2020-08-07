@@ -24,4 +24,8 @@ public class SplashActivity extends SingleFragmentActivity {
     public String getTag() {
         return SplashFragment.TAG;
     }
+
+    @Override
+    public void onBackPressed() {
+    }
 }

@@ -56,7 +56,9 @@
   <string name="error_in_connection">خطا در برقراری ارتباط با سرور</string>
   <string name="hint_search_here">اینجا جستوجو کنید</string>
   <string name="splash_loading_text">بارگزاری محتوا</string>
-  <string name="splash_chant">کلینیک؛ دندانپزشک اختصاصی شما</string>
+  <string name="splash_chant">کلینیک؛ پزشک اختصاصی شما</string>
   <string name="splash_version">version: 1.0.0</string>
+  <string name="main_choose_surva_title">نوع پرسش نامه خود را انتخاب کنید</string>
+  <string name="main_choose_survay_text_detail">از گروه پرسشنامه های زیر، هرکدام که مناسب برای شرایط شما است انتخاب کنید.</string>
 
 </resources>

@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.ui.activities.drawer.BaseDrawerActivity;
-import com.developer.smmmousavi.clinic.ui.fragments.main.MainDrawerFragment;
+import com.developer.smmmousavi.clinic.ui.fragments.main.MainFragment;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,12 +23,12 @@ public class MainDrawerActivity extends BaseDrawerActivity {
 
     @Override
     public Fragment getFragmentObject() {
-        return MainDrawerFragment.newInstance();
+        return MainFragment.newInstance();
     }
 
     @Override
     public String getFragmentTag() {
-        return MainDrawerFragment.TAG;
+        return MainFragment.TAG;
     }
 
     @Override

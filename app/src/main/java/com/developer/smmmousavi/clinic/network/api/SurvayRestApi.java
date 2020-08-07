@@ -16,7 +16,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-interface FlowChartRestApi {
+public interface SurvayRestApi {
 
     @POST("api/user/SignUp")
     LiveData<ApiResponse<UserSignUpResponse>> userSignUp(@Body UserSignUpBody body);

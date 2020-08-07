@@ -48,7 +48,7 @@
         android:gravity="center_vertical"
         android:text="@string/sign_in_to_digishop"
         android:textColor="@color/colorAccent"
-        android:textSize="18dp" />
+        android:textSize="18sp" />
 
 
     </RelativeLayout>

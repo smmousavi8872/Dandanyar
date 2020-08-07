@@ -32,7 +32,7 @@
         app:srcCompat="@drawable/ic_navbar_white" />
 
       <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgToolbarSearch"
+        android:id="@+id/imgToolbarClose"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_alignParentEnd="true"
@@ -55,7 +55,7 @@
         android:paddingEnd="8dp"
         android:text="کلینیک"
         android:textColor="@color/colorAccent"
-        android:textSize="18dp" />
+        android:textSize="18sp" />
 
       <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtToolbarTitle"
@@ -66,7 +66,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="24dp"
         android:textColor="@color/pureWhite"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:visibility="gone"
         tools:text="لیست دسته بندی ها" />
     </RelativeLayout>

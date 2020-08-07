@@ -14,6 +14,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -31,6 +32,8 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     DrawerLayout mDrawerLayout;
     @BindView(R.id.includeToolbar)
     AppBarLayout mToolabrLayout;
+    @BindView(R.id.imgToolbarClose)
+    AppCompatImageView mToolbarClose;
 
     private AppCompatTextView mTxtSignupButton;
     private OnBackPressedListener mOnBackPressedListener;
@@ -61,7 +64,6 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
 
         initToolbar();
     }
-
 
 
     private void initToolbar() {
@@ -187,6 +189,10 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
         setOnBackPressedListener(this);
     }
 
+    @OnClick(R.id.imgToolbarClose)
+    void setToolbarClose() {
+        finish();
+    }
 
 
     @Override
@@ -201,7 +207,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
                 super.onBackPressed();
             mOnBackPressedListener = null;
         } else*/
-            super.onBackPressed();
+        super.onBackPressed();
     }
 
     @Override

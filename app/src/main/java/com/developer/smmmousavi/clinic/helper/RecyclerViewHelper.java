@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.developer.smmmousavi.clinic.base.recyclerview.BaseRvAdapter;
 import com.developer.smmmousavi.clinic.builder.recyclerview.RecyclerViewBuilder;
-import com.developer.smmmousavi.clinic.model.BaseModel;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +19,7 @@ public class RecyclerViewHelper {
 
     public RecyclerView buildRecyclerView(RecyclerView.LayoutManager layoutManager,
                                           RecyclerView recyclerView,
-                                          BaseRvAdapter<BaseModel> adapter) {
+                                          BaseRvAdapter adapter) {
         new RecyclerViewBuilder(recyclerView)
             .setLayoutManager(layoutManager)
             .setItemViewCacheSize(30)

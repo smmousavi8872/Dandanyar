@@ -2,9 +2,9 @@ package com.developer.smmmousavi.clinic.ui.fragments.base.di;
 
 
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
-import com.developer.smmmousavi.clinic.ui.fragments.main.MainDrawerFragment;
-import com.developer.smmmousavi.clinic.ui.fragments.main.di.MainDrawerFragmentModule;
-import com.developer.smmmousavi.clinic.ui.fragments.main.di.MainDrawerFragmentVMModule;
+import com.developer.smmmousavi.clinic.ui.fragments.main.MainFragment;
+import com.developer.smmmousavi.clinic.ui.fragments.main.di.MainFragmentModule;
+import com.developer.smmmousavi.clinic.ui.fragments.main.di.MainFragmentVMModule;
 import com.developer.smmmousavi.clinic.ui.fragments.signinsignup.SignInFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.signinsignup.SignUpFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.signinsignup.di.SignInFragmentModule;
@@ -28,8 +28,8 @@ public abstract class FragmentBuildersModule {
     @ContributesAndroidInjector(modules = {SignUpFragmentModule.class})
     abstract SignUpFragment contributeSignUpFragment();
 
-    @ContributesAndroidInjector(modules = {MainDrawerFragmentModule.class, MainDrawerFragmentVMModule.class})
-    abstract MainDrawerFragment contributeMainDrawerFragment();
+    @ContributesAndroidInjector(modules = {MainFragmentModule.class, MainFragmentVMModule.class})
+    abstract MainFragment contributeMainDrawerFragment();
 
     @ContributesAndroidInjector(modules = {SplashFragmentModule.class, SplashFragmentViewModelModule.class})
     abstract SplashFragment contributeSplashFragment();

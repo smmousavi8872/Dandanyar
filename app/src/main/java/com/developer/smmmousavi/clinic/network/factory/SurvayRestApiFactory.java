@@ -1,25 +1,28 @@
-package com.developer.smmmousavi.clinic.application.di;
+package com.developer.smmmousavi.clinic.network.factory;
 
 
 import com.developer.smmmousavi.clinic.constants.Constants;
+import com.developer.smmmousavi.clinic.network.api.SurvayRestApi;
 import com.developer.smmmousavi.clinic.network.util.LiveDataCallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module
-public class BaseApplicationModule {
+public class SurvayRestApiFactory {
 
-    @Provides
-    @Singleton
+    private SurvayRestApiFactory() {
+    }
+
+    public static SurvayRestApi create() {
+        OkHttpClient client = provideOkHttpClientInstance();
+        Retrofit retrofit = provideRetrofitInstance(client);
+        return retrofit.create(SurvayRestApi.class);
+    }
+
     static OkHttpClient provideOkHttpClientInstance() {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -36,8 +39,6 @@ public class BaseApplicationModule {
             .build();
     }
 
-    @Provides
-    @Singleton
     static Retrofit provideRetrofitInstance(OkHttpClient httpClient) {
         return new Retrofit.Builder()
             .baseUrl(Constants.SURVAY_BASE_URL)
@@ -46,5 +47,4 @@ public class BaseApplicationModule {
             .client(httpClient)
             .build();
     }
-
 }
