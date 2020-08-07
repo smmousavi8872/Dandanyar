@@ -2,6 +2,7 @@ package com.developer.smmmousavi.clinic.presistence.db;
 
 import android.content.Context;
 
+import com.developer.smmmousavi.clinic.model.Category;
 import com.developer.smmmousavi.clinic.model.Question;
 import com.developer.smmmousavi.clinic.presistence.dao.CategoryDAO;
 import com.developer.smmmousavi.clinic.presistence.dao.QuestionDAO;
@@ -10,7 +11,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@androidx.room.Database(entities = {Question.class}, version = 1)
+@androidx.room.Database(entities = {Question.class, Category.class}, version = 1)
 @TypeConverters({ListConverter.class})
 public abstract class Database extends RoomDatabase {
 

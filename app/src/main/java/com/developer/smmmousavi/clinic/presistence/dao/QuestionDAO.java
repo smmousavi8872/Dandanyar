@@ -19,13 +19,13 @@ public interface QuestionDAO {
     // in case of failure: {-1, id2, -1, -1}
 
     @Insert(onConflict = REPLACE)
-    void insertQuestion(Question recipe);
+    void insertQuestion(Question question);
 
     @Update
-    void updateQuestion(Question recipe);
+    void updateQuestion(Question question);
 
     @Delete
-    void deleteQuestion(Question recipe);
+    void deleteQuestion(Question question);
 
     /*@Query("UPDATE recipes SET title = :title, publisher = :publisher, image_url = :imageUrl, social_rank = :social_rank "
         + "WHERE recipe_id = :recipeId ")
