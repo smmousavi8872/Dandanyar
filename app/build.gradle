@@ -11,12 +11,29 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
+            }
+        }
     }
 
     buildTypes {
         release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles fileTree('proguard').asList().toArray()
+            multiDexEnabled false
+        }
+        debug {
+            multiDexEnabled true
+            debuggable true
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -52,10 +69,7 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp-urlconnection:$okHttpVersion"
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-    implementation 'com.squareup.moshi:moshi:1.8.0'
 
-    //dexter
-    implementation 'com.karumi:dexter:5.0.0'
 
     //ButterKnife
     implementation 'com.jakewharton:butterknife:10.1.0'
@@ -71,9 +85,6 @@ dependencies {
     //implementation 'com.google.android.material:material:1.2.0-alpha06'
     implementation 'com.google.android.material:material:1.0.0'
 
-    //loading progressbar
-    implementation 'com.victor:lib:1.0.4'
-
     //glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
@@ -86,5 +97,4 @@ dependencies {
     //noinspection GradleDependency
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-
 }

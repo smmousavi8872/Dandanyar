@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="rtl"
-    app:cardCornerRadius="24dp"
+    app:cardCornerRadius="21dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 

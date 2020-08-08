@@ -68,10 +68,62 @@
   </androidx.cardview.widget.CardView>
 
   <com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/inpSignUpUserEmailContainer"
+    android:id="@+id/inpSignUpFirstName"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="64dp"
+    android:hint="@string/firstName"
+    android:layoutDirection="rtl"
+    app:errorEnabled="true"
+    app:hintTextAppearance="@style/greenTextInputLayoutStyle">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/edtSignUpFirstName"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:layout_marginEnd="32dp"
+      android:drawableStart="@drawable/ic_edit_pen"
+      android:drawablePadding="8dp"
+      android:inputType="text"
+      android:paddingTop="16dp"
+      android:textColor="@color/colorPrimaryDark"
+      android:textDirection="rtl"
+      android:textSize="15sp"
+      android:theme="@style/greenEditTextStyle" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/inpSignUpLastName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/inpSignUpFirstName"
+    android:hint="@string/lastName"
+    android:layoutDirection="rtl"
+    app:errorEnabled="true"
+    app:hintTextAppearance="@style/greenTextInputLayoutStyle">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/edtSignUpLastName"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:layout_marginEnd="32dp"
+      android:drawableStart="@drawable/ic_edit_pen"
+      android:drawablePadding="8dp"
+      android:inputType="text"
+      android:paddingTop="16dp"
+      android:textColor="@color/colorPrimaryDark"
+      android:textDirection="rtl"
+      android:textSize="15sp"
+      android:theme="@style/greenEditTextStyle" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/inpSignUpUserEmailContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/inpSignUpLastName"
     android:hint="@string/userLoginEmailOrMobile"
     android:layoutDirection="rtl"
     app:errorEnabled="true"
@@ -83,12 +135,13 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="32dp"
       android:layout_marginEnd="32dp"
+      android:drawablePadding="8dp"
       android:drawableStart="@drawable/ic_email_gray_24dp"
       android:inputType="textEmailAddress"
       android:paddingTop="16dp"
-      android:textSize="15sp"
       android:textColor="@color/colorPrimaryDark"
       android:textDirection="rtl"
+      android:textSize="15sp"
       android:theme="@style/greenEditTextStyle" />
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,12 +160,13 @@
       android:id="@+id/edtSignUpUserPassword"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:textSize="15sp"
       android:layout_marginStart="32dp"
       android:layout_marginEnd="32dp"
+      android:drawablePadding="8dp"
       android:drawableStart="@drawable/ic_lock_gray_24dp"
       android:textColor="@color/colorPrimaryDark"
       android:textDirection="rtl"
+      android:textSize="15sp"
       android:theme="@style/greenEditTextStyle" />
   </com.google.android.material.textfield.TextInputLayout>
 </RelativeLayout>

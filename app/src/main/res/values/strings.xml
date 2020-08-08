@@ -41,6 +41,8 @@
   <string name="signin_comma">،</string>
   <string name="registerInDigishop">ثبت نام در کلینیک</string>
   <string name="userLoginEmailOrMobile">شماره موبایل یا ایمیل</string>
+  <string name="firstName">نام</string>
+  <string name="lastName">نام خانوادگی</string>
   <string name="userLoginPassword">کلمه عبور</string>
   <string name="userLoginForgotPassword">کلمه عبورم را فراموش کرده‌ام!</string>
   <string name="sign_up_in">ثبت نام در کلینیک</string>
@@ -64,5 +66,9 @@
   <string name="toolbar_dentistry_title">پرسشنامه دندانپزشکی</string>
   <string name="categories_choose_dentistry_survay">نوع پرسش نامه دندانپزشکی را انتخاب نمایید</string>
   <string name="toolbar_questions_title">پرسش ها</string>
+  <string name="exit">خروج</string>
+  <string name="are_u_sure_exit">آیا برای خروج اطمینان دارید؟</string>
+  <string name="yes">بله</string>
+  <string name="cancel">لغو</string>
 
 </resources>

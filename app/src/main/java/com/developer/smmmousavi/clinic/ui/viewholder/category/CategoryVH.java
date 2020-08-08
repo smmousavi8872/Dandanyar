@@ -29,6 +29,7 @@ public class CategoryVH<T extends Category> extends BaseViewHolder<T> {
     @Override
     public void onBind(T item) {
         mItem = item;
+        mTxtCategoryTitle.setText(item.getTitle());
     }
 
     @Override

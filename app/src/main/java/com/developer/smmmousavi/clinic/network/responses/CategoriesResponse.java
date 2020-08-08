@@ -7,30 +7,33 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class CategoriesResponse {
+
+    @SerializedName("count")
+    @Expose
+    private int mCount;
+
     @SerializedName("status")
     @Expose
-    private int mStatus;
+    private String mStatus;
 
     @SerializedName("data")
     @Expose
     private List<Category> mCategories;
 
 
-    public int getStatus() {
+    public String getStatus() {
         return mStatus;
     }
 
+    public void setStatus(String status) {
+        mStatus = status;
+    }
 
     public List<Category> getCategories() {
         return mCategories;
     }
 
-
-    @Override
-    public String toString() {
-        return "CategoriesResponse{" +
-            "mStatus=" + mStatus +
-            ", mUser=" + mCategories +
-            '}';
+    public void setCategories(List<Category> categories) {
+        mCategories = categories;
     }
 }

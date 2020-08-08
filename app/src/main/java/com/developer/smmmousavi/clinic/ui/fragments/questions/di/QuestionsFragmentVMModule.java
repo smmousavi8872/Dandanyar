@@ -1,7 +1,7 @@
 package com.developer.smmmousavi.clinic.ui.fragments.questions.di;
 
 import com.developer.smmmousavi.clinic.factory.viewmodel.di.ViewModelKey;
-import com.developer.smmmousavi.clinic.ui.fragments.questions.QuestionFragmentVM;
+import com.developer.smmmousavi.clinic.ui.fragments.questions.QuestionsFragmentVM;
 
 import androidx.lifecycle.ViewModel;
 import dagger.Binds;
@@ -13,7 +13,7 @@ public abstract class QuestionsFragmentVMModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(QuestionFragmentVM.class)
-    abstract ViewModel bindQuestionFragmenVM(QuestionFragmentVM questionFragmentVM);
+    @ViewModelKey(QuestionsFragmentVM.class)
+    abstract ViewModel bindQuestionFragmenVM(QuestionsFragmentVM questionsFragmentVM);
 
 }

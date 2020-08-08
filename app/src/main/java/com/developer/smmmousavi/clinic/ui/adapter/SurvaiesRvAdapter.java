@@ -22,10 +22,7 @@ public class SurvaiesRvAdapter<T extends Survay> extends BaseRvAdapter<T> {
 
     @Override
     protected RecyclerView.ViewHolder createHeaderViewHolder(ViewGroup parent) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_survay, parent, false);
-        SurvaysVH<T> viewHolder = new SurvaysVH<>(v);
-        viewHolder.setItemClickListener(mItemClickListener);
-        return viewHolder;
+        return null;
     }
 
     @Override
@@ -38,15 +35,11 @@ public class SurvaiesRvAdapter<T extends Survay> extends BaseRvAdapter<T> {
 
     @Override
     protected RecyclerView.ViewHolder createFooterViewHolder(ViewGroup parent) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_survay, parent, false);
-        SurvaysVH<T> viewHolder = new SurvaysVH<>(v);
-        viewHolder.setItemClickListener(mItemClickListener);
-        return viewHolder;
+        return null;
     }
 
     @Override
     protected void bindHeaderViewHolder(RecyclerView.ViewHolder viewHolder) {
-        ((SurvaysVH<T>) viewHolder).onBind(mItemList.get(0));
 
     }
 
@@ -83,9 +76,6 @@ public class SurvaiesRvAdapter<T extends Survay> extends BaseRvAdapter<T> {
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0)
-            return HEADER;
-        else
-            return ITEM;
+        return ITEM;
     }
 }

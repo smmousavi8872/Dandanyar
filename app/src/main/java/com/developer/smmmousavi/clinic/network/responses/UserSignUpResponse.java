@@ -8,9 +8,17 @@ public class UserSignUpResponse {
 
     @SerializedName("status")
     @Expose
-    private int mStatus;
+    private String mStatus;
 
     @SerializedName("data")
     @Expose
     private User mUser;
+
+    public String getStatus() {
+        return mStatus;
+    }
+
+    public User getUser() {
+        return mUser;
+    }
 }

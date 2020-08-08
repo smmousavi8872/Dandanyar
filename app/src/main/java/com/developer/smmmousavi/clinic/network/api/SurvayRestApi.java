@@ -13,8 +13,8 @@ import com.developer.smmmousavi.clinic.network.responses.UserSignUpResponse;
 import androidx.lifecycle.LiveData;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface SurvayRestApi {
 
@@ -27,13 +27,11 @@ public interface SurvayRestApi {
     @GET("api/category/Get")
     LiveData<ApiResponse<CategoriesResponse>> getCategories();
 
-    @GET("api/question/GetFirstCategoryQuestion")
+    @GET("/api/question/GetFirstCategoryQuestion")
     LiveData<ApiResponse<FirstCategoryQuestionResponse>> getFristCategoryQuestion(
-        @Query("categoryId") String categoryId
+        @Header("categoryId") long categoryId
     );
 
     @POST("api/userQuestion/PostUserQuestion")
     LiveData<ApiResponse<PostQuestionResponse>> postUserQuestion(@Body PostUserQuestionBody body);
-
-
 }

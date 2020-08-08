@@ -1,6 +1,7 @@
 package com.developer.smmmousavi.clinic.ui.fragments.categories;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,14 @@ import com.developer.smmmousavi.clinic.ui.adapter.CategoriesRvAdapter;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.questions.QuestionsFragment;
 import com.developer.smmmousavi.clinic.ui.viewholder.category.CategoryItemClickListener;
+import com.developer.smmmousavi.clinic.util.Animations;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,6 +44,11 @@ public class CategoriesFragment extends BaseDaggerFragment implements CategoryIt
 
     @BindView(R.id.rvCategories)
     RecyclerView mRvCategories;
+    @BindView(R.id.categoryLoading)
+    SpinKitView mLoadingView;
+    @BindView(R.id.txtCategoryLoadingContent)
+    AppCompatTextView mTxtLoadingContent;
+
 
     @Inject
     RecyclerViewHelper mRvHelper;
@@ -94,7 +103,6 @@ public class CategoriesFragment extends BaseDaggerFragment implements CategoryIt
         mCategoriesRvAdapter.setItemList(categories);
         mCategoriesRvAdapter.setItemClickListener(this);
         mRvCategories = mRvHelper.buildRecyclerView(mLM, mRvCategories, mCategoriesRvAdapter);
-
     }
 
     private void subscribeObserver() {
@@ -107,14 +115,21 @@ public class CategoriesFragment extends BaseDaggerFragment implements CategoryIt
                         break;
                     case SUCCESS:
                         Log.d(TAG, "subscribeObserver: cache has been refreshed.");
-                        Log.d(TAG, "subscribeObserver: status: SUCCESS, #recipes: " + listResource.data.size());
-                        initCategoriesRv(listResource.data);
+                        Log.d(TAG, "subscribeObserver: status: SUCCESS, #categories: " + listResource.data.size());
+                        Log.d(TAG, "subscribeObserver: status: SUCCESS, id: " + listResource.data.get(0).getId());
+                        Log.d(TAG, "subscribeObserver: status: SUCCESS, id: " + listResource.data.get(1).getId());
+                        new Handler().postDelayed(() -> {
+                            initCategoriesRv(listResource.data);
+                            Animations.setAnimation(Animations.FADE_OUT, mLoadingView, mTxtLoadingContent);
+                        }, 1500);
                         break;
                     case ERROR:
+                        mLoadingView.setVisibility(View.GONE);
+                        mTxtLoadingContent.setVisibility(View.GONE);
+                        initCategoriesRv(listResource.data);
                         Log.e(TAG, "subscribeObserver: can not refresh the cache.");
                         Log.e(TAG, "subscribeObserver: Error message: " + listResource.message);
                         Log.e(TAG, "subscribeObserver: status: ERROR, #recipes: " + listResource.data.size());
-                        initCategoriesRv(listResource.data);
                         break;
                 }
             }

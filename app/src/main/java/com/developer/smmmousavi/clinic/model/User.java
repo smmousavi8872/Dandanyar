@@ -20,6 +20,10 @@ public class User extends BaseModel {
     @Expose
     private String mLastName;
 
+    @SerializedName("userName")
+    @Expose
+    private String mUserName;
+
     @SerializedName("password")
     @Expose
     private String mPassword;
@@ -27,6 +31,55 @@ public class User extends BaseModel {
     @SerializedName("userQuestions")
     @Expose
     private List<Question> mUserQuestions;
+
+
+    public long getId() {
+        return mId;
+    }
+
+    public void setId(long id) {
+        mId = id;
+    }
+
+    public String getFirstName() {
+        return mFirstName;
+    }
+
+    public void setFirstName(String firstName) {
+        mFirstName = firstName;
+    }
+
+    public String getLastName() {
+        return mLastName;
+    }
+
+    public void setLastName(String lastName) {
+        mLastName = lastName;
+    }
+
+    public String getUserName() {
+        return mUserName;
+    }
+
+    public void setUserName(String userName) {
+        mUserName = userName;
+    }
+
+    public String getPassword() {
+        return mPassword;
+    }
+
+    public void setPassword(String password) {
+        mPassword = password;
+    }
+
+    public List<Question> getUserQuestions() {
+        return mUserQuestions;
+    }
+
+    public void setUserQuestions(List<Question> userQuestions) {
+        mUserQuestions = userQuestions;
+    }
 
     @Override
     public boolean equals(Object o) {

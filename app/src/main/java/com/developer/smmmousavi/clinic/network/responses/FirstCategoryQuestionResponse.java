@@ -4,8 +4,6 @@ import com.developer.smmmousavi.clinic.model.Question;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class FirstCategoryQuestionResponse {
     @SerializedName("status")
     @Expose
@@ -13,6 +11,14 @@ public class FirstCategoryQuestionResponse {
 
     @SerializedName("data")
     @Expose
-    private List<Question> mQuestions;
+    private Question mQuestion;
 
+
+    public Question getQuestion() {
+        return mQuestion;
+    }
+
+    public void setQuestion(Question question) {
+        mQuestion = question;
+    }
 }

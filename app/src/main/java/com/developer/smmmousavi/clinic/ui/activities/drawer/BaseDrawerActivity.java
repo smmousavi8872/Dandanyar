@@ -10,6 +10,8 @@ import android.view.View;
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.ui.activities.base.BaseDaggerCompatActivity;
 import com.developer.smmmousavi.clinic.ui.activities.signupsignin.signinsignup.SignInSignUpActivity;
+import com.developer.smmmousavi.clinic.ui.alertdialog.AlertDialogFragment;
+import com.developer.smmmousavi.clinic.ui.alertdialog.OnDialogButtonClickListener;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.categories.CategoriesFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.questions.QuestionsFragment;
@@ -35,6 +37,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
 
     @IdRes
     private static final int sFragmentContainerId = R.id.flDrawerContentFragmentContainer;
+    private static final String ALERT_DIALOG_FM_TAG = "AlertDialogFMTag";
 
     @BindView(R.id.navbarView)
     NavigationView mNavigationView;
@@ -84,7 +87,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
             mToolabrLayout.setVisibility(View.GONE);
         if (mHostedFrgament instanceof SurvaysFragment) {
             mToolbarClose.setOnClickListener(view -> {
-                finish();
+                showDialog();
             });
             mTxtToolbarTitle.setText(R.string.toolbar_clinic_title);
         } else if (mHostedFrgament instanceof CategoriesFragment) {
@@ -110,8 +113,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     }
 
     /**
-     * @HardCoded
-     * TODO: categoryId should recieve from server
+     * @HardCoded TODO: categoryId should recieve from server
      */
     private void replaceByCategories() {
         replaceContentFragment(CategoriesFragment.newInstance(0),
@@ -246,6 +248,32 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
         initToolbar();
     }
 
+    private void showDialog() {
+        String title = getString(R.string.exit);
+        String message = getString(R.string.are_u_sure_exit);
+        String positiveButtonText = getString(R.string.yes);
+        String negativeButtonText = getString(R.string.cancel);
+        AlertDialogFragment dialog = AlertDialogFragment.newInstance(title,
+            message,
+            positiveButtonText,
+            negativeButtonText);
+
+        dialog.setCancelable(false);
+        dialog.setButtonClickListener(new OnDialogButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(View v) {
+                dialog.dismiss();
+                finish();
+            }
+
+            @Override
+            public void onNegativeButtonClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show(mFm, ALERT_DIALOG_FM_TAG);
+    }
+
     @OnClick(R.id.imgToolbarNavbarButton)
     void setNavBarListener() {
         mDrawerLayout.openDrawer(GravityCompat.END);
@@ -255,10 +283,10 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     @Override
     public void onBackPressed() {
         if (mHostedFrgament instanceof SurvaysFragment) {
-            super.onBackPressed();
+            showDialog();
         } else if (mHostedFrgament instanceof CategoriesFragment) {
             replaceBySurvaysFragment();
-        } else if(mHostedFrgament instanceof QuestionsFragment) {
+        } else if (mHostedFrgament instanceof QuestionsFragment) {
             replaceByCategories();
         }
     }

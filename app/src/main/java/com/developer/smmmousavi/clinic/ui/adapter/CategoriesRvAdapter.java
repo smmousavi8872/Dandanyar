@@ -22,10 +22,7 @@ public class CategoriesRvAdapter<T extends Category> extends BaseRvAdapter<T> {
 
     @Override
     protected RecyclerView.ViewHolder createHeaderViewHolder(ViewGroup parent) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_categories, parent, false);
-        CategoryVH<T> viewHolder = new CategoryVH<>(v);
-        viewHolder.setItemClickListener(mItemClickListener);
-        return new CategoryVH<T>(v);
+        return null;
     }
 
     @Override
@@ -33,31 +30,25 @@ public class CategoriesRvAdapter<T extends Category> extends BaseRvAdapter<T> {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_categories, parent, false);
         CategoryVH<T> viewHolder = new CategoryVH<>(v);
         viewHolder.setItemClickListener(mItemClickListener);
-        return new CategoryVH<T>(v);
+        return viewHolder;
     }
 
     @Override
     protected RecyclerView.ViewHolder createFooterViewHolder(ViewGroup parent) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_categories, parent, false);
-        CategoryVH<T> viewHolder = new CategoryVH<>(v);
-        viewHolder.setItemClickListener(mItemClickListener);
-        return new CategoryVH<T>(v);
+        return null;
     }
 
     @Override
     protected void bindHeaderViewHolder(RecyclerView.ViewHolder viewHolder) {
-
     }
 
     @Override
     protected void bindItemViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        ((CategoryVH<T>)viewHolder).onBind(mItemList.get(position));
-
+        ((CategoryVH<T>) viewHolder).onBind(mItemList.get(position));
     }
 
     @Override
     protected void bindFooterViewHolder(RecyclerView.ViewHolder viewHolder) {
-
     }
 
     @Override
@@ -82,6 +73,6 @@ public class CategoriesRvAdapter<T extends Category> extends BaseRvAdapter<T> {
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        return ITEM;
     }
 }

@@ -1,5 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.fragments.questions;
-
+package com.developer.smmmousavi.clinic.ui.fragments.signinsignup;
 
 import android.app.Application;
 
@@ -9,10 +8,10 @@ import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 
-public class QuestionFragmentVM extends BaseViewModel {
+public class SingInFragmentVM extends BaseViewModel {
 
     @Inject
-    public QuestionFragmentVM(@NonNull Application application) {
+    public SingInFragmentVM(@NonNull Application application) {
         super(application);
     }
 }
