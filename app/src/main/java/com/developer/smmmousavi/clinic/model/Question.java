@@ -42,7 +42,6 @@ public class Question extends BaseModel {
     @ColumnInfo(name = "isLast")
     private boolean isLast;
 
-
     public String getId() {
         return mId;
     }

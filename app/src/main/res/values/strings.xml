@@ -70,5 +70,8 @@
   <string name="are_u_sure_exit">آیا برای خروج اطمینان دارید؟</string>
   <string name="yes">بله</string>
   <string name="cancel">لغو</string>
+  <string name="sign_up_successful">ثبت نام با موفقیت انجام شد.</string>
+  <string name="neccessary_fields">پر کردن این فیلد الزامی است.</string>
+  <string name="sign_up_failed">ثبت نام ناموفق!</string>
 
 </resources>

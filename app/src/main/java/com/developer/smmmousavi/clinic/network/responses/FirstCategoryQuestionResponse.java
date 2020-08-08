@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class FirstCategoryQuestionResponse {
     @SerializedName("status")
     @Expose
-    private int mStatus;
+    private String mStatus;
 
     @SerializedName("data")
     @Expose

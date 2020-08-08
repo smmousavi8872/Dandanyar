@@ -12,6 +12,8 @@ import com.developer.smmmousavi.clinic.ui.fragments.signinsignup.SignInFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.signinsignup.SignUpFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.signinsignup.di.SignInFragmentModule;
 import com.developer.smmmousavi.clinic.ui.fragments.signinsignup.di.SignUpFragmentModule;
+import com.developer.smmmousavi.clinic.ui.fragments.signinsignup.di.SignUpFragmentVMModule;
+import com.developer.smmmousavi.clinic.ui.fragments.signinsignup.di.SignInFragmentVMModule;
 import com.developer.smmmousavi.clinic.ui.fragments.splash.SplashFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.splash.di.SplashFragmentModule;
 import com.developer.smmmousavi.clinic.ui.fragments.splash.di.SplashFragmentViewModelModule;
@@ -28,10 +30,10 @@ public abstract class FragmentBuildersModule {
     @ContributesAndroidInjector(modules = {BaseDaggerFragmentModule.class})
     abstract BaseDaggerFragment contributeBaseDaggerFragment();
 
-    @ContributesAndroidInjector(modules = {SignInFragmentModule.class})
+    @ContributesAndroidInjector(modules = {SignInFragmentModule.class, SignInFragmentVMModule.class})
     abstract SignInFragment contributeSingInFragment();
 
-    @ContributesAndroidInjector(modules = {SignUpFragmentModule.class})
+    @ContributesAndroidInjector(modules = {SignUpFragmentModule.class, SignUpFragmentVMModule.class})
     abstract SignUpFragment contributeSignUpFragment();
 
     @ContributesAndroidInjector(modules = {SurvaysFragmentModule.class, SurvaysFragmentVMModule.class})

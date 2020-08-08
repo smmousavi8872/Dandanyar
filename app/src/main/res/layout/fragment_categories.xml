@@ -64,8 +64,8 @@
   <com.github.ybq.android.spinkit.SpinKitView
     android:id="@+id/categoryLoading"
     style="@style/SpinKitView.Large.FoldingCube"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
+    android:layout_width="56dp"
+    android:layout_height="56dp"
     android:layout_marginBottom="64dp"
     android:clickable="false"
     android:focusable="false"

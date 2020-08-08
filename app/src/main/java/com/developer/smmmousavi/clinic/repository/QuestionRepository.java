@@ -42,7 +42,6 @@ public class QuestionRepository {
 
             @Override
             protected void saveCallResult(@NonNull FirstCategoryQuestionResponse item) {
-
                 if (item.getQuestion() != null) {
                     Question[] questionArr = new Question[1];
                     questionArr[0] =item.getQuestion();

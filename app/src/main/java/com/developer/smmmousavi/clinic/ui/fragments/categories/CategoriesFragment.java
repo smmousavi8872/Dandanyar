@@ -116,8 +116,6 @@ public class CategoriesFragment extends BaseDaggerFragment implements CategoryIt
                     case SUCCESS:
                         Log.d(TAG, "subscribeObserver: cache has been refreshed.");
                         Log.d(TAG, "subscribeObserver: status: SUCCESS, #categories: " + listResource.data.size());
-                        Log.d(TAG, "subscribeObserver: status: SUCCESS, id: " + listResource.data.get(0).getId());
-                        Log.d(TAG, "subscribeObserver: status: SUCCESS, id: " + listResource.data.get(1).getId());
                         new Handler().postDelayed(() -> {
                             initCategoriesRv(listResource.data);
                             Animations.setAnimation(Animations.FADE_OUT, mLoadingView, mTxtLoadingContent);

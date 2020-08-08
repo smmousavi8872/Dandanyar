@@ -87,7 +87,6 @@ public abstract class NetworkBoundResource<CacheObj, RequestObj> {
                         });
                     });
                 });
-
             } else if (requestObjApiResponse instanceof ApiResponse.ApiEmptyResponse) {
                 Log.d(TAG, "fetchFromNetwork: ApiEmptyResponse");
                 mAppExecutors.mainThread().execute(() -> {
@@ -95,7 +94,6 @@ public abstract class NetworkBoundResource<CacheObj, RequestObj> {
                         setValue(Resource.success(cacheObj));
                     });
                 });
-
             } else if (requestObjApiResponse instanceof ApiResponse.ApiErrorResponse) {
                 Log.d(TAG, "fetchFromNetwork: ApiErrorResponse");
                 results.addSource(dbSource, cacheObj -> {

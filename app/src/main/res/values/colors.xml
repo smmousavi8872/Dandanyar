@@ -9,6 +9,7 @@
   <color name="primaryOrange">#ffefa021</color>
   <color name="primaryBlue">#1D89E4</color>
   <color name="middleGray">#858585</color>
+  <color name="deactiveGray">#AAAAAA</color>
   <color name="darkGray">#757575</color>
   <color name="darkerGray">#555555</color>
   <color name="darkWhite">#CFCFCF</color>

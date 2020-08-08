@@ -59,7 +59,7 @@ public class QuestionsFragment extends BaseDaggerFragment {
         View v = inflater.inflate(R.layout.fragment_questions, container, false);
         ButterKnife.bind(this, v);
         initViewModel();
-        subscirbeObserver();
+        subscribeObserver();
         return v;
     }
 
@@ -68,7 +68,7 @@ public class QuestionsFragment extends BaseDaggerFragment {
         mViewModel.executeGetFirstQuestion(mCategoryId);
     }
 
-    private void subscirbeObserver() {
+    private void subscribeObserver() {
         mViewModel.getQuestionMLD().observe(this, listResource -> {
             //onChange
             if (listResource != null) {
@@ -77,7 +77,6 @@ public class QuestionsFragment extends BaseDaggerFragment {
                         break;
                     case SUCCESS:
                         Log.d(TAG, "subscribeObserver: cache has been refreshed.");
-                        Log.d(TAG, "subscribeObserver: status: SUCCESS, #categories: " + listResource.data.getText());
                         break;
                     case ERROR:
                         Log.e(TAG, "subscribeObserver: can not refresh the cache.");

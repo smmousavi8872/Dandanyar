@@ -1,8 +1,8 @@
 package com.developer.smmmousavi.clinic.repository;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.developer.smmmousavi.clinic.constants.Constants;
 import com.developer.smmmousavi.clinic.model.User;
 import com.developer.smmmousavi.clinic.network.AppExecutors;
 import com.developer.smmmousavi.clinic.network.bodies.UserSignUpBody;
@@ -11,7 +11,8 @@ import com.developer.smmmousavi.clinic.network.responses.ApiResponse;
 import com.developer.smmmousavi.clinic.network.responses.UserSignUpResponse;
 import com.developer.smmmousavi.clinic.network.util.NetworkBoundResource;
 import com.developer.smmmousavi.clinic.network.util.Resource;
-import com.developer.smmmousavi.clinic.sharepref.StringSharedPref;
+import com.developer.smmmousavi.clinic.presistence.dao.UserDAO;
+import com.developer.smmmousavi.clinic.presistence.db.Database;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +23,7 @@ public class SingUpRepository {
 
     private static final String TAG = "TAG";
     private static SingUpRepository sInstance;
-    private StringSharedPref mSharedPref;
+    private UserDAO mUserDAO;
 
 
     public static SingUpRepository getInstance(Context context) {
@@ -34,17 +35,33 @@ public class SingUpRepository {
     }
 
     private SingUpRepository(Context context) {
-        mSharedPref = StringSharedPref.getInstance(context);
+        mUserDAO = Database.getInstance(context).getUserDao();
     }
 
-    public LiveData<Resource<User>> signUpRequest(String firstName, String lastName, String username, String password) {
+
+    public LiveData<Resource<User>> signUpRequest(UserSignUpBody body) {
         return new NetworkBoundResource<User, UserSignUpResponse>(AppExecutors.getInstance()) {
 
             @Override
             protected void saveCallResult(@NonNull UserSignUpResponse item) {
-                if (item.getUser() != null && item.getStatus().equals("ok")) {
-                    mSharedPref.writeStringInSP(Constants.SHARED_PREF_USER_NAME_LABEL, item.getUser().getUserName());
-                    mSharedPref.writeStringInSP(Constants.SHARED_PREF_USER_PASS_LABEL, item.getUser().getPassword());
+                if (item.getUser() != null) {
+                    User[] userArr = new User[1];
+                    userArr[0] = item.getUser();
+                    int index = 0;
+                    for (long rowId : mUserDAO.insertUsers(userArr)) {
+                        // if category already exists.
+                        if (rowId == -1) {
+                            Log.d(TAG, "saveCallResult: CONFLICT... This recipe is already in the cache");
+                            mUserDAO.updateUser(
+                                userArr[index].getId(),
+                                userArr[index].getFirstName(),
+                                userArr[index].getLastName(),
+                                userArr[index].getUserName(),
+                                userArr[index].getPassword()
+                            );
+                        }
+                        index++;
+                    }
                 }
             }
 
@@ -57,17 +74,17 @@ public class SingUpRepository {
             @NonNull
             @Override
             protected LiveData<User> loadFromDb() {
-                return null;
+                return mUserDAO.getUserByBody(body.getUserName(), body.getPassword());
             }
 
             @NonNull
             @Override
             protected LiveData<ApiResponse<UserSignUpResponse>> createCall() {
-                UserSignUpBody body = new UserSignUpBody(firstName, lastName, username, password);
                 return SurvayRestApiFactory.create()
                     .userSignUp(body);
             }
         }.getAsLiveData();
 
     }
+
 }
