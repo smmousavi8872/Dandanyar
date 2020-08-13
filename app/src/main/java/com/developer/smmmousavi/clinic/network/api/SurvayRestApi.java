@@ -1,7 +1,6 @@
 package com.developer.smmmousavi.clinic.network.api;
 
 import com.developer.smmmousavi.clinic.network.bodies.PostUserQuestionBody;
-import com.developer.smmmousavi.clinic.network.bodies.UserSignInBody;
 import com.developer.smmmousavi.clinic.network.bodies.UserSignUpBody;
 import com.developer.smmmousavi.clinic.network.responses.ApiResponse;
 import com.developer.smmmousavi.clinic.network.responses.CategoriesResponse;
@@ -12,6 +11,8 @@ import com.developer.smmmousavi.clinic.network.responses.UserSignUpResponse;
 
 import androidx.lifecycle.LiveData;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -22,7 +23,8 @@ public interface SurvayRestApi {
     LiveData<ApiResponse<UserSignUpResponse>> userSignUp(@Body UserSignUpBody body);
 
     @POST("api/user/login")
-    LiveData<ApiResponse<UserSignInResponse>> userSignIn(@Body UserSignInBody bdoy);
+    @FormUrlEncoded
+    LiveData<ApiResponse<UserSignInResponse>> userSignIn(@Field("username") String userName, @Field("password") String password);
 
     @GET("api/category/Get")
     LiveData<ApiResponse<CategoriesResponse>> getCategories();

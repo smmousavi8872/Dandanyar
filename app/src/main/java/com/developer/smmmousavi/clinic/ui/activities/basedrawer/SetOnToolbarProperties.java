@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.activities.drawer;
+package com.developer.smmmousavi.clinic.ui.activities.basedrawer;
 
 public interface SetOnToolbarProperties {
 

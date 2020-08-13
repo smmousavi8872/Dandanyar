@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.activities.drawer.di;
+package com.developer.smmmousavi.clinic.ui.activities.basedrawer.di;
 
 
 import dagger.Module;

@@ -1,10 +1,10 @@
 package com.developer.smmmousavi.clinic.ui.activities.base.di;
 
 import com.developer.smmmousavi.clinic.ui.activities.base.BaseDaggerCompatActivity;
-import com.developer.smmmousavi.clinic.ui.activities.drawer.BaseDrawerActivity;
-import com.developer.smmmousavi.clinic.ui.activities.drawer.di.BaseDrawerActivityModule;
-import com.developer.smmmousavi.clinic.ui.activities.main.MainDrawerActivity;
-import com.developer.smmmousavi.clinic.ui.activities.main.di.MainActivityModule;
+import com.developer.smmmousavi.clinic.ui.activities.basedrawer.BaseDrawerActivity;
+import com.developer.smmmousavi.clinic.ui.activities.basedrawer.di.BaseDrawerActivityModule;
+import com.developer.smmmousavi.clinic.ui.activities.maindrawer.MainDrawerActivity;
+import com.developer.smmmousavi.clinic.ui.activities.maindrawer.di.MainActivityModule;
 import com.developer.smmmousavi.clinic.ui.activities.signupsignin.signinsignup.SignInSignUpActivity;
 import com.developer.smmmousavi.clinic.ui.activities.signupsignin.signinsignup.di.SignInSignUpActivityModule;
 import com.developer.smmmousavi.clinic.ui.activities.singlefragment.SingleFragmentActivity;

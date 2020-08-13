@@ -9,7 +9,7 @@ import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.factory.viewmodel.ViewModelProviderFactory;
 import com.developer.smmmousavi.clinic.helper.RecyclerViewHelper;
 import com.developer.smmmousavi.clinic.model.Survay;
-import com.developer.smmmousavi.clinic.ui.activities.main.MainDrawerActivity;
+import com.developer.smmmousavi.clinic.ui.activities.maindrawer.MainDrawerActivity;
 import com.developer.smmmousavi.clinic.ui.adapter.SurvaiesRvAdapter;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.categories.CategoriesFragment;

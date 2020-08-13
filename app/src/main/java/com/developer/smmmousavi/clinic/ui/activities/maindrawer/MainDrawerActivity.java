@@ -1,16 +1,19 @@
-package com.developer.smmmousavi.clinic.ui.activities.main;
+package com.developer.smmmousavi.clinic.ui.activities.maindrawer;
 
 import android.content.Context;
 import android.content.Intent;
 
-import com.developer.smmmousavi.clinic.ui.activities.drawer.BaseDrawerActivity;
+import com.developer.smmmousavi.clinic.ui.activities.basedrawer.BaseDrawerActivity;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.survays.SurvaysFragment;
 
 public class MainDrawerActivity extends BaseDrawerActivity {
+    public static final String EXTRA_PARCELABLE_USER = "ExtraParcelableUser";
 
-    public static Intent newIntent(Context origin) {
+
+    public static Intent newIntent(Context origin, long userId) {
         Intent intent = new Intent(origin, MainDrawerActivity.class);
+        intent.putExtra(EXTRA_PARCELABLE_USER, userId);
         return intent;
     }
 

@@ -40,7 +40,7 @@ public class User extends BaseModel {
     @Expose
     private String mPassword;
 
-    public long getId() {
+     public long getId() {
         return mId;
     }
 
@@ -107,4 +107,5 @@ public class User extends BaseModel {
             ", mPassword='" + mPassword + '\'' +
             '}';
     }
+
 }

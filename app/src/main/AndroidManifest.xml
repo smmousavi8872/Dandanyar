@@ -22,7 +22,7 @@
         <activity android:name=".ui.activities.signupsignin.signinsignup.SignInSignUpActivity">
 
         </activity>
-        <activity android:name=".ui.activities.main.MainDrawerActivity">
+        <activity android:name=".ui.activities.maindrawer.MainDrawerActivity">
 
         </activity>
     </application>

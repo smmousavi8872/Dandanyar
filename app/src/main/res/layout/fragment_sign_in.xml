@@ -7,7 +7,7 @@
   android:background="@color/secondBackground"
   android:focusable="true"
   android:focusableInTouchMode="true"
-  tools:context=".ui.fragments.signinsignup.SignInFragment">
+  tools:context=".ui.fragments.signin.SignInFragment">
 
   <View
     android:id="@+id/viewSignUpInDigishopUnderline"
@@ -69,15 +69,15 @@
     android:textColor="@color/lightGray"
     android:textSize="16sp" />
 
-  <androidx.cardview.widget.CardView
-    android:id="@+id/cvFinalizeShop"
+  <com.google.android.material.card.MaterialCardView
+    android:id="@+id/cvSignIn"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:layout_alignParentBottom="true"
-    android:background="@color/colorAccent"
     android:imeOptions="actionSend|flagNoEnterAction">
 
     <LinearLayout
+      android:id="@+id/llSingInBtnContainer"
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
       android:layout_gravity="center_horizontal"
@@ -86,8 +86,19 @@
       android:orientation="horizontal"
       android:padding="8dp">
 
+      <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/signInLoading"
+        android:visibility="gone"
+        style="@style/SpinKitView.Large.FoldingCube"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:padding="4dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:SpinKit_Color="@color/pureWhite" />
+
       <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgFinalizeShopIcon"
+        android:id="@+id/imgSignInArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -95,14 +106,14 @@
         app:srcCompat="@drawable/ic_navigation_next_white" />
 
       <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtFinalizeShop"
+        android:id="@+id/txtDidSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in_to_digishop"
+        android:text="@string/sign_in_clinic"
         android:textColor="@color/pureWhite"
         android:textSize="19sp" />
     </LinearLayout>
-  </androidx.cardview.widget.CardView>
+  </com.google.android.material.card.MaterialCardView>
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/inpSignInUserEmailContainer"

@@ -22,7 +22,7 @@
   <color name="lightNavyBlue">#607FDC</color>
   <color name="subtitleColor">#979797</color>
   <color name="book_loading_background">#ffffff</color>
-  <color name="book_loading_book">#EF394F</color>
+  <color name="primaryRed">#EF394F</color>
 
 
   <color name="colorPrimaryText">#050505</color>

@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.fragments.signinsignup;
+package com.developer.smmmousavi.clinic.ui.fragments.signup;
 
 
 import android.content.Intent;
@@ -13,10 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.developer.smmmousavi.clinic.R;
-import com.developer.smmmousavi.clinic.constants.Constants;
 import com.developer.smmmousavi.clinic.factory.viewmodel.ViewModelProviderFactory;
 import com.developer.smmmousavi.clinic.network.bodies.UserSignUpBody;
-import com.developer.smmmousavi.clinic.ui.activities.main.MainDrawerActivity;
+import com.developer.smmmousavi.clinic.ui.activities.maindrawer.MainDrawerActivity;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
 import com.developer.smmmousavi.clinic.util.SharedPrefUtils;
 import com.github.ybq.android.spinkit.SpinKitView;
@@ -105,42 +104,66 @@ public class SignUpFragment extends BaseDaggerFragment {
                     case SUCCESS:
                         new Handler().postDelayed(() -> {
                             Log.d(TAG, "subscribeObserver: cache has been refreshed.");
-                            logInUser();
+                            logInUser(listResource.data.getId());
 
                             doneWating();
-
-                            intentMainActivity();
                         }, 2000);
 
                         break;
                     case ERROR:
                         Log.e(TAG, "subscribeObserver: can not refresh the cache.");
                         Log.e(TAG, "subscribeObserver: Error message: " + listResource.message);
-                        Toast.makeText(getContext(), R.string.sign_up_failed, Toast.LENGTH_SHORT).show();
-                        doneWating();
+                        new Handler().postDelayed(() -> {
+                            Toast.makeText(getContext(), R.string.sign_up_failed, Toast.LENGTH_SHORT).show();
+                            doneWating();
+
+                            activateSignUpButton(true);
+                        }, 2000);
                         break;
                 }
             }
         });
     }
 
-    private void logInUser() {
+    private void logInUser(long userId) {
         Toast.makeText(getContext(), R.string.sign_up_successful, Toast.LENGTH_SHORT).show();
-        SharedPrefUtils.putString(Constants.SHARED_PREF_LOGIN_STATUS, Constants.LOGED_IN);
+        SharedPrefUtils.setSignedIn(true);
+        SharedPrefUtils.setSignedInUserId(userId);
+
+        intentMainActivity(userId);
     }
 
-    private void intentMainActivity() {
-        Intent intent = MainDrawerActivity.newIntent(getContext());
+    private void intentMainActivity(long userId) {
+        Intent intent = MainDrawerActivity.newIntent(getContext(), userId);
         startActivity(intent);
         getActivity().finish();
     }
 
     private UserSignUpBody getUserSignUpBody() {
         String firstName = mEdtFristName.getText().toString();
-        String lastName = mEdtFristName.getText().toString();
-        String userName = mEdtFristName.getText().toString();
-        String passWord = mEdtFristName.getText().toString();
+        String lastName = mEdtLastName.getText().toString();
+        String userName = mEdtUserEmail.getText().toString();
+        String passWord = mEdtUserPassword.getText().toString();
         return new UserSignUpBody(firstName, lastName, userName, passWord);
+    }
+
+    private void awaitUser() {
+        activateSignUpButton(false);
+        mImgDoneSignUp.setVisibility(View.GONE);
+        mSignUpLoading.setVisibility(View.VISIBLE);
+        mSignUpBtnContainer.setBackgroundColor(getResources().getColor(R.color.deactiveGray));
+    }
+
+    private void activateSignUpButton(boolean activate) {
+        mCvSignUp.setActivated(activate);
+        mCvSignUp.setClickable(activate);
+        mCvSignUp.setFocusable(activate);
+    }
+
+    private void doneWating() {
+        mImgDoneSignUp.setVisibility(View.VISIBLE);
+        mSignUpLoading.setVisibility(View.GONE);
+        mSignUpBtnContainer.setBackgroundColor(getResources().getColor(R.color.colorAccent));
     }
 
     @OnClick(R.id.cvSignUp)
@@ -156,15 +179,4 @@ public class SignUpFragment extends BaseDaggerFragment {
         subscribeObserver();
     }
 
-    private void awaitUser() {
-        mImgDoneSignUp.setVisibility(View.GONE);
-        mSignUpLoading.setVisibility(View.VISIBLE);
-        mSignUpBtnContainer.setBackgroundColor(getResources().getColor(R.color.deactiveGray));
-    }
-
-    private void doneWating() {
-        mImgDoneSignUp.setVisibility(View.VISIBLE);
-        mSignUpLoading.setVisibility(View.GONE);
-        mSignUpBtnContainer.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-    }
 }

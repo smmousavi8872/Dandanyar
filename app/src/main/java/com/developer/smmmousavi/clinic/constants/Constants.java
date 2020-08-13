@@ -5,7 +5,6 @@ public class Constants {
     public static final int CONNECTION_TIMEOUT = 5000;
     public static final int READ_TIMEOUT = 2000;
     public static final int WRITE_TIMEOUT = 2000;
-    public static final String SHARED_PREF_LOGIN_STATUS = "UserNameLabel";
-    public static final String LOGED_IN = "LogedIn";
-    public static final String LOGED_OUT = "LogedOut";
+    public static final String SHARED_PREF_LOGIN_KEY = "UserLoginKey";
+    public static final String SHARED_PREF_LOGED_IN_USER_ID_KEY = "LogedInUserIdKey";
 }

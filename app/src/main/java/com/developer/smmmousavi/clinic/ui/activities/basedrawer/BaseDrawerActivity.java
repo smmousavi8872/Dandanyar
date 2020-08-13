@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.activities.drawer;
+package com.developer.smmmousavi.clinic.ui.activities.basedrawer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.ui.activities.base.BaseDaggerCompatActivity;
@@ -17,6 +19,7 @@ import com.developer.smmmousavi.clinic.ui.fragments.categories.CategoriesFragmen
 import com.developer.smmmousavi.clinic.ui.fragments.questions.QuestionsFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.survays.SurvaysFragment;
 import com.developer.smmmousavi.clinic.util.Animations;
+import com.developer.smmmousavi.clinic.util.SharedPrefUtils;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
 
@@ -51,6 +54,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     AppCompatTextView mTxtToolbarTitle;
 
     private AppCompatTextView mTxtSignupButton;
+    private AppCompatTextView mTxtExitAccount;
     private OnBackPressedListener mOnBackPressedListener;
     private BaseDaggerFragment mHostedFrgament;
 
@@ -78,6 +82,8 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
 
         initNavView();
 
+        initNavViewHeader();
+
         initToolbar();
     }
 
@@ -87,7 +93,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
             mToolabrLayout.setVisibility(View.GONE);
         if (mHostedFrgament instanceof SurvaysFragment) {
             mToolbarClose.setOnClickListener(view -> {
-                showDialog();
+                showExitDialog();
             });
             mTxtToolbarTitle.setText(R.string.toolbar_clinic_title);
         } else if (mHostedFrgament instanceof CategoriesFragment) {
@@ -124,21 +130,38 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     }
 
 
-    private void initNavView() {
+    protected void initNavView() {
         mNavigationView.setNavigationItemSelectedListener(this);
         mNavigationView.getMenu()
             .getItem(0)
             .setChecked(true);
+    }
 
+
+    protected void initNavViewHeader() {
         // to set listener on views of header, first shoud find them
         // here is how to get NavigationView header
         View navHeader = mNavigationView.getHeaderView(0);
-        mTxtSignupButton = navHeader.findViewById(R.id.txtNavbarSignUpButton);
-        mTxtSignupButton.setOnClickListener(v -> {
-            startActivity(SignInSignUpActivity.newIntent(this));
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            new Handler().postDelayed(this::closeDrawer, 600);
-        });
+        LinearLayout userInfoContainer = navHeader.findViewById(R.id.llNavbarUserInfoContainer);
+        RelativeLayout signInContainer = navHeader.findViewById(R.id.rlNavbarSigninContainer);
+        if (SharedPrefUtils.getSignIn()) {
+            signInContainer.setVisibility(View.GONE);
+            userInfoContainer.setVisibility(View.VISIBLE);
+            mTxtExitAccount = navHeader.findViewById(R.id.txtUserExitAccount);
+            mTxtExitAccount.setOnClickListener(v -> {
+                showExitAccountDialog();
+            });
+
+        } else {
+            userInfoContainer.setVisibility(View.GONE);
+            signInContainer.setVisibility(View.VISIBLE);
+            mTxtSignupButton = navHeader.findViewById(R.id.txtNavbarSignUpButton);
+            mTxtSignupButton.setOnClickListener(v -> {
+                startActivity(SignInSignUpActivity.newIntent(this));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                new Handler().postDelayed(this::closeDrawer, 600);
+            });
+        }
     }
 
 
@@ -248,7 +271,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
         initToolbar();
     }
 
-    private void showDialog() {
+    private void showExitDialog( ) {
         String title = getString(R.string.exit);
         String message = getString(R.string.are_u_sure_exit);
         String positiveButtonText = getString(R.string.yes);
@@ -274,6 +297,33 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
         dialog.show(mFm, ALERT_DIALOG_FM_TAG);
     }
 
+    private void showExitAccountDialog( ) {
+        String title = getString(R.string.exit_user_account);
+        String message = getString(R.string.are_u_sure_exit_account);
+        String positiveButtonText = getString(R.string.yes);
+        String negativeButtonText = getString(R.string.cancel);
+        AlertDialogFragment dialog = AlertDialogFragment.newInstance(title,
+            message,
+            positiveButtonText,
+            negativeButtonText);
+
+        dialog.setCancelable(false);
+        dialog.setButtonClickListener(new OnDialogButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(View v) {
+                startActivity(SignInSignUpActivity.newIntent(BaseDrawerActivity.this));
+                SharedPrefUtils.setSignedIn(false);
+                finish();
+            }
+
+            @Override
+            public void onNegativeButtonClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show(mFm, ALERT_DIALOG_FM_TAG);
+    }
+
     @OnClick(R.id.imgToolbarNavbarButton)
     void setNavBarListener() {
         mDrawerLayout.openDrawer(GravityCompat.END);
@@ -283,7 +333,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     @Override
     public void onBackPressed() {
         if (mHostedFrgament instanceof SurvaysFragment) {
-            showDialog();
+            showExitDialog();
         } else if (mHostedFrgament instanceof CategoriesFragment) {
             replaceBySurvaysFragment();
         } else if (mHostedFrgament instanceof QuestionsFragment) {

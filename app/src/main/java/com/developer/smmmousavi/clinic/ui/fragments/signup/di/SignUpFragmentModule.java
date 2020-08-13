@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.fragments.signinsignup.di;
+package com.developer.smmmousavi.clinic.ui.fragments.signup.di;
 
 import dagger.Module;
 

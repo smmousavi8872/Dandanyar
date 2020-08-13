@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.activities.main;
+package com.developer.smmmousavi.clinic.ui.activities.maindrawer;
 
 import android.app.Application;
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.developer.smmmousavi.clinic.application.BaseApplication;
+import com.developer.smmmousavi.clinic.constants.Constants;
 
 
 public class SharedPrefUtils {
@@ -36,5 +37,25 @@ public class SharedPrefUtils {
 
     public static String getString(String key, String defValue) {
         return mSharedPref.getString(key, defValue);
+    }
+
+    public static void setSignedIn(boolean signIn) {
+        mSharedPref.edit()
+            .putBoolean(Constants.SHARED_PREF_LOGIN_KEY, signIn)
+            .apply();
+    }
+
+    public static boolean getSignIn() {
+        return mSharedPref.getBoolean(Constants.SHARED_PREF_LOGIN_KEY, false);
+    }
+
+    public static void setSignedInUserId(long userId) {
+        mSharedPref.edit()
+            .putLong(Constants.SHARED_PREF_LOGED_IN_USER_ID_KEY, userId)
+            .apply();
+    }
+
+    public static long getSignedInUserId() {
+        return mSharedPref.getLong(Constants.SHARED_PREF_LOGED_IN_USER_ID_KEY, -1);
     }
 }

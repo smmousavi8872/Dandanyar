@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.ui.activities.base.BaseDaggerCompatActivity;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
-import com.developer.smmmousavi.clinic.ui.fragments.signinsignup.SignInFragment;
+import com.developer.smmmousavi.clinic.ui.fragments.signin.SignInFragment;
 import com.developer.smmmousavi.clinic.util.Animations;
 
 import androidx.annotation.StringRes;

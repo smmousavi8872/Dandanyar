@@ -36,7 +36,7 @@
   <string name="emptyBasketAlertTitle">خالی کردن سبد</string>
   <string name="emptyBasketAlertMessage">آیا مایل به حذف تمامی سفارشات از سبد خریدتان هستید؟</string>
   <string name="signin_enter">ورود</string>
-  <string name="signin_dear_user">کاربر گرامی،</string>
+  <string name="signin_dear_user">کاربر گرامی</string>
   <string name="singin_and_signup">ورود و ثبت نام</string>
   <string name="signin_comma">،</string>
   <string name="registerInDigishop">ثبت نام در کلینیک</string>
@@ -46,6 +46,7 @@
   <string name="userLoginPassword">کلمه عبور</string>
   <string name="userLoginForgotPassword">کلمه عبورم را فراموش کرده‌ام!</string>
   <string name="sign_up_in">ثبت نام در کلینیک</string>
+  <string name="sign_in_clinic">ورود به کلینیک</string>
   <string name="signed_up_with_email_in_before">اگر قبلا با ایمیل ثبت‌نام کرده‌اید، نیاز به ثبت‌نام مجدد با شماره همراه ندارید</string>
   <string name="remembser_me">مرا به خاطر بسپار</string>
   <string name="sign_in_to_digishop">ورود به کلینیک</string>
@@ -67,11 +68,15 @@
   <string name="categories_choose_dentistry_survay">نوع پرسش نامه دندانپزشکی را انتخاب نمایید</string>
   <string name="toolbar_questions_title">پرسش ها</string>
   <string name="exit">خروج</string>
+  <string name="exit_account"> خروج از حساب کاربری</string>
   <string name="are_u_sure_exit">آیا برای خروج اطمینان دارید؟</string>
+  <string name="are_u_sure_exit_account">آیا برای خروج از حساب کاربریتان اطمینان دارید؟</string>
   <string name="yes">بله</string>
   <string name="cancel">لغو</string>
   <string name="sign_up_successful">ثبت نام با موفقیت انجام شد.</string>
   <string name="neccessary_fields">پر کردن این فیلد الزامی است.</string>
   <string name="sign_up_failed">ثبت نام ناموفق!</string>
+  <string name="sign_in_faild">ورود ناموفق!</string>
+  <string name="exit_user_account">خروج از حساب کاربری</string>
 
 </resources>

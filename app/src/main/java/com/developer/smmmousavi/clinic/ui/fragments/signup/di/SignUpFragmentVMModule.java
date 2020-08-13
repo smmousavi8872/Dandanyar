@@ -1,7 +1,7 @@
-package com.developer.smmmousavi.clinic.ui.fragments.signinsignup.di;
+package com.developer.smmmousavi.clinic.ui.fragments.signup.di;
 
 import com.developer.smmmousavi.clinic.factory.viewmodel.di.ViewModelKey;
-import com.developer.smmmousavi.clinic.ui.fragments.signinsignup.SignUpFragmentVM;
+import com.developer.smmmousavi.clinic.ui.fragments.signup.SignUpFragmentVM;
 
 import androidx.lifecycle.ViewModel;
 import dagger.Binds;

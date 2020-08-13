@@ -7,7 +7,7 @@
   android:background="@color/secondBackground"
   android:focusable="true"
   android:focusableInTouchMode="true"
-  tools:context=".ui.fragments.signinsignup.SignUpFragment">
+  tools:context=".ui.fragments.signup.SignUpFragment">
 
   <androidx.appcompat.widget.AppCompatCheckBox
     android:id="@+id/chkReceiveMagazine"
@@ -69,7 +69,7 @@
         app:srcCompat="@drawable/ic_navigation_next_white" />
 
       <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtDoneSignUpInDigishop"
+        android:id="@+id/txtDidSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up_in"
