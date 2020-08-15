@@ -8,9 +8,25 @@ public class PostQuestionResponse {
 
     @SerializedName("status")
     @Expose
-    private int mStatus;
+    private String mStatus;
 
     @SerializedName("data")
     @Expose
     private Question mNextQuestion;
+
+    public String getStatus() {
+        return mStatus;
+    }
+
+    public void setStatus(String status) {
+        mStatus = status;
+    }
+
+    public Question getNextQuestion() {
+        return mNextQuestion;
+    }
+
+    public void setNextQuestion(Question nextQuestion) {
+        mNextQuestion = nextQuestion;
+    }
 }

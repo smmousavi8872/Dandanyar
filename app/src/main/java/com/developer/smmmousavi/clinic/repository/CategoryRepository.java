@@ -81,8 +81,5 @@ public class CategoryRepository {
                     .getCategories();
             }
         }.getAsLiveData();
-
     }
-
-
 }

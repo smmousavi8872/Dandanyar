@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.factory.viewmodel.ViewModelProviderFactory;
+import com.developer.smmmousavi.clinic.model.User;
 import com.developer.smmmousavi.clinic.network.bodies.UserSignInBody;
+import com.developer.smmmousavi.clinic.network.util.Resource;
 import com.developer.smmmousavi.clinic.ui.activities.maindrawer.MainDrawerActivity;
 import com.developer.smmmousavi.clinic.ui.activities.signupsignin.signinsignup.SignInSignUpActivity;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
@@ -30,6 +32,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -96,7 +99,9 @@ public class SignInFragment extends BaseDaggerFragment {
     }
 
     private void subscribeObserver() {
-        mViewModel.getUserMLD().observe(this, listResource -> {
+        Log.d(TAG, "subscribeObserver: subscribeObserver");
+        MediatorLiveData<Resource<User>> liveData = mViewModel.getUserMLD();
+        liveData.observe(this, listResource -> {
             //onChange
             if (listResource != null) {
                 switch (listResource.status) {
@@ -107,7 +112,7 @@ public class SignInFragment extends BaseDaggerFragment {
                             Log.d(TAG, "subscribeObserver: cache has been refreshed.");
                             logInUser(listResource.data.getId(), listResource.data.getFirstName());
                             doneWating();
-                        }, 2000);
+                        }, 1000);
 
                         break;
                     case ERROR:
@@ -117,7 +122,7 @@ public class SignInFragment extends BaseDaggerFragment {
                             Toast.makeText(getContext(), R.string.sign_in_faild, Toast.LENGTH_SHORT).show();
                             doneWating();
                             activateSignUpButton(true);
-                        }, 2000);
+                        }, 1000);
                         break;
                 }
             }
@@ -127,6 +132,7 @@ public class SignInFragment extends BaseDaggerFragment {
     private void logInUser(long userId, String userFirstName) {
         intentMainActivity(userId);
         SharedPrefUtils.setSignedIn(true);
+        SharedPrefUtils.setSignedInUserId(userId);
         String welcome = String.format("%s  گرامی، خوش آمدید", userFirstName);
         Toast.makeText(getContext(), welcome, Toast.LENGTH_SHORT).show();
     }

@@ -9,17 +9,19 @@ import com.developer.smmmousavi.clinic.ui.fragments.questions.QuestionsFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.questions.di.QuestionFragmentModule;
 import com.developer.smmmousavi.clinic.ui.fragments.questions.di.QuestionsFragmentVMModule;
 import com.developer.smmmousavi.clinic.ui.fragments.signin.SignInFragment;
-import com.developer.smmmousavi.clinic.ui.fragments.signup.SignUpFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.signin.di.SignInFragmentModule;
+import com.developer.smmmousavi.clinic.ui.fragments.signin.di.SignInFragmentVMModule;
+import com.developer.smmmousavi.clinic.ui.fragments.signup.SignUpFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.signup.di.SignUpFragmentModule;
 import com.developer.smmmousavi.clinic.ui.fragments.signup.di.SignUpFragmentVMModule;
-import com.developer.smmmousavi.clinic.ui.fragments.signin.di.SignInFragmentVMModule;
 import com.developer.smmmousavi.clinic.ui.fragments.splash.SplashFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.splash.di.SplashFragmentModule;
 import com.developer.smmmousavi.clinic.ui.fragments.splash.di.SplashFragmentViewModelModule;
 import com.developer.smmmousavi.clinic.ui.fragments.survays.SurvaysFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.survays.di.SurvaysFragmentModule;
 import com.developer.smmmousavi.clinic.ui.fragments.survays.di.SurvaysFragmentVMModule;
+import com.developer.smmmousavi.clinic.ui.viewholder.questionnum.di.QuestionNumVHModule;
+import com.developer.smmmousavi.clinic.ui.viewholder.questionnum.di.QuestionNumVHVMModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -45,7 +47,12 @@ public abstract class FragmentBuildersModule {
     @ContributesAndroidInjector(modules = {CategoriesFragmentModule.class, CategoriesFragmentVMModule.class})
     abstract CategoriesFragment contributeCategoriesFragmentModule();
 
-    @ContributesAndroidInjector(modules = {QuestionFragmentModule.class, QuestionsFragmentVMModule.class})
+    @ContributesAndroidInjector(modules = {
+        QuestionFragmentModule.class,
+        QuestionsFragmentVMModule.class,
+        QuestionNumVHVMModule.class,
+        QuestionNumVHModule.class
+    })
     abstract QuestionsFragment contributeQuestionFragment();
 
 

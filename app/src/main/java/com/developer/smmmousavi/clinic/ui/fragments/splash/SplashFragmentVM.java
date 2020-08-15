@@ -33,7 +33,7 @@ public class SplashFragmentVM extends BaseViewModel {
                 origin.startActivity(intent);
             }
             origin.getActivity().finish();
-        }, 3000);
+        }, 2000);
     }
 
 

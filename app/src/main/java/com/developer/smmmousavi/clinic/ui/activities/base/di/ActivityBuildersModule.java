@@ -3,8 +3,10 @@ package com.developer.smmmousavi.clinic.ui.activities.base.di;
 import com.developer.smmmousavi.clinic.ui.activities.base.BaseDaggerCompatActivity;
 import com.developer.smmmousavi.clinic.ui.activities.basedrawer.BaseDrawerActivity;
 import com.developer.smmmousavi.clinic.ui.activities.basedrawer.di.BaseDrawerActivityModule;
+import com.developer.smmmousavi.clinic.ui.activities.basedrawer.di.BaseDrawerActivityVMModule;
 import com.developer.smmmousavi.clinic.ui.activities.maindrawer.MainDrawerActivity;
 import com.developer.smmmousavi.clinic.ui.activities.maindrawer.di.MainActivityModule;
+import com.developer.smmmousavi.clinic.ui.activities.maindrawer.di.MainActivityVMModule;
 import com.developer.smmmousavi.clinic.ui.activities.signupsignin.signinsignup.SignInSignUpActivity;
 import com.developer.smmmousavi.clinic.ui.activities.signupsignin.signinsignup.di.SignInSignUpActivityModule;
 import com.developer.smmmousavi.clinic.ui.activities.singlefragment.SingleFragmentActivity;
@@ -27,10 +29,10 @@ public abstract class ActivityBuildersModule {
     @ContributesAndroidInjector(modules = {SignInSignUpActivityModule.class})
     abstract SignInSignUpActivity contributeSignInSignUpActivity();
 
-    @ContributesAndroidInjector(modules = {MainActivityModule.class})
+    @ContributesAndroidInjector(modules = {MainActivityModule.class, MainActivityVMModule.class})
     abstract MainDrawerActivity contributeMainActivity();
 
-    @ContributesAndroidInjector(modules = {BaseDrawerActivityModule.class})
+    @ContributesAndroidInjector(modules = {BaseDrawerActivityModule.class, BaseDrawerActivityVMModule.class})
     abstract BaseDrawerActivity contributeBaseDrawerModule();
 
     @ContributesAndroidInjector(modules = {SplashActivityModule.class})

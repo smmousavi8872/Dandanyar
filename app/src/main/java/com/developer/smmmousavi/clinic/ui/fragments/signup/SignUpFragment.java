@@ -129,7 +129,6 @@ public class SignUpFragment extends BaseDaggerFragment {
         Toast.makeText(getContext(), R.string.sign_up_successful, Toast.LENGTH_SHORT).show();
         SharedPrefUtils.setSignedIn(true);
         SharedPrefUtils.setSignedInUserId(userId);
-
         intentMainActivity(userId);
     }
 

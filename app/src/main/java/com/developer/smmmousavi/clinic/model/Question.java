@@ -16,7 +16,7 @@ public class Question extends BaseModel {
     @ColumnInfo(name = "id")
     @PrimaryKey
     @NonNull
-    private String mId;
+    private long mId;
 
     @SerializedName("text")
     @ColumnInfo(name = "text")
@@ -32,7 +32,7 @@ public class Question extends BaseModel {
 
     @SerializedName("categoryId")
     @ColumnInfo(name = "categoryId")
-    private String mCategoryId;
+    private long mCategoryId;
 
     @SerializedName("isFirst")
     @ColumnInfo(name = "isFirst")
@@ -42,11 +42,11 @@ public class Question extends BaseModel {
     @ColumnInfo(name = "isLast")
     private boolean isLast;
 
-    public String getId() {
+    public long getId() {
         return mId;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         mId = id;
     }
 
@@ -74,11 +74,11 @@ public class Question extends BaseModel {
         mResFlaseId = resFlaseId;
     }
 
-    public String getCategoryId() {
+    public long getCategoryId() {
         return mCategoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(long categoryId) {
         mCategoryId = categoryId;
     }
 
@@ -117,9 +117,9 @@ public class Question extends BaseModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Question question = (Question) o;
-        return isFirst == question.isFirst &&
+        return mId == question.mId &&
+            isFirst == question.isFirst &&
             isLast == question.isLast &&
-            mId.equals(question.mId) &&
             Objects.equals(mText, question.mText) &&
             Objects.equals(mResTrueId, question.mResTrueId) &&
             Objects.equals(mResFlaseId, question.mResFlaseId) &&

@@ -19,13 +19,13 @@
 
     <RelativeLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layoutDirection="rtl">
+      android:layout_height="match_parent">
 
       <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgToolbarNavbarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="8dp"
         android:padding="8dp"
@@ -35,13 +35,13 @@
         android:id="@+id/imgToolbarClose"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
         android:padding="8dp"
-        app:srcCompat="@drawable/ic_baseline_arrow_ios_24"
+        app:srcCompat="@drawable/ic_back_mirror_24"
         tools:ignore="PrivateResource" />
 
       <androidx.appcompat.widget.AppCompatTextView
@@ -49,10 +49,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/imgToolbarNavbarButton"
+        android:layout_toStartOf="@id/imgToolbarNavbarButton"
         android:fontFamily="@font/iran_sans_mobile_bold"
-        android:paddingStart="16dp"
-        android:paddingEnd="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:text="کلینیک"
         android:textColor="@color/colorAccent"
         android:textSize="18sp" />

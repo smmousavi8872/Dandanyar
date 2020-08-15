@@ -11,6 +11,9 @@ import android.widget.RelativeLayout;
 
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.ui.activities.base.BaseDaggerCompatActivity;
+import com.developer.smmmousavi.clinic.ui.activities.basedrawer.callback.OnBackPressedListener;
+import com.developer.smmmousavi.clinic.ui.activities.basedrawer.callback.SetOnContentFragmentInsert;
+import com.developer.smmmousavi.clinic.ui.activities.basedrawer.callback.SetOnToolbarProperties;
 import com.developer.smmmousavi.clinic.ui.activities.signupsignin.signinsignup.SignInSignUpActivity;
 import com.developer.smmmousavi.clinic.ui.alertdialog.AlertDialogFragment;
 import com.developer.smmmousavi.clinic.ui.alertdialog.OnDialogButtonClickListener;
@@ -41,6 +44,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     @IdRes
     private static final int sFragmentContainerId = R.id.flDrawerContentFragmentContainer;
     private static final String ALERT_DIALOG_FM_TAG = "AlertDialogFMTag";
+    private static final String TAG = "BaseDrawerActivity";
 
     @BindView(R.id.navbarView)
     NavigationView mNavigationView;
@@ -57,6 +61,8 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     private AppCompatTextView mTxtExitAccount;
     private OnBackPressedListener mOnBackPressedListener;
     private BaseDaggerFragment mHostedFrgament;
+    private AppCompatTextView mTxtNavBarUserName;
+
 
     public NavigationView getNavigationView() {
         return mNavigationView;
@@ -82,7 +88,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
 
         initNavView();
 
-        initNavViewHeader();
+        initNavViewHeader("");
 
         initToolbar();
     }
@@ -138,7 +144,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     }
 
 
-    protected void initNavViewHeader() {
+    protected void initNavViewHeader(String userName) {
         // to set listener on views of header, first shoud find them
         // here is how to get NavigationView header
         View navHeader = mNavigationView.getHeaderView(0);
@@ -148,6 +154,8 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
             signInContainer.setVisibility(View.GONE);
             userInfoContainer.setVisibility(View.VISIBLE);
             mTxtExitAccount = navHeader.findViewById(R.id.txtUserExitAccount);
+            mTxtNavBarUserName = navHeader.findViewById(R.id.txtNavbarUsername);
+            mTxtNavBarUserName.setText(userName);
             mTxtExitAccount.setOnClickListener(v -> {
                 showExitAccountDialog();
             });
@@ -271,7 +279,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
         initToolbar();
     }
 
-    private void showExitDialog( ) {
+    private void showExitDialog() {
         String title = getString(R.string.exit);
         String message = getString(R.string.are_u_sure_exit);
         String positiveButtonText = getString(R.string.yes);
@@ -297,7 +305,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
         dialog.show(mFm, ALERT_DIALOG_FM_TAG);
     }
 
-    private void showExitAccountDialog( ) {
+    private void showExitAccountDialog() {
         String title = getString(R.string.exit_user_account);
         String message = getString(R.string.are_u_sure_exit_account);
         String positiveButtonText = getString(R.string.yes);

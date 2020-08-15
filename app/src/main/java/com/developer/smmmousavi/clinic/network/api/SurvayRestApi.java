@@ -1,13 +1,11 @@
 package com.developer.smmmousavi.clinic.network.api;
 
-import com.developer.smmmousavi.clinic.network.bodies.PostUserQuestionBody;
 import com.developer.smmmousavi.clinic.network.bodies.UserSignUpBody;
 import com.developer.smmmousavi.clinic.network.responses.ApiResponse;
 import com.developer.smmmousavi.clinic.network.responses.CategoriesResponse;
-import com.developer.smmmousavi.clinic.network.responses.FirstCategoryQuestionResponse;
+import com.developer.smmmousavi.clinic.network.responses.FirstQuestionResponse;
 import com.developer.smmmousavi.clinic.network.responses.PostQuestionResponse;
-import com.developer.smmmousavi.clinic.network.responses.UserSignInResponse;
-import com.developer.smmmousavi.clinic.network.responses.UserSignUpResponse;
+import com.developer.smmmousavi.clinic.network.responses.UserResponse;
 
 import androidx.lifecycle.LiveData;
 import retrofit2.http.Body;
@@ -16,24 +14,36 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface SurvayRestApi {
 
     @POST("api/user/SignUp")
-    LiveData<ApiResponse<UserSignUpResponse>> userSignUp(@Body UserSignUpBody body);
+    LiveData<ApiResponse<UserResponse>> userSignUp(@Body UserSignUpBody body);
 
     @POST("api/user/login")
     @FormUrlEncoded
-    LiveData<ApiResponse<UserSignInResponse>> userSignIn(@Field("username") String userName, @Field("password") String password);
+    LiveData<ApiResponse<UserResponse>> userSignIn(
+        @Field("username") String userName,
+        @Field("password") String password
+    );
 
     @GET("api/category/Get")
     LiveData<ApiResponse<CategoriesResponse>> getCategories();
 
+    @GET("api/user/getUser")
+    LiveData<ApiResponse<UserResponse>> getUserById(@Query("userId") long userId);
+
     @GET("/api/question/GetFirstCategoryQuestion")
-    LiveData<ApiResponse<FirstCategoryQuestionResponse>> getFristCategoryQuestion(
+    LiveData<ApiResponse<FirstQuestionResponse>> getFristQuestion(
         @Header("categoryId") long categoryId
     );
 
     @POST("api/userQuestion/PostUserQuestion")
-    LiveData<ApiResponse<PostQuestionResponse>> postUserQuestion(@Body PostUserQuestionBody body);
+    @FormUrlEncoded
+    LiveData<ApiResponse<PostQuestionResponse>> postUserQuestion(
+        @Field("userId") long userId,
+        @Field("questionId") long questionId,
+        @Field("userAnswer") boolean userAnswer
+    );
 }

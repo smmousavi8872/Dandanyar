@@ -119,7 +119,7 @@ public class CategoriesFragment extends BaseDaggerFragment implements CategoryIt
                         new Handler().postDelayed(() -> {
                             initCategoriesRv(listResource.data);
                             Animations.setAnimation(Animations.FADE_OUT, mLoadingView, mTxtLoadingContent);
-                        }, 1500);
+                        }, 1000);
                         break;
                     case ERROR:
                         mLoadingView.setVisibility(View.GONE);

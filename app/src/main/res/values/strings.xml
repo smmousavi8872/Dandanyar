@@ -78,5 +78,6 @@
   <string name="sign_up_failed">ثبت نام ناموفق!</string>
   <string name="sign_in_faild">ورود ناموفق!</string>
   <string name="exit_user_account">خروج از حساب کاربری</string>
+  <string name="question_no_answer">خیر، اینطور نیست</string>
 
 </resources>

@@ -31,8 +31,14 @@ public interface QuestionDAO {
 
     @Query("UPDATE questions SET text = :text, categoryId = :categoryId, res_True_Id = :mResTrueId, " +
         "res_False_Id = :mResFlaseId, isFirst = :isFirst, isLast = :isLast " + "WHERE id = :questionId ")
-    void updateQuestion(String questionId, String categoryId, String text, String mResTrueId,  String mResFlaseId, boolean isFirst, boolean isLast);
+    void updateQuestion(long questionId, long categoryId, String text, String mResTrueId, String mResFlaseId, boolean isFirst, boolean isLast);
 
     @Query("SELECT * FROM questions WHERE categoryId = :categoryId")
     LiveData<Question> getFrirstCategoryQuestion(long categoryId);
+
+    @Query("SELECT * FROM questions WHERE id = :qId")
+    LiveData<Question> getQuestionById(long qId);
+
+    @Query("DELETE FROM questions")
+    void deleteAll();
 }
