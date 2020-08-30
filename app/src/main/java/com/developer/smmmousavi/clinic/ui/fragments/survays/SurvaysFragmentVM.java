@@ -27,7 +27,7 @@ public class SurvaysFragmentVM extends BaseViewModel {
      */
     public LiveData<List<Survay>> getSurvays() {
         List<Survay> survays = new ArrayList<>();
-        Survay survay = new Survay("پرسشنامه", "دندانپزشکی", "");
+        Survay survay = new Survay("پرسشنامه", "مشکلات دهان و دندان", "");
         survays.add(survay);
         return new MutableLiveData<>(survays);
     }

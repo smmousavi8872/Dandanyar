@@ -2,9 +2,10 @@ package com.developer.smmmousavi.clinic.network.bodies;
 
 public class PostQuestionBody {
 
-    private final long userId;
-    private final long questionId;
-    private final boolean userAnswer;
+    private long userId;
+    private long questionId;
+    private boolean userAnswer;
+
 
     public PostQuestionBody(long userId, long questionId, boolean userAnswer) {
         this.userId = userId;
@@ -22,6 +23,18 @@ public class PostQuestionBody {
 
     public boolean getUserAnswer() {
         return userAnswer;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public void setQuestionId(long questionId) {
+        this.questionId = questionId;
+    }
+
+    public void setUserAnswer(boolean userAnswer) {
+        this.userAnswer = userAnswer;
     }
 
     @Override

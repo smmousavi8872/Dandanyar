@@ -23,7 +23,7 @@ public class SplashFragmentVM extends BaseViewModel {
 
     public void intentTo(BaseDaggerFragment origin) {
         new Handler().postDelayed(() -> {
-            boolean signIn = SharedPrefUtils.getSignIn();
+             boolean signIn = SharedPrefUtils.getSignIn();
             if (signIn) {
                 long userId = SharedPrefUtils.getSignedInUserId();
                 Intent intent = MainDrawerActivity.newIntent(origin.getContext(), userId);

@@ -11,6 +11,7 @@ import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.factory.viewmodel.ViewModelProviderFactory;
 import com.developer.smmmousavi.clinic.model.Question;
 import com.developer.smmmousavi.clinic.network.bodies.PostQuestionBody;
+import com.developer.smmmousavi.clinic.ui.activities.basedrawer.BaseDrawerActivity;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
 import com.developer.smmmousavi.clinic.ui.viewholder.questionnum.QuestionNumItemClickListener;
 import com.developer.smmmousavi.clinic.util.Animations;
@@ -54,6 +55,8 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
     private long mCategoryId;
     private QuestionsFragmentVM mViewModel;
     private Question mQuestion;
+    private String mCategoryTitle = "";
+
 
     @Inject
     ViewModelProviderFactory mProviderFactory;
@@ -62,7 +65,6 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static QuestionsFragment newInstance(long categoriesId) {
         QuestionsFragment fragment = new QuestionsFragment();
         Bundle args = new Bundle();
@@ -105,18 +107,19 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
                             break;
                         case SUCCESS:
                             mQuestion = listResource.data;
-                            Log.d(TAG, "subscribeObserver: userID " + SharedPrefUtils.getSignedInUserId());
-                            Log.d(TAG, "subscribeObserver: questionId " + mQuestion.getId());
-                            mTxtQuestionText.setText(mQuestion.getText());
-                            Animations.setAnimation(R.anim.fade_in, mCvQuestionContainer);
-                            Animations.setAnimation(R.anim.fade_out, mQuestionLoading);
-                            mQuestionLoading.setVisibility(View.GONE);
-                            mCvQuestionContainer.setVisibility(View.VISIBLE);
+                            Log.d(TAG, "subscribeObserverQ: userID " + SharedPrefUtils.getSignedInUserId());
+                            Log.d(TAG, "subscribeObserverQ: questionId " + mQuestion.getId());
+                            setFirstQuestion();
                             break;
                         case ERROR:
-                            Log.e(TAG, "subscribeObserver: can not refresh the cache.");
-                            Log.e(TAG, "subscribeObserver: Error message: " + listResource.message);
-                            mQuestionLoading.setVisibility(View.GONE);
+                            if (listResource.data != null) {
+                                mQuestion = listResource.data;
+                                Log.e(TAG, "subscribeObserverQ: can not refresh the cache.");
+                                Log.e(TAG, "subscribeObserverQ: Error message: " + listResource.message);
+                                Log.e(TAG, "subscribeObserverQ: status: ERROR, #recipes: " + listResource.data.toString());
+                                setFirstQuestion();
+                            } else {
+                            }
                             break;
                     }
                 }, 1000);
@@ -131,20 +134,49 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
                         break;
                     case SUCCESS:
                         mQuestion = questionResource.data;
-                        Animations.setAnimation(R.anim.hint_in, mTxtQuestionText);
-                        mTxtQuestionText.setText(mQuestion.getText());
-                        if (mQuestion.isLast()) {
-                            mBtnYesAnswer.setVisibility(View.GONE);
-                            mBtnNoAnswer.setVisibility(View.GONE);
-                        }
+                        Log.d(TAG, "subscribeObserver2: new question id" + mQuestion.getId());
+                        setNextQuestion();
                         break;
                     case ERROR:
-                        Log.e(TAG, "subscribeObserver2: can not refresh the cache.");
-                        Log.e(TAG, "subscribeObserver2: Error message: " + questionResource.message);
+                        if (questionResource.data != null) {
+                            mQuestion = questionResource.data;
+                            Log.e(TAG, "subscribeObserver2: can not refresh the cache.");
+                            Log.e(TAG, "subscribeObserver2: Error message: " + questionResource.message);
+                            setNextQuestion();
+                        } else {
+                            Log.e(TAG, "subscribeObserver2: questionResource.data = null");
+                        }
                         break;
                 }
             }
         });
+        mViewModel.getCategoryById(mCategoryId).observe(this, category -> {
+            setToolbarTitle(category.getTitle());
+        });
+    }
+
+    private void setNextQuestion() {
+        Animations.setAnimation(R.anim.hint_in, mTxtQuestionText);
+        mTxtQuestionText.setText(mQuestion.getText());
+        if (mQuestion.isLast()) {
+            mBtnYesAnswer.setVisibility(View.GONE);
+            mBtnNoAnswer.setVisibility(View.GONE);
+        }
+    }
+
+    private void setFirstQuestion() {
+        mTxtQuestionText.setText(mQuestion.getText());
+        Animations.setAnimation(R.anim.fade_in, mCvQuestionContainer);
+        Animations.setAnimation(R.anim.fade_out, mQuestionLoading);
+        mQuestionLoading.setVisibility(View.GONE);
+        mCvQuestionContainer.setVisibility(View.VISIBLE);
+    }
+
+    private void setToolbarTitle(String title) {
+        if (!mCategoryTitle.equals(title)) {
+            mCategoryTitle = title;
+            ((BaseDrawerActivity) getActivity()).setToolbarTitle(mCategoryTitle);
+        }
     }
 
     private PostQuestionBody getPostQuestionBody(boolean userAnswer) {
@@ -159,12 +191,13 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
         PostQuestionBody body = getPostQuestionBody(true);
         Log.d(TAG, "setOnYesButtonClickListener: body -> " + body.toString());
         mViewModel.executePostQuestion(body);
-
     }
 
     @OnClick(R.id.btnNoAnswer)
     void setOnNoButtonClickListener() {
-        mViewModel.executePostQuestion(getPostQuestionBody(false));
+        PostQuestionBody body = getPostQuestionBody(false);
+        Log.d(TAG, "setOnYesButtonClickListener: body -> " + body.toString());
+        mViewModel.executePostQuestion(body);
 
     }
 

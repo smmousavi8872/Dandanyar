@@ -58,4 +58,15 @@ public class SharedPrefUtils {
     public static long getSignedInUserId() {
         return mSharedPref.getLong(Constants.SHARED_PREF_LOGED_IN_USER_ID_KEY, -1);
     }
+
+    public static void setNextOfflineQuestionId(long userId) {
+        mSharedPref.edit()
+            .putLong(Constants.SHARED_PREF_LOGED_IN_USER_ID_KEY, userId)
+            .apply();
+    }
+
+    public static long getNextOfflineQuestionId() {
+        return mSharedPref.getLong(Constants.SHARED_PREF_LOGED_IN_USER_ID_KEY, -1);
+    }
+
 }

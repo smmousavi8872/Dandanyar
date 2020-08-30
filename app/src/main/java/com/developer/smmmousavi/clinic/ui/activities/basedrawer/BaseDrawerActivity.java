@@ -12,8 +12,8 @@ import android.widget.RelativeLayout;
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.ui.activities.base.BaseDaggerCompatActivity;
 import com.developer.smmmousavi.clinic.ui.activities.basedrawer.callback.OnBackPressedListener;
-import com.developer.smmmousavi.clinic.ui.activities.basedrawer.callback.SetOnContentFragmentInsert;
-import com.developer.smmmousavi.clinic.ui.activities.basedrawer.callback.SetOnToolbarProperties;
+import com.developer.smmmousavi.clinic.ui.activities.basedrawer.callback.OnContentFragmentInsertSet;
+import com.developer.smmmousavi.clinic.ui.activities.basedrawer.callback.OnToolbarVisibilitySet;
 import com.developer.smmmousavi.clinic.ui.activities.signupsignin.signinsignup.SignInSignUpActivity;
 import com.developer.smmmousavi.clinic.ui.alertdialog.AlertDialogFragment;
 import com.developer.smmmousavi.clinic.ui.alertdialog.OnDialogButtonClickListener;
@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener, OnBackPressedListener, SetOnContentFragmentInsert, SetOnToolbarProperties {
+    implements NavigationView.OnNavigationItemSelectedListener, OnBackPressedListener, OnContentFragmentInsertSet, OnToolbarVisibilitySet {
 
     @IdRes
     private static final int sFragmentContainerId = R.id.flDrawerContentFragmentContainer;
@@ -111,9 +111,12 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
             mToolbarClose.setOnClickListener(view -> {
                 replaceByCategories();
             });
-            mTxtToolbarTitle.setText(R.string.toolbar_questions_title);
         }
         Animations.setAnimation(R.anim.hint_in, mTxtToolbarTitle);
+    }
+
+    public void setToolbarTitle(String title) {
+        mTxtToolbarTitle.setText(title);
     }
 
     private void replaceBySurvaysFragment() {
@@ -250,7 +253,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     }
 
 
-    public void insertContentFragment(SetOnContentFragmentInsert contentSet) {
+    public void insertContentFragment(OnContentFragmentInsertSet contentSet) {
         mHostedFrgament = contentSet.getFragmentObject();
         String fragmentTag = contentSet.getFragmentTag();
 

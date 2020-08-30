@@ -114,8 +114,8 @@ public class CategoriesFragment extends BaseDaggerFragment implements CategoryIt
                     case LOADING:
                         break;
                     case SUCCESS:
-                        Log.d(TAG, "subscribeObserver: cache has been refreshed.");
-                        Log.d(TAG, "subscribeObserver: status: SUCCESS, #categories: " + listResource.data.size());
+                        Log.d(TAG, "subscribeObserverC: cache has been refreshed.");
+                        Log.d(TAG, "subscribeObserverC: status: SUCCESS, #categories: " + listResource.data.size());
                         new Handler().postDelayed(() -> {
                             initCategoriesRv(listResource.data);
                             Animations.setAnimation(Animations.FADE_OUT, mLoadingView, mTxtLoadingContent);
@@ -125,9 +125,9 @@ public class CategoriesFragment extends BaseDaggerFragment implements CategoryIt
                         mLoadingView.setVisibility(View.GONE);
                         mTxtLoadingContent.setVisibility(View.GONE);
                         initCategoriesRv(listResource.data);
-                        Log.e(TAG, "subscribeObserver: can not refresh the cache.");
-                        Log.e(TAG, "subscribeObserver: Error message: " + listResource.message);
-                        Log.e(TAG, "subscribeObserver: status: ERROR, #recipes: " + listResource.data.size());
+                        Log.e(TAG, "subscribeObserverC: can not refresh the cache.");
+                        Log.e(TAG, "subscribeObserverC: Error message: " + listResource.message);
+                        Log.e(TAG, "subscribeObserverC: status: ERROR, #recipes: " + listResource.data.size());
                         break;
                 }
             }
@@ -137,10 +137,12 @@ public class CategoriesFragment extends BaseDaggerFragment implements CategoryIt
     @Override
     public void onItemClicked(long categoryId) {
         //TODO: go to questions fragment
-        ((MainDrawerActivity) getActivity()).replaceContentFragment(QuestionsFragment.newInstance(categoryId),
-            QuestionsFragment.TAG,
-            R.anim.activity_left_to_right,
-            R.anim.activity_left_to_right2,
-            true);
+        new Handler().postDelayed(() -> {
+            ((MainDrawerActivity) getActivity()).replaceContentFragment(QuestionsFragment.newInstance(categoryId),
+                QuestionsFragment.TAG,
+                R.anim.activity_left_to_right,
+                R.anim.activity_left_to_right2,
+                true);
+        }, 200);
     }
 }

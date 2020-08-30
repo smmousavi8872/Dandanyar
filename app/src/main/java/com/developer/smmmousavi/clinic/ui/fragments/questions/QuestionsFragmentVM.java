@@ -4,6 +4,7 @@ package com.developer.smmmousavi.clinic.ui.fragments.questions;
 import android.app.Application;
 
 import com.developer.smmmousavi.clinic.base.viewmodel.BaseViewModel;
+import com.developer.smmmousavi.clinic.model.Category;
 import com.developer.smmmousavi.clinic.model.Question;
 import com.developer.smmmousavi.clinic.network.bodies.PostQuestionBody;
 import com.developer.smmmousavi.clinic.network.util.Resource;
@@ -93,6 +94,10 @@ public class QuestionsFragmentVM extends BaseViewModel {
                 mNextQuestionMLD.removeSource(repoSource);
             }
         });
+    }
+
+    public LiveData<Category> getCategoryById(long categoryId) {
+        return mRepository.getCategoryById(categoryId);
     }
 
 }

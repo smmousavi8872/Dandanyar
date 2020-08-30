@@ -5,15 +5,15 @@ import android.view.View;
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.base.BaseViewHolder;
 import com.developer.smmmousavi.clinic.model.Category;
+import com.google.android.material.button.MaterialButton;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatTextView;
 import butterknife.BindView;
 
 public class CategoryVH<T extends Category> extends BaseViewHolder<T> {
 
-    @BindView(R.id.txtCategoryTitle)
-    AppCompatTextView mTxtCategoryTitle;
+    @BindView(R.id.btnCategory)
+    MaterialButton mBtnCategoryTitle;
 
     private Category mItem;
     private CategoryItemClickListener mItemClickListener;
@@ -29,7 +29,7 @@ public class CategoryVH<T extends Category> extends BaseViewHolder<T> {
     @Override
     public void onBind(T item) {
         mItem = item;
-        mTxtCategoryTitle.setText(item.getTitle());
+        mBtnCategoryTitle.setText(item.getTitle());
     }
 
     @Override

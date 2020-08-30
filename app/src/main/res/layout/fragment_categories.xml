@@ -22,7 +22,7 @@
     android:paddingBottom="8dp"
     android:text="@string/categories_choose_dentistry_survay"
     android:textColor="@color/pureBlack"
-    android:textSize="24sp"
+    android:textSize="21sp"
     app:layout_constraintTop_toTopOf="parent" />
 
   <androidx.appcompat.widget.AppCompatTextView
@@ -34,9 +34,9 @@
     android:maxLines="2"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
-    android:text="@string/main_choose_survay_text_detail"
+    android:text="@string/main_choose_category_text_detail"
     android:textColor="@color/middleGray"
-    android:textSize="20sp"
+    android:textSize="19sp"
     app:layout_constraintTop_toBottomOf="@id/txtDescriptionTitle" />
 
   <androidx.appcompat.widget.AppCompatTextView

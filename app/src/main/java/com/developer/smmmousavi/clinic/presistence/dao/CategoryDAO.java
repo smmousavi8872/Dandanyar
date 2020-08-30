@@ -39,7 +39,7 @@ public interface CategoryDAO {
     LiveData<List<Category>> searchCategories(String query, int pageNumber);
 
     @Query("SELECT * FROM categories WHERE id = :categoryId")
-    LiveData<Category> getCategory(long categoryId);
+    LiveData<Category> getCategoryById(long categoryId);
 
     @Query("SELECT * FROM categories")
     LiveData<List<Category>> getAllCategories();

@@ -47,9 +47,9 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:fontFamily="@font/iran_sans_mobile_bold"
-          android:text="دندانپزشکی"
+          android:text="مشکلات دهان و دندان"
           android:textColor="@color/pureBlack"
-          android:textSize="24sp" />
+          android:textSize="21sp" />
       </LinearLayout>
     </LinearLayout>
 
