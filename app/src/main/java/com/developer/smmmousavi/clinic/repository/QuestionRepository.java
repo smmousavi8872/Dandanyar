@@ -64,7 +64,8 @@ public class QuestionRepository {
                                 questionArr[index].getResTrueId(),
                                 questionArr[index].getResFlaseId(),
                                 questionArr[index].isFirst(),
-                                questionArr[index].isLast()
+                                questionArr[index].isLast(),
+                                questionArr[index].getStatus()
                             );
                         }
                         index++;
@@ -120,7 +121,8 @@ public class QuestionRepository {
                                 questionArr[index].getResTrueId(),
                                 questionArr[index].getResFlaseId(),
                                 questionArr[index].isFirst(),
-                                questionArr[index].isLast()
+                                questionArr[index].isLast(),
+                                questionArr[index].getStatus()
                             );
                         }
                         index++;

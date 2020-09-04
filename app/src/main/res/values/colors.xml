@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#03B89B</color>
+  <color name="colorPrimary">#80CBC4</color>
   <color name="colorPrimaryLight">#106632</color>
   <color name="colorPrimaryDark">#0C4733</color>
-  <color name="colorAccent">#03B89B</color>
+  <color name="colorAccent">#80CBC4</color>
+  <color name="colorAccent2">#03B89B</color>
   <color name="secondBackground">#EDEFF2</color>
-  <color name="primaryGreen">#66BB6A</color>
-  <color name="primaryOrange">#ffefa021</color>
-  <color name="primaryBlue">#1D89E4</color>
+  <color name="primaryGreen">#15A32F</color>
+  <color name="primaryOrange">#EA8D0D</color>
+  <color name="primaryBlue">#096BDF</color>
   <color name="middleGray">#858585</color>
   <color name="deactiveGray">#AAAAAA</color>
   <color name="darkGray">#757575</color>
@@ -22,7 +23,7 @@
   <color name="lightNavyBlue">#607FDC</color>
   <color name="subtitleColor">#979797</color>
   <color name="book_loading_background">#ffffff</color>
-  <color name="primaryRed">#EF394F</color>
+  <color name="primaryRed">#de2626</color>
 
 
   <color name="colorPrimaryText">#050505</color>

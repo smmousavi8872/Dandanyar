@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
@@ -29,6 +29,7 @@
     android:id="@+id/txtDescriptionText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_below="@id/txtDescriptionTitle"
     android:layout_marginBottom="16dp"
     android:ellipsize="end"
     android:maxLines="2"
@@ -36,36 +37,37 @@
     android:paddingEnd="16dp"
     android:text="@string/main_choose_category_text_detail"
     android:textColor="@color/middleGray"
-    android:textSize="19sp"
-    app:layout_constraintTop_toBottomOf="@id/txtDescriptionTitle" />
+    android:textSize="19sp" />
 
   <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/txtCategoryLoadingContent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_above="@id/categoryLoading"
+    android:layout_centerHorizontal="true"
     android:clickable="false"
     android:focusable="false"
     android:text="@string/splash_loading_text"
     android:textColor="@color/colorAccent"
-    android:textSize="18sp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/categoryLoading" />
+    android:textSize="18sp" />
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rvCategories"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_below="@id/txtDescriptionText"
     android:layoutAnimation="@anim/layoun_anim_bottom"
     android:padding="4dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    app:layout_constraintTop_toBottomOf="@id/txtDescriptionText" />
+    tools:layout_editor_absoluteX="0dp" />
 
   <com.github.ybq.android.spinkit.SpinKitView
     android:id="@+id/categoryLoading"
     style="@style/SpinKitView.Large.FoldingCube"
     android:layout_width="56dp"
     android:layout_height="56dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
     android:layout_marginBottom="64dp"
     android:clickable="false"
     android:focusable="false"
@@ -75,4 +77,4 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

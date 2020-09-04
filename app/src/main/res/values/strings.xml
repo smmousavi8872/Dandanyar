@@ -64,5 +64,9 @@
   <string name="user_registered_before">نام کاربری قبلا ثبت شده است</string>
   <string name="exit_user_account">خروج از حساب کاربری</string>
   <string name="question_no_answer">خیر، اینطور نیست</string>
+  <string name="status_unurgent">شرایط غیرفوری</string>
+  <string name="status_urgent">شرایط فوری</string>
+  <string name="status_super_urgent">شرایط اورژانسی</string>
+  <string name="status_self_care">خودمراقبتی</string>
 
 </resources>

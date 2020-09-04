@@ -13,7 +13,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@androidx.room.Database(entities = {Question.class, Category.class, User.class}, version = 1)
+@androidx.room.Database(entities = {Question.class, Category.class, User.class}, version = 2)
 @TypeConverters({Converters.class})
 public abstract class Database extends RoomDatabase {
 
@@ -32,7 +32,8 @@ public abstract class Database extends RoomDatabase {
             sInstance = Room.databaseBuilder(
                 context.getApplicationContext(),
                 Database.class,
-                DATABASE_NAME).build();
+                DATABASE_NAME).fallbackToDestructiveMigration()
+                .build();
         return sInstance;
     }
 }

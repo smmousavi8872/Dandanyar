@@ -42,6 +42,10 @@ public class Question extends BaseModel {
     @ColumnInfo(name = "isLast")
     private boolean isLast;
 
+    @SerializedName("status")
+    @ColumnInfo(name = "status")
+    private int mStatus;
+
     public long getId() {
         return mId;
     }
@@ -98,17 +102,25 @@ public class Question extends BaseModel {
         isLast = last;
     }
 
+    public int getStatus() {
+        return mStatus;
+    }
+
+    public void setStatus(int status) {
+        mStatus = status;
+    }
 
     @Override
     public String toString() {
         return "Question{" +
-            "mId='" + mId + '\'' +
+            "mId=" + mId +
             ", mText='" + mText + '\'' +
             ", mResTrueId='" + mResTrueId + '\'' +
             ", mResFlaseId='" + mResFlaseId + '\'' +
-            ", mCategoryId='" + mCategoryId + '\'' +
+            ", mCategoryId=" + mCategoryId +
             ", isFirst=" + isFirst +
             ", isLast=" + isLast +
+            ", mStatus=" + mStatus +
             '}';
     }
 
@@ -118,16 +130,17 @@ public class Question extends BaseModel {
         if (o == null || getClass() != o.getClass()) return false;
         Question question = (Question) o;
         return mId == question.mId &&
+            mCategoryId == question.mCategoryId &&
             isFirst == question.isFirst &&
             isLast == question.isLast &&
+            mStatus == question.mStatus &&
             Objects.equals(mText, question.mText) &&
             Objects.equals(mResTrueId, question.mResTrueId) &&
-            Objects.equals(mResFlaseId, question.mResFlaseId) &&
-            Objects.equals(mCategoryId, question.mCategoryId);
+            Objects.equals(mResFlaseId, question.mResFlaseId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mId, mText, mResTrueId, mResFlaseId, mCategoryId, isFirst, isLast);
+        return Objects.hash(mId, mText, mResTrueId, mResFlaseId, mCategoryId, isFirst, isLast, mStatus);
     }
 }

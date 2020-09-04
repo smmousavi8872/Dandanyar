@@ -25,7 +25,6 @@ import javax.inject.Inject;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,8 +38,8 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
 
     public static final String ARGS_CATEGORY_ID = "ArgsCateogryId";
 
-    @BindView(R.id.rvQuestionNum)
-    RecyclerView mQuestionNumRv;
+    @BindView(R.id.txtStatusFlag)
+    AppCompatTextView mTxtStatusFlag;
     @BindView(R.id.txtQuestionText)
     AppCompatTextView mTxtQuestionText;
     @BindView(R.id.cvQuestionContainer)
@@ -156,16 +155,40 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
     }
 
     private void setNextQuestion() {
+        Log.d(TAG, "setNextQuestion: status is: " + mQuestion.getStatus());
+        setStatusFlag();
         Animations.setAnimation(R.anim.hint_in, mTxtQuestionText);
         mTxtQuestionText.setText(mQuestion.getText());
-        if (mQuestion.isLast()) {
-            mBtnYesAnswer.setVisibility(View.GONE);
+        if (mQuestion.getResFlaseId() == null)
             mBtnNoAnswer.setVisibility(View.GONE);
+        if (mQuestion.getResTrueId() == null)
+            mBtnNoAnswer.setVisibility(View.GONE);
+    }
+
+    private void setStatusFlag() {
+        switch (mQuestion.getStatus()) {
+            case 1:
+                mTxtStatusFlag.setText(R.string.status_unurgent);
+                mTxtStatusFlag.setBackgroundColor(getResources().getColor(R.color.primaryGreen));
+                break;
+            case 2:
+                mTxtStatusFlag.setText(R.string.status_urgent);
+                mTxtStatusFlag.setBackgroundColor(getResources().getColor(R.color.primaryOrange));
+                break;
+            case 3:
+                mTxtStatusFlag.setText(R.string.status_super_urgent);
+                mTxtStatusFlag.setBackgroundColor(getResources().getColor(R.color.primaryRed));
+                break;
+            case 4:
+                mTxtStatusFlag.setText(R.string.status_self_care);
+                mTxtStatusFlag.setBackgroundColor(getResources().getColor(R.color.primaryBlue));
+                break;
         }
     }
 
     private void setFirstQuestion() {
         mTxtQuestionText.setText(mQuestion.getText());
+        setStatusFlag();
         Animations.setAnimation(R.anim.fade_in, mCvQuestionContainer);
         Animations.setAnimation(R.anim.fade_out, mQuestionLoading);
         mQuestionLoading.setVisibility(View.GONE);

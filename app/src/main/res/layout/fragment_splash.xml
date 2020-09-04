@@ -10,12 +10,12 @@
   <androidx.appcompat.widget.AppCompatImageView
     android:layout_margin="16dp"
     android:id="@+id/imUniLogo"
-    android:layout_width="144dp"
-    android:layout_height="144dp"
+    android:layout_width="128dp"
+    android:layout_height="128dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:srcCompat="@drawable/uni_logo" />
+    app:srcCompat="@drawable/ic_teeth" />
 
   <androidx.appcompat.widget.AppCompatTextView
     app:layout_constraintStart_toStartOf="parent"
