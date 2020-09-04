@@ -17,6 +17,11 @@ public class MainDrawerActivity extends BaseDrawerActivity {
     public static final String EXTRA_USER_ID = "ExtraUserId";
     private static final String TAG = "MainDrawerActivity";
     private MainDrawerActivityVM mViewModel;
+    BaseDaggerFragment mFragmentObject = SurvaysFragment.newInstance();;
+
+    public void setFragmentObject(BaseDaggerFragment fragmentObject) {
+        mFragmentObject = fragmentObject;
+    }
 
     @Inject
     ViewModelProviderFactory mProviderFactory;
@@ -38,9 +43,8 @@ public class MainDrawerActivity extends BaseDrawerActivity {
 
     @Override
     public BaseDaggerFragment getFragmentObject() {
-        return SurvaysFragment.newInstance();
+        return mFragmentObject;
     }
-
     @Override
     public String getFragmentTag() {
         return SurvaysFragment.TAG;

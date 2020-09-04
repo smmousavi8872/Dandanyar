@@ -43,8 +43,8 @@ public class CategoryRepository {
 
             @Override
             protected void saveCallResult(@NonNull CategoriesResponse item) {
-
                 if (item.getCategories() != null) {
+                    mCategoryDAO.deleteAll();
                     Category[] categoryArr = new Category[item.getCategories().size()];
                     int index = 0;
                     for (long rowId : mCategoryDAO.insertCategories(item.getCategories().toArray(categoryArr))) {
@@ -59,7 +59,6 @@ public class CategoryRepository {
                         index++;
                     }
                 }
-
             }
 
             @Override

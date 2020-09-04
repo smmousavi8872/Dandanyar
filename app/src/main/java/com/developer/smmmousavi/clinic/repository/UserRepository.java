@@ -45,6 +45,7 @@ public class UserRepository {
             @Override
             protected void saveCallResult(@NonNull UserResponse item) {
                 if (item.getUser() != null) {
+                    mUserDAO.deleteAll();
                     User[] userArr = new User[1];
                     userArr[0] = item.getUser();
                     int index = 0;

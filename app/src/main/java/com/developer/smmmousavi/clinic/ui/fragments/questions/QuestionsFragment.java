@@ -221,7 +221,6 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
         PostQuestionBody body = getPostQuestionBody(false);
         Log.d(TAG, "setOnYesButtonClickListener: body -> " + body.toString());
         mViewModel.executePostQuestion(body);
-
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.developer.smmmousavi.clinic.ui.activities.basedrawer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -109,7 +108,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
             mTxtToolbarTitle.setText(R.string.toolbar_dentistry_title);
         } else if (mHostedFrgament instanceof QuestionsFragment) {
             mToolbarClose.setOnClickListener(view -> {
-                replaceByCategories();
+                replaceByCategoriesFragment();
             });
         }
         Animations.setAnimation(R.anim.hint_in, mTxtToolbarTitle);
@@ -122,15 +121,15 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     private void replaceBySurvaysFragment() {
         replaceContentFragment(SurvaysFragment.newInstance(),
             SurvaysFragment.TAG,
-            R.anim.activity_right_to_left,
-            R.anim.activity_right_to_left2,
+            R.anim.activity_left_to_right,
+            R.anim.activity_left_to_right2,
             true);
     }
 
     /**
      * @HardCoded TODO: categoryId should recieve from server
      */
-    private void replaceByCategories() {
+    private void replaceByCategoriesFragment() {
         replaceContentFragment(CategoriesFragment.newInstance(0),
             CategoriesFragment.TAG,
             R.anim.activity_right_to_left,
@@ -187,52 +186,17 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     }
 
     private void setNavigationItemAction(@NonNull MenuItem item) {
-        Intent intent = null;
         switch (item.getItemId()) {
-            /*case R.id.navbarMenuHome:
-                if (!(getFragmentObject() instanceof HomeDrawerFragment)) {
-                    intent = HomeDrawerActivity.newIntent(this);
-                    // to finish all previous activities
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                } else
-                    intent = null;
+            case R.id.navbarMenuHome:
+                if (!(mHostedFrgament instanceof SurvaysFragment))
+                    replaceBySurvaysFragment();
                 break;
             case R.id.navbarMenuCatList:
-                intent = CategoryListActivity.newIntent(this, 0);
+                if (!(mHostedFrgament instanceof CategoriesFragment))
+                    replaceByCategoriesFragment();
                 break;
-            case R.id.navbarMenuShoppingBasket:
-                intent = ShoppingBasketActivity.newIntent(this);
-                break;
-            case R.id.navbarMenuSpecialOffer:
-                intent = SpecialOffersActivity.newIntent(this, OfferType.SPECIAL_OFFER);
-                break;
-            case R.id.navbarMenuMostSold:
-                intent = SpecialOffersActivity.newIntent(this, OfferType.MOST_SOLD);
-                break;
-            case R.id.navbarMenuMostSeen:
-                intent = SpecialOffersActivity.newIntent(this, OfferType.MOST_SEEN);
-                break;
-            case R.id.navbarMenuNewest:
-                intent = SpecialOffersActivity.newIntent(this, OfferType.NEWEST);
-                break;
-            case R.id.navbarMenuSettings:
-                intent = SettingsActivity.newIntent(this);
-                break;
-            case R.id.navbarMap:
-                intent = MapActivity.newIntent(this);
-                break;
-            case R.id.navbarMenuAboutUs:
-                intent = AboutUsActivity.newIntent(this);
-                break;
-            default:
-                intent = HomeDrawerActivity.newIntent(this);
-                break;*/
         }
         closeDrawer();
-        if (intent != null)
-            startActivity(intent);
-        new Handler().postDelayed(() -> {
-        }, 200);
     }
 
     public void closeDrawer() {
@@ -348,7 +312,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
         } else if (mHostedFrgament instanceof CategoriesFragment) {
             replaceBySurvaysFragment();
         } else if (mHostedFrgament instanceof QuestionsFragment) {
-            replaceByCategories();
+            replaceByCategoriesFragment();
         }
     }
 

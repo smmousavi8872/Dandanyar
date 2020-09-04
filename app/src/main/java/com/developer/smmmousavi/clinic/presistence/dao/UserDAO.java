@@ -38,4 +38,8 @@ public interface UserDAO {
 
     @Query("SELECT * FROM users WHERE userName = :userName AND password = :password")
     LiveData<User> getUserByBody(String userName, String password);
+
+    @Query("DELETE from users")
+    void deleteAll();
+
 }

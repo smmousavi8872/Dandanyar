@@ -3,7 +3,7 @@
 
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
-  <string name="navbarMenuHome">خانه</string>
+  <string name="navbarMenuHome">پرسشنامه ها</string>
   <string name="navbarMenuProductCatList">لیست دسته بندی ها</string>
   <string name="navbarMenuShoppingBasket">سبد خرید</string>
   <string name="navbarMenuSpecialOffer">پیشنهاد ویژه دندان\u200cیار</string>
@@ -42,7 +42,7 @@
   <string name="hint_search_here">اینجا جستوجو کنید</string>
   <string name="splash_loading_text">بارگزاری محتوا</string>
   <string name="splash_chant">پرسشنامه غربالگری «دندان\u200cیار»</string>
-  <string name="splash_version">version: 1.1.0</string>
+  <string name="splash_version">version: 2.0.0</string>
   <string name="main_choose_surva_title">نوع پرسش نامه خود را انتخاب کنید</string>
   <string name="toolbar_clinic_title">دندان\u200cیار</string>
   <string name="toolbar_dentistry_title">مشکلات دهان و دندان</string>

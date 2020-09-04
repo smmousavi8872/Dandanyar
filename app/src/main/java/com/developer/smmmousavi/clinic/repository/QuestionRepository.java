@@ -105,6 +105,7 @@ public class QuestionRepository {
             protected void saveCallResult(@NonNull PostQuestionResponse item) {
                 Log.d(TAG, "postUserQuestion: saveCallResult");
                 if (item.getNextQuestion() != null) {
+                    mQuestionDAO.deleteAll();
                     mCallSaved = true;
                     mQId = item.getNextQuestion().getId();
                     Question[] questionArr = new Question[1];
