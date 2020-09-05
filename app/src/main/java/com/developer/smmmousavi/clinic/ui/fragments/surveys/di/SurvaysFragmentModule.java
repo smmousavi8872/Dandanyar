@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.fragments.survays.di;
+package com.developer.smmmousavi.clinic.ui.fragments.surveys.di;
 
 import com.developer.smmmousavi.clinic.helper.RecyclerViewHelper;
 import com.developer.smmmousavi.clinic.model.Survay;

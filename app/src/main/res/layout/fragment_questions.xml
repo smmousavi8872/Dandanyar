@@ -7,6 +7,26 @@
   android:background="@color/secondBackground"
   tools:context=".ui.fragments.questions.QuestionsFragment">
 
+  <androidx.appcompat.widget.AppCompatImageView
+    android:id="@+id/imgConnectionError"
+    android:layout_width="128dp"
+    android:layout_height="128dp"
+    android:layout_gravity="center"
+    android:visibility="gone"
+    android:alpha="0.3"
+    app:srcCompat="@drawable/ic_connection_error" />
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rvQuestionNum"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="32dp"
+    android:layout_marginEnd="16dp"
+    android:layoutDirection="rtl"
+    android:orientation="horizontal" />
+
   <com.github.ybq.android.spinkit.SpinKitView
     android:id="@+id/questionLoading"
     style="@style/SpinKitView.Large.FoldingCube"
@@ -38,6 +58,26 @@
       android:layout_height="wrap_content"
       android:paddingBottom="16dp">
 
+      <ScrollView
+        android:id="@+id/svQuestionText"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/txtStatusFlag"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fillViewport="true"
+        android:minHeight="64dp"
+        android:paddingBottom="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/txtQuestionText"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:textColor="@color/pureBlack"
+          android:textSize="20sp" />
+      </ScrollView>
+
       <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtStatusFlag"
         android:layout_width="match_parent"
@@ -46,30 +86,17 @@
         android:textColor="@color/pureWhite"
         android:textSize="16sp" />
 
-      <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtQuestionText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtStatusFlag"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:gravity="center"
-        android:textColor="@color/pureBlack"
-        android:textSize="20sp" />
-
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btnYesAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtQuestionText"
+        android:layout_below="@+id/svQuestionText"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="2dp"
         android:padding="8dp"
-        android:text="بله، همینطور است"
+        android:text="@string/questin_yes_answer"
         android:textColor="@color/pureWhite"
         android:textSize="18sp"
         app:cornerRadius="24dp" />
@@ -88,9 +115,21 @@
         android:textSize="18sp"
         app:cornerRadius="24dp" />
 
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnStartOver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnNoAnswer"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="16dp"
+        android:padding="8dp"
+        android:text="@string/question_start_over"
+        android:textColor="@color/pureWhite"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:cornerRadius="24dp" />
+
     </RelativeLayout>
-
   </com.google.android.material.card.MaterialCardView>
-
-
 </FrameLayout>

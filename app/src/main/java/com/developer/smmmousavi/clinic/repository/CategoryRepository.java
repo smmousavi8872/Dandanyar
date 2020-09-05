@@ -8,6 +8,7 @@ import com.developer.smmmousavi.clinic.network.AppExecutors;
 import com.developer.smmmousavi.clinic.network.factory.SurvayRestApiFactory;
 import com.developer.smmmousavi.clinic.network.responses.ApiResponse;
 import com.developer.smmmousavi.clinic.network.responses.CategoriesResponse;
+import com.developer.smmmousavi.clinic.network.responses.CategoryByIdResponse;
 import com.developer.smmmousavi.clinic.network.util.NetworkBoundResource;
 import com.developer.smmmousavi.clinic.network.util.Resource;
 import com.developer.smmmousavi.clinic.presistence.dao.CategoryDAO;
@@ -37,6 +38,39 @@ public class CategoryRepository {
     private CategoryRepository(Context context) {
         mCategoryDAO = Database.getInstance(context).geCategoryDao();
     }
+
+    public LiveData<Resource<Category>> getCategoryById(long categoryId) {
+        return new NetworkBoundResource<Category, CategoryByIdResponse>(AppExecutors.getInstance()) {
+
+            @Override
+            protected void saveCallResult(@NonNull CategoryByIdResponse item) {
+                if (item.getCategory() != null) {
+                    mCategoryDAO.insertCategory(item.getCategory());
+                    // if category already exists.
+                }
+            }
+
+            @Override
+            protected boolean shouldFetch(@Nullable Category data) {
+                // set the interval of request.
+                return true;
+            }
+
+            @NonNull
+            @Override
+            protected LiveData<Category> loadFromDb() {
+                return mCategoryDAO.getCategoryById(categoryId);
+            }
+
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<CategoryByIdResponse>> createCall() {
+                return SurvayRestApiFactory.create()
+                    .getCategoryById(categoryId);
+            }
+        }.getAsLiveData();
+    }
+
 
     public LiveData<Resource<List<Category>>> getCategories() {
         return new NetworkBoundResource<List<Category>, CategoriesResponse>(AppExecutors.getInstance()) {

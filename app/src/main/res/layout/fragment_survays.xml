@@ -7,7 +7,7 @@
   android:layout_marginEnd="16dp"
   android:background="@color/secondBackground"
   android:orientation="vertical"
-  tools:context=".ui.fragments.survays.SurvaysFragment">
+  tools:context=".ui.fragments.surveys.SurveysFragment">
 
   <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/txtDescriptionTitle"

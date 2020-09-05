@@ -17,9 +17,9 @@ import com.developer.smmmousavi.clinic.ui.fragments.signup.di.SignUpFragmentVMMo
 import com.developer.smmmousavi.clinic.ui.fragments.splash.SplashFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.splash.di.SplashFragmentModule;
 import com.developer.smmmousavi.clinic.ui.fragments.splash.di.SplashFragmentViewModelModule;
-import com.developer.smmmousavi.clinic.ui.fragments.survays.SurvaysFragment;
-import com.developer.smmmousavi.clinic.ui.fragments.survays.di.SurvaysFragmentModule;
-import com.developer.smmmousavi.clinic.ui.fragments.survays.di.SurvaysFragmentVMModule;
+import com.developer.smmmousavi.clinic.ui.fragments.surveys.SurveysFragment;
+import com.developer.smmmousavi.clinic.ui.fragments.surveys.di.SurvaysFragmentModule;
+import com.developer.smmmousavi.clinic.ui.fragments.surveys.di.SurvaysFragmentVMModule;
 import com.developer.smmmousavi.clinic.ui.viewholder.questionnum.di.QuestionNumVHModule;
 import com.developer.smmmousavi.clinic.ui.viewholder.questionnum.di.QuestionNumVHVMModule;
 
@@ -39,7 +39,7 @@ public abstract class FragmentBuildersModule {
     abstract SignUpFragment contributeSignUpFragment();
 
     @ContributesAndroidInjector(modules = {SurvaysFragmentModule.class, SurvaysFragmentVMModule.class})
-    abstract SurvaysFragment contributeSurvaysFragment();
+    abstract SurveysFragment contributeSurvaysFragment();
 
     @ContributesAndroidInjector(modules = {SplashFragmentModule.class, SplashFragmentViewModelModule.class})
     abstract SplashFragment contributeSplashFragment();

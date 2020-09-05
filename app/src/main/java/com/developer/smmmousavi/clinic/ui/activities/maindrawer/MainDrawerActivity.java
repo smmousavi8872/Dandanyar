@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.developer.smmmousavi.clinic.factory.viewmodel.ViewModelProviderFactory;
 import com.developer.smmmousavi.clinic.ui.activities.basedrawer.BaseDrawerActivity;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
-import com.developer.smmmousavi.clinic.ui.fragments.survays.SurvaysFragment;
+import com.developer.smmmousavi.clinic.ui.fragments.surveys.SurveysFragment;
 
 import javax.inject.Inject;
 
@@ -17,7 +17,7 @@ public class MainDrawerActivity extends BaseDrawerActivity {
     public static final String EXTRA_USER_ID = "ExtraUserId";
     private static final String TAG = "MainDrawerActivity";
     private MainDrawerActivityVM mViewModel;
-    BaseDaggerFragment mFragmentObject = SurvaysFragment.newInstance();;
+    BaseDaggerFragment mFragmentObject = SurveysFragment.newInstance();;
 
     public void setFragmentObject(BaseDaggerFragment fragmentObject) {
         mFragmentObject = fragmentObject;
@@ -47,7 +47,7 @@ public class MainDrawerActivity extends BaseDrawerActivity {
     }
     @Override
     public String getFragmentTag() {
-        return SurvaysFragment.TAG;
+        return SurveysFragment.TAG;
     }
 
     @Override

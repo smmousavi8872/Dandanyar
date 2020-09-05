@@ -1,18 +1,22 @@
 package com.developer.smmmousavi.clinic.ui.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.base.recyclerview.BaseRvAdapter;
-import com.developer.smmmousavi.clinic.model.Question;
+import com.developer.smmmousavi.clinic.model.QuestionNumber;
 import com.developer.smmmousavi.clinic.ui.viewholder.questionnum.QuestionNumItemClickListener;
 import com.developer.smmmousavi.clinic.ui.viewholder.questionnum.QuestionNumVH;
+import com.developer.smmmousavi.clinic.ui.viewholder.questionnum.di.FirstQuestionNumVH;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class QuestionNumRvAdapter<T extends Question> extends BaseRvAdapter<T> {
+public class QuestionNumRvAdapter<T extends QuestionNumber> extends BaseRvAdapter<T> {
+
+    private static final String TAG = "QuestionNumRvAdapter";
 
     public QuestionNumItemClickListener mItemClickListener;
 
@@ -22,15 +26,20 @@ public class QuestionNumRvAdapter<T extends Question> extends BaseRvAdapter<T> {
 
     @Override
     protected RecyclerView.ViewHolder createHeaderViewHolder(ViewGroup parent) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_question_num, parent, false);
-        QuestionNumVH<Question> questionNumVH = new QuestionNumVH<>(v);
+        Log.d(TAG, "createItemViewHolder: (HEADER) list size = " + mItemList.size());
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_question_num_first, parent, false);
+        FirstQuestionNumVH<QuestionNumber> questionNumVH = new FirstQuestionNumVH<>(v);
         questionNumVH.setItemClickListener(mItemClickListener);
         return questionNumVH;
     }
 
     @Override
     protected RecyclerView.ViewHolder createItemViewHolder(ViewGroup parent) {
-        return null;
+        Log.d(TAG, "createItemViewHolder: (ITEM) list size = " + mItemList.size());
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_question_num, parent, false);
+        QuestionNumVH<QuestionNumber> questionNumVH = new QuestionNumVH<>(v);
+        questionNumVH.setItemClickListener(mItemClickListener);
+        return questionNumVH;
     }
 
     @Override
@@ -40,12 +49,12 @@ public class QuestionNumRvAdapter<T extends Question> extends BaseRvAdapter<T> {
 
     @Override
     protected void bindHeaderViewHolder(RecyclerView.ViewHolder viewHolder) {
-
+        ((FirstQuestionNumVH<QuestionNumber>) viewHolder).onBind(mItemList.get(0));
     }
 
     @Override
     protected void bindItemViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
+        ((QuestionNumVH<QuestionNumber>) viewHolder).onBind(mItemList.get(position));
     }
 
     @Override
@@ -75,11 +84,11 @@ public class QuestionNumRvAdapter<T extends Question> extends BaseRvAdapter<T> {
 
     @Override
     public int getItemViewType(int position) {
-        if (position == mItemList.size()) {
-            return FOOTER;
-        } else if (position == 0) {
+        if (mItemList.get(position).isFirst()) {
+            Log.d(TAG, "getItemViewType: HEADER, position = " + position);
             return HEADER;
         } else {
+            Log.d(TAG, "getItemViewType: ITEM");
             return ITEM;
         }
     }

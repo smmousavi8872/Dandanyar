@@ -114,7 +114,7 @@ public class SignUpFragment extends BaseDaggerFragment {
                         Log.e(TAG, "subscribeObserver: can not refresh the cache.");
                         Log.e(TAG, "subscribeObserver: Error message: " + listResource.message);
                         new Handler().postDelayed(() -> {
-                            Toast.makeText(getContext(), R.string.sign_up_failed, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.sign_up_failed +" error: " +listResource.message, Toast.LENGTH_LONG).show();
                             doneWating();
 
                             activateSignUpButton(true);

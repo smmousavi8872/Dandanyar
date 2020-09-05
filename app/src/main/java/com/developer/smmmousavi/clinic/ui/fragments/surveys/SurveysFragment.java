@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.fragments.survays;
+package com.developer.smmmousavi.clinic.ui.fragments.surveys;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,10 +28,10 @@ import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SurvaysFragment#newInstance} factory method to
+ * Use the {@link SurveysFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SurvaysFragment extends BaseDaggerFragment implements SurvayItemClickListener {
+public class SurveysFragment extends BaseDaggerFragment implements SurvayItemClickListener {
 
     public static final String TAG = "MainDrawerFragmentTAG";
 
@@ -45,15 +45,15 @@ public class SurvaysFragment extends BaseDaggerFragment implements SurvayItemCli
     @Inject
     ViewModelProviderFactory mProviderFactory;
 
-    private SurvaysFragmentVM mViewModel;
+    private SurveysFragmentVM mViewModel;
 
-    public SurvaysFragment() {
+    public SurveysFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static SurvaysFragment newInstance() {
-        SurvaysFragment fragment = new SurvaysFragment();
+    public static SurveysFragment newInstance() {
+        SurveysFragment fragment = new SurveysFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -79,7 +79,7 @@ public class SurvaysFragment extends BaseDaggerFragment implements SurvayItemCli
     }
 
     private void initViewModle() {
-        mViewModel = ViewModelProviders.of(this, mProviderFactory).get(SurvaysFragmentVM.class);
+        mViewModel = ViewModelProviders.of(this, mProviderFactory).get(SurveysFragmentVM.class);
     }
 
     private void subscribeObserver() {

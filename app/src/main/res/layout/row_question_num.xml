@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:layout_width="match_parent"
+  android:layout_width="wrap_content"
   android:layout_height="wrap_content"
+  android:layout_gravity="end"
   android:layoutDirection="rtl">
 
   <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/txtQuestionNum"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
     android:background="@drawable/bg_selected_question_num"
     android:fontFamily="@font/roboto_bold"
     android:gravity="center"
     android:text="1"
     android:textColor="@color/pureWhite"
-    android:textSize="18dp"
+    android:textSize="19dp"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/txtQuestionNumDash"
     app:layout_constraintTop_toTopOf="parent" />
 
   <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/txtQuestionNumDash"
-    android:layout_width="32dp"
+    android:layout_width="36dp"
     android:layout_height="3dp"
     android:layout_centerVertical="true"
-    android:layout_toEndOf="@id/txtQuestionNum"
-    android:background="@color/colorPrimaryDark"
     android:layout_marginTop="4dp"
+    android:background="@color/colorAccent2"
     app:layout_constraintBottom_toBottomOf="@id/txtQuestionNum"
-    app:layout_constraintStart_toEndOf="@id/txtQuestionNum"
+    app:layout_constraintEnd_toStartOf="@id/txtQuestionNum"
     app:layout_constraintTop_toTopOf="@id/txtQuestionNum" />
 
   <androidx.appcompat.widget.AppCompatTextView
-    android:id="@+id/txtAnswerText"
+    android:id="@+id/txtQuestionNumAnswer"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_toEndOf="@id/txtQuestionNum"
@@ -42,6 +43,6 @@
     android:textColor="@color/colorPrimary"
     android:textSize="18dp"
     app:layout_constraintBottom_toTopOf="@id/txtQuestionNumDash"
-    app:layout_constraintStart_toEndOf="@id/txtQuestionNum"
+    app:layout_constraintEnd_toStartOf="@id/txtQuestionNum"
     app:layout_constraintTop_toTopOf="@id/txtQuestionNum" />
 </androidx.constraintlayout.widget.ConstraintLayout>

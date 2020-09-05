@@ -1,8 +1,8 @@
 package com.developer.smmmousavi.clinic.ui.fragments.questions.di;
 
 import com.developer.smmmousavi.clinic.helper.RecyclerViewHelper;
-import com.developer.smmmousavi.clinic.model.Category;
-import com.developer.smmmousavi.clinic.ui.adapter.CategoriesRvAdapter;
+import com.developer.smmmousavi.clinic.model.QuestionNumber;
+import com.developer.smmmousavi.clinic.ui.adapter.QuestionNumRvAdapter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,7 +16,7 @@ public class QuestionFragmentModule {
     }
 
     @Provides
-    CategoriesRvAdapter<Category> provideSurvaiesRvAdapter() {
-        return new CategoriesRvAdapter<>();
+    QuestionNumRvAdapter<QuestionNumber> provideSurvaiesRvAdapter() {
+        return new QuestionNumRvAdapter<>();
     }
 }

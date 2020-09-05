@@ -29,7 +29,7 @@
         android:id="@+id/imgSurvayIcon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/survay_icon" />
+        app:srcCompat="@drawable/survey_icon" />
       </com.google.android.material.card.MaterialCardView>
       <LinearLayout
         android:layout_width="0dp"

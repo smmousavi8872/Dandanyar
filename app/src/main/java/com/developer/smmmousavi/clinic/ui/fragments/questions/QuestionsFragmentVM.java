@@ -8,6 +8,7 @@ import com.developer.smmmousavi.clinic.model.Category;
 import com.developer.smmmousavi.clinic.model.Question;
 import com.developer.smmmousavi.clinic.network.bodies.PostQuestionBody;
 import com.developer.smmmousavi.clinic.network.util.Resource;
+import com.developer.smmmousavi.clinic.repository.CategoryRepository;
 import com.developer.smmmousavi.clinic.repository.QuestionRepository;
 
 import javax.inject.Inject;
@@ -24,9 +25,11 @@ public class QuestionsFragmentVM extends BaseViewModel {
     private boolean mFirstQuestionRequestCanceled;
     private boolean mNextQuestionPerformingQuery;
     private boolean mNextQuestionRequestCanceled;
-    private QuestionRepository mRepository;
+    private QuestionRepository mQuestionRepository;
+    private CategoryRepository mCategoryRepository;
     private MediatorLiveData<Resource<Question>> mFirstQuestionMLD;
     private MediatorLiveData<Resource<Question>> mNextQuestionMLD;
+    private MediatorLiveData<Resource<Category>> mCategoryMLD;
 
 
     public boolean isFirstQuestionPerformingQuery() {
@@ -45,19 +48,29 @@ public class QuestionsFragmentVM extends BaseViewModel {
         return mNextQuestionMLD;
     }
 
+    public MediatorLiveData<Resource<Category>> getCategoryMLD() {
+        return mCategoryMLD;
+    }
+
+    public void setCategoryMLD(MediatorLiveData<Resource<Category>> categoryMLD) {
+        mCategoryMLD = categoryMLD;
+    }
+
     @Inject
     public QuestionsFragmentVM(@NonNull Application application) {
         super(application);
-        mRepository = QuestionRepository.getInstance(application);
+        mQuestionRepository = QuestionRepository.getInstance(application);
+        mCategoryRepository = CategoryRepository.getInstance(application);
         mFirstQuestionMLD = new MediatorLiveData<>();
         mNextQuestionMLD = new MediatorLiveData<>();
+        mCategoryMLD = new MediatorLiveData<>();
     }
 
 
     public void executeGetFirstQuestion(long categoryId) {
         mFirstQuestionPerformingQuery = true;
         mFirstQuestionRequestCanceled = false;
-        final LiveData<Resource<Question>> repoSource = mRepository.getFirstCategoryQuestion(categoryId);
+        final LiveData<Resource<Question>> repoSource = mQuestionRepository.getFirstCategoryQuestion(categoryId);
         mFirstQuestionMLD.addSource(repoSource, listResource -> {
             //onChange
             if (listResource != null) {
@@ -78,7 +91,7 @@ public class QuestionsFragmentVM extends BaseViewModel {
     public void executePostQuestion(PostQuestionBody body) {
         mNextQuestionPerformingQuery = true;
         mNextQuestionRequestCanceled = false;
-        final LiveData<Resource<Question>> repoSource = mRepository.postUserQuestion(body);
+        final LiveData<Resource<Question>> repoSource = mQuestionRepository.postUserQuestion(body);
         mNextQuestionMLD.addSource(repoSource, listResource -> {
             //onChange
             if (listResource != null) {
@@ -96,8 +109,26 @@ public class QuestionsFragmentVM extends BaseViewModel {
         });
     }
 
-    public LiveData<Category> getCategoryById(long categoryId) {
-        return mRepository.getCategoryById(categoryId);
+    public void executeGetCategoryById(long categoryId) {
+        final LiveData<Resource<Category>> repoSource = mCategoryRepository.getCategoryById(categoryId);
+        mCategoryMLD.addSource(repoSource, listResource -> {
+            //onChange
+            if (listResource != null) {
+                mCategoryMLD.setValue(listResource);
+                if (listResource.status == Resource.Status.SUCCESS) {
+                    mCategoryMLD.removeSource(repoSource);
+                } else if (listResource.status == Resource.Status.ERROR) {
+                    mCategoryMLD.removeSource(repoSource);
+                }
+            } else {
+                mCategoryMLD.removeSource(repoSource);
+            }
+        });
     }
+
+    public LiveData<Category> getCategoryById(long categoryId) {
+        return mQuestionRepository.getCategoryById(categoryId);
+    }
+
 
 }

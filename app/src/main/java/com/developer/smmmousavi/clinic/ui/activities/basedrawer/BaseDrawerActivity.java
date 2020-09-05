@@ -19,7 +19,7 @@ import com.developer.smmmousavi.clinic.ui.alertdialog.OnDialogButtonClickListene
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.categories.CategoriesFragment;
 import com.developer.smmmousavi.clinic.ui.fragments.questions.QuestionsFragment;
-import com.developer.smmmousavi.clinic.ui.fragments.survays.SurvaysFragment;
+import com.developer.smmmousavi.clinic.ui.fragments.surveys.SurveysFragment;
 import com.developer.smmmousavi.clinic.util.Animations;
 import com.developer.smmmousavi.clinic.util.SharedPrefUtils;
 import com.google.android.material.appbar.AppBarLayout;
@@ -96,16 +96,16 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     private void initToolbar() {
         if (!isToolbarVisible())
             mToolabrLayout.setVisibility(View.GONE);
-        if (mHostedFrgament instanceof SurvaysFragment) {
+        if (mHostedFrgament instanceof SurveysFragment) {
             mToolbarClose.setOnClickListener(view -> {
                 showExitDialog();
             });
-            mTxtToolbarTitle.setText(R.string.toolbar_clinic_title);
+            mTxtToolbarTitle.setText(R.string.toolbar_dandanyar_title);
         } else if (mHostedFrgament instanceof CategoriesFragment) {
             mToolbarClose.setOnClickListener(view -> {
                 replaceBySurvaysFragment();
             });
-            mTxtToolbarTitle.setText(R.string.toolbar_dentistry_title);
+            mTxtToolbarTitle.setText(R.string.toolbar_oral_problems_title);
         } else if (mHostedFrgament instanceof QuestionsFragment) {
             mToolbarClose.setOnClickListener(view -> {
                 replaceByCategoriesFragment();
@@ -115,12 +115,13 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     }
 
     public void setToolbarTitle(String title) {
+        Animations.setAnimation(R.anim.hint_in, mTxtToolbarTitle);
         mTxtToolbarTitle.setText(title);
     }
 
     private void replaceBySurvaysFragment() {
-        replaceContentFragment(SurvaysFragment.newInstance(),
-            SurvaysFragment.TAG,
+        replaceContentFragment(SurveysFragment.newInstance(),
+            SurveysFragment.TAG,
             R.anim.activity_left_to_right,
             R.anim.activity_left_to_right2,
             true);
@@ -135,6 +136,16 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
             R.anim.activity_right_to_left,
             R.anim.activity_right_to_left2,
             true);
+    }
+
+    public void replaceByQuestionsFragment(long categoryId) {
+        new Handler().postDelayed(() -> {
+            replaceContentFragment(QuestionsFragment.newInstance(categoryId),
+                QuestionsFragment.TAG,
+                R.anim.activity_left_to_right,
+                R.anim.activity_left_to_right2,
+                true);
+        }, 200);
     }
 
 
@@ -188,7 +199,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
     private void setNavigationItemAction(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navbarMenuHome:
-                if (!(mHostedFrgament instanceof SurvaysFragment))
+                if (!(mHostedFrgament instanceof SurveysFragment))
                     replaceBySurvaysFragment();
                 break;
             case R.id.navbarMenuCatList:
@@ -307,7 +318,7 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
 
     @Override
     public void onBackPressed() {
-        if (mHostedFrgament instanceof SurvaysFragment) {
+        if (mHostedFrgament instanceof SurveysFragment) {
             showExitDialog();
         } else if (mHostedFrgament instanceof CategoriesFragment) {
             replaceBySurvaysFragment();

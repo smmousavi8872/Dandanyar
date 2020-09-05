@@ -1,4 +1,4 @@
-package com.developer.smmmousavi.clinic.ui.fragments.survays;
+package com.developer.smmmousavi.clinic.ui.fragments.surveys;
 
 
 import android.app.Application;
@@ -15,10 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-public class SurvaysFragmentVM extends BaseViewModel {
+public class SurveysFragmentVM extends BaseViewModel {
 
     @Inject
-    public SurvaysFragmentVM(@NonNull Application application) {
+    public SurveysFragmentVM(@NonNull Application application) {
         super(application);
     }
 

@@ -11,10 +11,9 @@ import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.factory.viewmodel.ViewModelProviderFactory;
 import com.developer.smmmousavi.clinic.helper.RecyclerViewHelper;
 import com.developer.smmmousavi.clinic.model.Category;
-import com.developer.smmmousavi.clinic.ui.activities.maindrawer.MainDrawerActivity;
+import com.developer.smmmousavi.clinic.ui.activities.basedrawer.BaseDrawerActivity;
 import com.developer.smmmousavi.clinic.ui.adapter.CategoriesRvAdapter;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
-import com.developer.smmmousavi.clinic.ui.fragments.questions.QuestionsFragment;
 import com.developer.smmmousavi.clinic.ui.viewholder.category.CategoryItemClickListener;
 import com.developer.smmmousavi.clinic.util.Animations;
 import com.github.ybq.android.spinkit.SpinKitView;
@@ -136,13 +135,6 @@ public class CategoriesFragment extends BaseDaggerFragment implements CategoryIt
 
     @Override
     public void onItemClicked(long categoryId) {
-        //TODO: go to questions fragment
-        new Handler().postDelayed(() -> {
-            ((MainDrawerActivity) getActivity()).replaceContentFragment(QuestionsFragment.newInstance(categoryId),
-                QuestionsFragment.TAG,
-                R.anim.activity_left_to_right,
-                R.anim.activity_left_to_right2,
-                true);
-        }, 200);
+        ((BaseDrawerActivity) getActivity()).replaceByQuestionsFragment(categoryId);
     }
 }

@@ -1,7 +1,9 @@
 package com.developer.smmmousavi.clinic.base.recyclerview;
 
+import android.util.Log;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final String TAG = "BaseRvAdapter";
 
     protected static final int HEADER = 0;
     protected static final int ITEM = 1;
@@ -45,8 +48,12 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<RecyclerView
     }
 
     public void setItemList(List<T> items) {
-        mItemList = items;
+        if (mItemList == null)
+            mItemList = new ArrayList<>();
+        mItemList.clear();
+        mItemList.addAll(items);
         notifyDataSetChanged();
+        Log.d(TAG, "setItemList: " + mItemList.size());
     }
 
     public List<T> getItemList() {

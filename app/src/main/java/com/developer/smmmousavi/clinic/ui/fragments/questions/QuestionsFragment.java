@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.factory.viewmodel.ViewModelProviderFactory;
+import com.developer.smmmousavi.clinic.helper.RecyclerViewHelper;
 import com.developer.smmmousavi.clinic.model.Question;
+import com.developer.smmmousavi.clinic.model.QuestionNumber;
 import com.developer.smmmousavi.clinic.network.bodies.PostQuestionBody;
 import com.developer.smmmousavi.clinic.ui.activities.basedrawer.BaseDrawerActivity;
+import com.developer.smmmousavi.clinic.ui.adapter.QuestionNumRvAdapter;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
 import com.developer.smmmousavi.clinic.ui.viewholder.questionnum.QuestionNumItemClickListener;
 import com.developer.smmmousavi.clinic.util.Animations;
@@ -19,12 +22,18 @@ import com.developer.smmmousavi.clinic.util.SharedPrefUtils;
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -50,15 +59,27 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
     MaterialButton mBtnYesAnswer;
     @BindView(R.id.btnNoAnswer)
     MaterialButton mBtnNoAnswer;
+    @BindView(R.id.btnStartOver)
+    MaterialButton mBtnStartOver;
+    @BindView(R.id.rvQuestionNum)
+    RecyclerView mQuestionNumRv;
+    @BindView(R.id.imgConnectionError)
+    AppCompatImageView mConnectionError;
 
     private long mCategoryId;
     private QuestionsFragmentVM mViewModel;
     private Question mQuestion;
     private String mCategoryTitle = "";
+    private List<QuestionNumber> mQuestionNumbers;
+    private boolean mQuestionAnswer;
 
 
     @Inject
     ViewModelProviderFactory mProviderFactory;
+    @Inject
+    RecyclerViewHelper mRvHelper;
+    @Inject
+    QuestionNumRvAdapter<QuestionNumber> mQuestionNumRvAdapter;
 
     public QuestionsFragment() {
         // Required empty public constructor
@@ -86,9 +107,14 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_questions, container, false);
         ButterKnife.bind(this, v);
+        init();
         initViewModel();
         subscribeObserver();
         return v;
+    }
+
+    private void init() {
+        mQuestionNumbers = new ArrayList<>();
     }
 
     private void initViewModel() {
@@ -111,14 +137,15 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
                             setFirstQuestion();
                             break;
                         case ERROR:
-                            if (listResource.data != null) {
+                            setConnectionErrorVisiblie();
+                            /*if (listResource.data != null) {
                                 mQuestion = listResource.data;
                                 Log.e(TAG, "subscribeObserverQ: can not refresh the cache.");
                                 Log.e(TAG, "subscribeObserverQ: Error message: " + listResource.message);
                                 Log.e(TAG, "subscribeObserverQ: status: ERROR, #recipes: " + listResource.data.toString());
                                 setFirstQuestion();
                             } else {
-                            }
+                            }*/
                             break;
                     }
                 }, 1000);
@@ -133,53 +160,90 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
                         break;
                     case SUCCESS:
                         mQuestion = questionResource.data;
-                        Log.d(TAG, "subscribeObserver2: new question id" + mQuestion.getId());
                         setNextQuestion();
                         break;
                     case ERROR:
-                        if (questionResource.data != null) {
+                        setConnectionErrorVisiblie();
+                        /*if (questionResource.data != null) {
                             mQuestion = questionResource.data;
                             Log.e(TAG, "subscribeObserver2: can not refresh the cache.");
                             Log.e(TAG, "subscribeObserver2: Error message: " + questionResource.message);
                             setNextQuestion();
                         } else {
                             Log.e(TAG, "subscribeObserver2: questionResource.data = null");
-                        }
+                        }*/
+                        break;
+                }
+            }
+        });
+        mViewModel.getCategoryMLD().observe(this, categoryResource -> {
+            //onChange
+            if (categoryResource != null) {
+                switch (categoryResource.status) {
+                    case LOADING:
+                        break;
+                    case SUCCESS:
+                        Log.d(TAG, "titleSubscribeObserver: " + categoryResource.data.getTitle());
+
+                        setToolbarTitle(categoryResource.data.getTitle());
+                        break;
+                    case ERROR:
                         break;
                 }
             }
         });
         mViewModel.getCategoryById(mCategoryId).observe(this, category -> {
-            setToolbarTitle(category.getTitle());
+            if (mCategoryTitle.equals(""))
+                setToolbarTitle(category.getTitle());
         });
+
     }
 
-    private void setNextQuestion() {
-        Log.d(TAG, "setNextQuestion: status is: " + mQuestion.getStatus());
-        setStatusFlag();
-        Animations.setAnimation(R.anim.hint_in, mTxtQuestionText);
-        mTxtQuestionText.setText(mQuestion.getText());
-        if (mQuestion.getResFlaseId() == null)
+    private void setConnectionErrorVisiblie() {
+        new Handler().postDelayed(() -> {
+            Animations.setAnimation(R.anim.fade_out, mQuestionLoading);
+            if (getView() != null)
+                Snackbar.make(getView(), R.string.faild_to_connect_to_server, Snackbar.LENGTH_SHORT).show();
+            mConnectionError.setVisibility(View.VISIBLE);
+        }, 1000);
+    }
+
+
+    private void setAnswerButtonsVisibility() {
+        if (mQuestion.getResTrueId() == null && mQuestion.getResFlaseId() == null) {
             mBtnNoAnswer.setVisibility(View.GONE);
-        if (mQuestion.getResTrueId() == null)
+            mBtnYesAnswer.setVisibility(View.GONE);
+            mBtnStartOver.setVisibility(View.VISIBLE);
+        } else if (mQuestion.getResFlaseId() == null && mQuestion.getResTrueId() != null) {
             mBtnNoAnswer.setVisibility(View.GONE);
+            mBtnYesAnswer.setVisibility(View.VISIBLE);
+        } else if (mQuestion.getResTrueId() == null && mQuestion.getResFlaseId() != null) {
+            mBtnYesAnswer.setVisibility(View.GONE);
+            mBtnNoAnswer.setVisibility(View.VISIBLE);
+        } else {
+            mBtnYesAnswer.setVisibility(View.VISIBLE);
+            mBtnNoAnswer.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setStatusFlag() {
         switch (mQuestion.getStatus()) {
             case 1:
+                mTxtStatusFlag.setBackgroundColor(getResources().getColor(R.color.pureWhite));
+                break;
+            case 2:
                 mTxtStatusFlag.setText(R.string.status_unurgent);
                 mTxtStatusFlag.setBackgroundColor(getResources().getColor(R.color.primaryGreen));
                 break;
-            case 2:
+            case 3:
                 mTxtStatusFlag.setText(R.string.status_urgent);
                 mTxtStatusFlag.setBackgroundColor(getResources().getColor(R.color.primaryOrange));
                 break;
-            case 3:
+            case 4:
                 mTxtStatusFlag.setText(R.string.status_super_urgent);
                 mTxtStatusFlag.setBackgroundColor(getResources().getColor(R.color.primaryRed));
                 break;
-            case 4:
+            case 5:
                 mTxtStatusFlag.setText(R.string.status_self_care);
                 mTxtStatusFlag.setBackgroundColor(getResources().getColor(R.color.primaryBlue));
                 break;
@@ -187,17 +251,43 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
     }
 
     private void setFirstQuestion() {
+        mViewModel.executeGetCategoryById(mQuestion.getCategoryId());
         mTxtQuestionText.setText(mQuestion.getText());
         setStatusFlag();
+        addNewQuestionNum(true, 1, -1, false);
+        initQuestionNumRv(mQuestionNumbers);
         Animations.setAnimation(R.anim.fade_in, mCvQuestionContainer);
         Animations.setAnimation(R.anim.fade_out, mQuestionLoading);
         mQuestionLoading.setVisibility(View.GONE);
         mCvQuestionContainer.setVisibility(View.VISIBLE);
+        setAnswerButtonsVisibility();
+    }
+
+    private void setNextQuestion() {
+        mViewModel.executeGetCategoryById(mQuestion.getCategoryId());
+        setStatusFlag();
+        addNewQuestionNum(false, mQuestionNumbers.size() + 1, mQuestion.getId(), mQuestionAnswer);
+        initQuestionNumRv(mQuestionNumbers);
+        setAnswerButtonsVisibility();
+        Animations.setAnimation(R.anim.hint_in, mTxtQuestionText);
+        mTxtQuestionText.setText(mQuestion.getText());
+    }
+
+
+    private void addNewQuestionNum(boolean first, int questionNum, long questionId, boolean answer) {
+        QuestionNumber qn = new QuestionNumber();
+        qn.setFirst(first);
+        qn.setQuestionNum(questionNum);
+        qn.setQuestionId(questionId);
+        qn.setQuestionAnswer(answer);
+        mQuestionNumbers.add(qn);
     }
 
     private void setToolbarTitle(String title) {
         if (!mCategoryTitle.equals(title)) {
             mCategoryTitle = title;
+            String message = String.format("انتقال به مسیر %s", mCategoryTitle);
+            Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
             ((BaseDrawerActivity) getActivity()).setToolbarTitle(mCategoryTitle);
         }
     }
@@ -209,8 +299,17 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
             userAnswer);
     }
 
+    private void initQuestionNumRv(List<QuestionNumber> questionNumbers) {
+        mQuestionNumRvAdapter.setItemClickListener(this);
+        mQuestionNumRvAdapter.setItemList(questionNumbers);
+        mRvHelper.buildRecyclerView(mRvHelper.getLinearLayoutManager(getContext(), RecyclerViewHelper.Orientation.HORIZONTAL, false),
+            mQuestionNumRv, mQuestionNumRvAdapter);
+        mQuestionNumRv.scrollToPosition(mQuestionNumRvAdapter.getItemCount() - 1);
+    }
+
     @OnClick(R.id.btnYesAnswer)
     void setOnYesButtonClickListener() {
+        mQuestionAnswer = true;
         PostQuestionBody body = getPostQuestionBody(true);
         Log.d(TAG, "setOnYesButtonClickListener: body -> " + body.toString());
         mViewModel.executePostQuestion(body);
@@ -218,13 +317,19 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
 
     @OnClick(R.id.btnNoAnswer)
     void setOnNoButtonClickListener() {
+        mQuestionAnswer = false;
         PostQuestionBody body = getPostQuestionBody(false);
         Log.d(TAG, "setOnYesButtonClickListener: body -> " + body.toString());
         mViewModel.executePostQuestion(body);
     }
 
+    @OnClick(R.id.btnStartOver)
+    void setOnStartOverClickListener() {
+        ((BaseDrawerActivity) getActivity()).replaceByQuestionsFragment(mCategoryId);
+    }
+
     @Override
     public void onItemClicked(long questionId, boolean userAnswer) {
-
+        //TODO: Requires getPreviousQuestion API
     }
 }

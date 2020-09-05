@@ -1,7 +1,7 @@
-package com.developer.smmmousavi.clinic.ui.fragments.survays.di;
+package com.developer.smmmousavi.clinic.ui.fragments.surveys.di;
 
 import com.developer.smmmousavi.clinic.factory.viewmodel.di.ViewModelKey;
-import com.developer.smmmousavi.clinic.ui.fragments.survays.SurvaysFragmentVM;
+import com.developer.smmmousavi.clinic.ui.fragments.surveys.SurveysFragmentVM;
 
 import androidx.lifecycle.ViewModel;
 import dagger.Binds;
@@ -13,6 +13,6 @@ public abstract class SurvaysFragmentVMModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(SurvaysFragmentVM.class)
-    public abstract ViewModel bindMainFragmentVM(SurvaysFragmentVM survaysFragmentVM);
+    @ViewModelKey(SurveysFragmentVM.class)
+    public abstract ViewModel bindMainFragmentVM(SurveysFragmentVM surveysFragmentVM);
 }

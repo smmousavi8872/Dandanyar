@@ -3,6 +3,7 @@ package com.developer.smmmousavi.clinic.network.api;
 import com.developer.smmmousavi.clinic.network.bodies.UserSignUpBody;
 import com.developer.smmmousavi.clinic.network.responses.ApiResponse;
 import com.developer.smmmousavi.clinic.network.responses.CategoriesResponse;
+import com.developer.smmmousavi.clinic.network.responses.CategoryByIdResponse;
 import com.developer.smmmousavi.clinic.network.responses.FirstQuestionResponse;
 import com.developer.smmmousavi.clinic.network.responses.PostQuestionResponse;
 import com.developer.smmmousavi.clinic.network.responses.UserResponse;
@@ -30,6 +31,11 @@ public interface SurvayRestApi {
 
     @GET("api/category/Get")
     LiveData<ApiResponse<CategoriesResponse>> getCategories();
+
+    @GET("api/category/GetCategoryById")
+    LiveData<ApiResponse<CategoryByIdResponse>> getCategoryById(
+        @Header("categoryId") long categoryId
+    );
 
     @GET("api/user/getUser")
     LiveData<ApiResponse<UserResponse>> getUserById(@Query("userId") long userId);
