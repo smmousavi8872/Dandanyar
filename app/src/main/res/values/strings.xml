@@ -42,7 +42,7 @@
   <string name="hint_search_here">اینجا جستوجو کنید</string>
   <string name="splash_loading_text">بارگزاری محتوا</string>
   <string name="splash_chant">پرسشنامه غربالگری «دندان\u200cیار»</string>
-  <string name="splash_version">version: 2.2.0</string>
+  <string name="splash_version">version: 2.2.1</string>
   <string name="main_choose_surva_title">نوع پرسش نامه خود را انتخاب کنید</string>
   <string name="toolbar_dandanyar_title">دندان\u200cیار</string>
   <string name="toolbar_oral_problems_title">مشکلات دهان و دندان</string>

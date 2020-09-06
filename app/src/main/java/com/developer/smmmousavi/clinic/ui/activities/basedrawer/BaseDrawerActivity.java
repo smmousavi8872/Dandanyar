@@ -92,7 +92,6 @@ public abstract class BaseDrawerActivity extends BaseDaggerCompatActivity
         initToolbar();
     }
 
-
     private void initToolbar() {
         if (!isToolbarVisible())
             mToolabrLayout.setVisibility(View.GONE);

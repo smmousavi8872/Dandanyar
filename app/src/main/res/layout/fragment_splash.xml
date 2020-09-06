@@ -58,7 +58,6 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     android:textColor="@color/colorPrimaryDark"
-    android:text="@string/splash_version"
     android:padding="8dp"
     android:fontFamily="@font/roboto_light"
     app:layout_constraintEnd_toEndOf="parent"

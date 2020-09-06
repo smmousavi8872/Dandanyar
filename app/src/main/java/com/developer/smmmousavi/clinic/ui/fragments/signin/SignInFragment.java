@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -84,6 +86,12 @@ public class SignInFragment extends BaseDaggerFragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((SignInSignUpActivity)getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -119,7 +127,7 @@ public class SignInFragment extends BaseDaggerFragment {
                         Log.e(TAG, "subscribeObserver: can not refresh the cache.");
                         Log.e(TAG, "subscribeObserver: Error message: " + listResource.message);
                         new Handler().postDelayed(() -> {
-                            Toast.makeText(getContext(), R.string.sign_in_faild +" error: " +listResource.message, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), R.string.sign_in_faild + " error: " + listResource.message, Toast.LENGTH_LONG).show();
                             doneWating();
                             activateSignUpButton(true);
                         }, 1000);

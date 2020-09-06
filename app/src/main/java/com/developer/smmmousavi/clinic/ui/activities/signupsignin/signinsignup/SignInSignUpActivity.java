@@ -3,6 +3,7 @@ package com.developer.smmmousavi.clinic.ui.activities.signupsignin.signinsignup;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.ui.activities.base.BaseDaggerCompatActivity;
@@ -35,6 +36,7 @@ public class SignInSignUpActivity extends BaseDaggerCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_sign_in_sign_up);
         ButterKnife.bind(this);
         insertFragment(SignInFragment.newInstance());

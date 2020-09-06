@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.factory.viewmodel.ViewModelProviderFactory;
 import com.developer.smmmousavi.clinic.network.bodies.UserSignUpBody;
 import com.developer.smmmousavi.clinic.ui.activities.maindrawer.MainDrawerActivity;
+import com.developer.smmmousavi.clinic.ui.activities.signupsignin.signinsignup.SignInSignUpActivity;
 import com.developer.smmmousavi.clinic.ui.fragments.base.BaseDaggerFragment;
 import com.developer.smmmousavi.clinic.util.SharedPrefUtils;
 import com.github.ybq.android.spinkit.SpinKitView;
@@ -23,6 +25,7 @@ import com.google.android.material.card.MaterialCardView;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -78,6 +81,12 @@ public class SignUpFragment extends BaseDaggerFragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((SignInSignUpActivity)getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -114,7 +123,7 @@ public class SignUpFragment extends BaseDaggerFragment {
                         Log.e(TAG, "subscribeObserver: can not refresh the cache.");
                         Log.e(TAG, "subscribeObserver: Error message: " + listResource.message);
                         new Handler().postDelayed(() -> {
-                            Toast.makeText(getContext(), R.string.sign_up_failed +" error: " +listResource.message, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), R.string.sign_up_failed + " error: " + listResource.message, Toast.LENGTH_LONG).show();
                             doneWating();
 
                             activateSignUpButton(true);

@@ -1,11 +1,14 @@
 package com.developer.smmmousavi.clinic.ui.fragments.questions;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.developer.smmmousavi.clinic.R;
 import com.developer.smmmousavi.clinic.factory.viewmodel.ViewModelProviderFactory;
@@ -161,9 +164,11 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
                     case SUCCESS:
                         mQuestion = questionResource.data;
                         setNextQuestion();
+                        awaitUser(false);
                         break;
                     case ERROR:
                         setConnectionErrorVisiblie();
+                        awaitUser(false);
                         /*if (questionResource.data != null) {
                             mQuestion = questionResource.data;
                             Log.e(TAG, "subscribeObserver2: can not refresh the cache.");
@@ -184,7 +189,6 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
                         break;
                     case SUCCESS:
                         Log.d(TAG, "titleSubscribeObserver: " + categoryResource.data.getTitle());
-
                         setToolbarTitle(categoryResource.data.getTitle());
                         break;
                     case ERROR:
@@ -266,11 +270,30 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
     private void setNextQuestion() {
         mViewModel.executeGetCategoryById(mQuestion.getCategoryId());
         setStatusFlag();
+
         addNewQuestionNum(false, mQuestionNumbers.size() + 1, mQuestion.getId(), mQuestionAnswer);
+
         initQuestionNumRv(mQuestionNumbers);
+
         setAnswerButtonsVisibility();
+
         Animations.setAnimation(R.anim.hint_in, mTxtQuestionText);
         mTxtQuestionText.setText(mQuestion.getText());
+    }
+
+    private void awaitUser(boolean await) {
+        if (await) {
+            mBtnYesAnswer.setEnabled(false);
+            mBtnNoAnswer.setEnabled(false);
+            mQuestionLoading.setVisibility(View.VISIBLE);
+            Animations.setAnimation(R.anim.fade_in, mQuestionLoading);
+
+        } else {
+            mBtnYesAnswer.setEnabled(true);
+            mBtnNoAnswer.setEnabled(true);
+            mQuestionLoading.setVisibility(View.GONE);
+            Animations.setAnimation(R.anim.fade_out, mQuestionLoading);
+        }
     }
 
 
@@ -287,9 +310,23 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
         if (!mCategoryTitle.equals(title)) {
             mCategoryTitle = title;
             String message = String.format("انتقال به مسیر %s", mCategoryTitle);
-            Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+            showSnackbar(message);
             ((BaseDrawerActivity) getActivity()).setToolbarTitle(mCategoryTitle);
         }
+    }
+
+    private void showSnackbar(String message) {
+        Snackbar snackbar = Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT);
+        View snackView = snackbar.getView();
+        snackView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        TextView tv = (TextView) snackView.findViewById(com.google.android.material.R.id.snackbar_text);
+        tv.setTextSize(19);
+        tv.setTextColor(getResources().getColor(R.color.pureWhite));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        else
+            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+        snackbar.show();
     }
 
     private PostQuestionBody getPostQuestionBody(boolean userAnswer) {
@@ -309,6 +346,7 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
 
     @OnClick(R.id.btnYesAnswer)
     void setOnYesButtonClickListener() {
+        awaitUser(true);
         mQuestionAnswer = true;
         PostQuestionBody body = getPostQuestionBody(true);
         Log.d(TAG, "setOnYesButtonClickListener: body -> " + body.toString());
@@ -317,6 +355,7 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
 
     @OnClick(R.id.btnNoAnswer)
     void setOnNoButtonClickListener() {
+        awaitUser(true);
         mQuestionAnswer = false;
         PostQuestionBody body = getPostQuestionBody(false);
         Log.d(TAG, "setOnYesButtonClickListener: body -> " + body.toString());

@@ -12,8 +12,8 @@
     android:layout_width="128dp"
     android:layout_height="128dp"
     android:layout_gravity="center"
-    android:visibility="gone"
     android:alpha="0.3"
+    android:visibility="gone"
     app:srcCompat="@drawable/ic_connection_error" />
 
   <androidx.recyclerview.widget.RecyclerView
@@ -85,6 +85,7 @@
         android:gravity="center"
         android:textColor="@color/pureWhite"
         android:textSize="16sp" />
+
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btnYesAnswer"

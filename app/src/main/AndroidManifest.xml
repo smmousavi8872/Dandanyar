@@ -20,7 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.signupsignin.signinsignup.SignInSignUpActivity">
+        <activity
+          android:windowSoftInputMode="adjustPan"
+          android:name=".ui.activities.signupsignin.signinsignup.SignInSignUpActivity">
 
         </activity>
         <activity android:name=".ui.activities.maindrawer.MainDrawerActivity">
