@@ -6,10 +6,13 @@ import android.app.Application;
 import com.developer.smmmousavi.clinic.base.viewmodel.BaseViewModel;
 import com.developer.smmmousavi.clinic.model.Category;
 import com.developer.smmmousavi.clinic.model.Question;
+import com.developer.smmmousavi.clinic.model.QuestionNumber;
 import com.developer.smmmousavi.clinic.network.bodies.PostQuestionBody;
 import com.developer.smmmousavi.clinic.network.util.Resource;
 import com.developer.smmmousavi.clinic.repository.CategoryRepository;
 import com.developer.smmmousavi.clinic.repository.QuestionRepository;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -131,4 +134,7 @@ public class QuestionsFragmentVM extends BaseViewModel {
     }
 
 
+    public void postUserSurvey(String userId, String startCategory, List<QuestionNumber> mQuestionNumbers) {
+        mQuestionRepository.postUserSurvey(userId, startCategory,mQuestionNumbers);
+    }
 }

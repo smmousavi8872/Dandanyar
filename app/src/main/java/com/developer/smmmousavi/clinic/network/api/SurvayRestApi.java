@@ -7,18 +7,23 @@ import com.developer.smmmousavi.clinic.network.responses.CategoryByIdResponse;
 import com.developer.smmmousavi.clinic.network.responses.FirstQuestionResponse;
 import com.developer.smmmousavi.clinic.network.responses.PostQuestionResponse;
 import com.developer.smmmousavi.clinic.network.responses.UserResponse;
+import com.google.gson.JsonElement;
 
 import androidx.lifecycle.LiveData;
+import okhttp3.RequestBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface SurvayRestApi {
 
+    @Headers("Content-Type: application/json")
     @POST("api/user/SignUp")
     LiveData<ApiResponse<UserResponse>> userSignUp(@Body UserSignUpBody body);
 
@@ -51,5 +56,11 @@ public interface SurvayRestApi {
         @Field("userId") long userId,
         @Field("questionId") long questionId,
         @Field("userAnswer") boolean userAnswer
+    );
+
+    @Headers("Content-Type: application/json")
+    @POST("api/userQuestion/PostUserSurvey")
+    Call<JsonElement> postUserSurvey(
+        @Body RequestBody body
     );
 }

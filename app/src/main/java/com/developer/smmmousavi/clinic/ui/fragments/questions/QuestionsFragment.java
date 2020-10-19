@@ -27,6 +27,10 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +44,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -218,6 +224,8 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
             mBtnNoAnswer.setVisibility(View.GONE);
             mBtnYesAnswer.setVisibility(View.GONE);
             mBtnStartOver.setVisibility(View.VISIBLE);
+            Log.d(TAG, "setAnswerButtonsVisibility: finish");
+            postUserSurvey();
         } else if (mQuestion.getResFlaseId() == null && mQuestion.getResTrueId() != null) {
             mBtnNoAnswer.setVisibility(View.GONE);
             mBtnYesAnswer.setVisibility(View.VISIBLE);
@@ -227,6 +235,14 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
         } else {
             mBtnYesAnswer.setVisibility(View.VISIBLE);
             mBtnNoAnswer.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void postUserSurvey() {
+        String userId = "10",startCategory="30";
+        if (mQuestionNumbers.size() > 0){
+            mQuestionNumbers.remove(mQuestionNumbers.get(0));
+            mViewModel.postUserSurvey(userId, startCategory, mQuestionNumbers);
         }
     }
 
