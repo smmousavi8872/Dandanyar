@@ -23,7 +23,7 @@ import retrofit2.http.Query;
 
 public interface SurvayRestApi {
 
-    @Headers("Content-Type: application/json")
+    //@Headers("Content-Type: application/json")
     @POST("api/user/SignUp")
     LiveData<ApiResponse<UserResponse>> userSignUp(@Body UserSignUpBody body);
 
