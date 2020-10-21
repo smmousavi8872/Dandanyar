@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.developer.smmmousavi.clinic">
+  package="com.developer.smmmousavi.dandanyar">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-      android:name=".application.BaseApplication"
+      android:name="com.developer.smmmousavi.dandanyar.application.BaseApplication"
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
@@ -13,7 +13,7 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.splash.SplashActivity">
+        <activity android:name="com.developer.smmmousavi.dandanyar.ui.activities.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,10 +22,10 @@
         </activity>
         <activity
           android:windowSoftInputMode="adjustPan"
-          android:name=".ui.activities.signupsignin.signinsignup.SignInSignUpActivity">
+          android:name="com.developer.smmmousavi.dandanyar.ui.activities.signupsignin.signinsignup.SignInSignUpActivity">
 
         </activity>
-        <activity android:name=".ui.activities.maindrawer.MainDrawerActivity">
+        <activity android:name="com.developer.smmmousavi.dandanyar.ui.activities.maindrawer.MainDrawerActivity">
 
         </activity>
     </application>
