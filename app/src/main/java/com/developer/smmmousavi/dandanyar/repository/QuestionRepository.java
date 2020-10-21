@@ -1,25 +1,38 @@
-package com.developer.smmmousavi.dandanyar.repository;
+package com.developer.smmmousavi.clinic.repository;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.developer.smmmousavi.dandanyar.model.Category;
-import com.developer.smmmousavi.dandanyar.model.Question;
-import com.developer.smmmousavi.dandanyar.network.AppExecutors;
-import com.developer.smmmousavi.dandanyar.network.bodies.PostQuestionBody;
-import com.developer.smmmousavi.dandanyar.network.factory.SurvayRestApiFactory;
-import com.developer.smmmousavi.dandanyar.network.responses.ApiResponse;
-import com.developer.smmmousavi.dandanyar.network.responses.FirstQuestionResponse;
-import com.developer.smmmousavi.dandanyar.network.responses.PostQuestionResponse;
-import com.developer.smmmousavi.dandanyar.network.util.NetworkBoundResource;
-import com.developer.smmmousavi.dandanyar.network.util.Resource;
-import com.developer.smmmousavi.dandanyar.presistence.dao.CategoryDAO;
-import com.developer.smmmousavi.dandanyar.presistence.dao.QuestionDAO;
-import com.developer.smmmousavi.dandanyar.presistence.db.Database;
+import com.developer.smmmousavi.clinic.model.Category;
+import com.developer.smmmousavi.clinic.model.Question;
+import com.developer.smmmousavi.clinic.model.QuestionNumber;
+import com.developer.smmmousavi.clinic.network.AppExecutors;
+import com.developer.smmmousavi.clinic.network.bodies.PostQuestionBody;
+import com.developer.smmmousavi.clinic.network.factory.SurvayRestApiFactory;
+import com.developer.smmmousavi.clinic.network.responses.ApiResponse;
+import com.developer.smmmousavi.clinic.network.responses.FirstQuestionResponse;
+import com.developer.smmmousavi.clinic.network.responses.PostQuestionResponse;
+import com.developer.smmmousavi.clinic.network.util.NetworkBoundResource;
+import com.developer.smmmousavi.clinic.network.util.Resource;
+import com.developer.smmmousavi.clinic.presistence.dao.CategoryDAO;
+import com.developer.smmmousavi.clinic.presistence.dao.QuestionDAO;
+import com.developer.smmmousavi.clinic.presistence.db.Database;
+import com.google.gson.JsonElement;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class QuestionRepository {
 
@@ -171,4 +184,45 @@ public class QuestionRepository {
         return mCategoryDAO.getCategoryById(categoryId);
     }
 
+    public void postUserSurvey(String userId, String startCategory, List<QuestionNumber> mQuestionNumbers) {
+        JSONObject root = new JSONObject();
+        JSONArray UserQuestions = new JSONArray();
+
+        try {
+
+            for(QuestionNumber question: mQuestionNumbers){
+                JSONObject obj = new JSONObject();
+                obj.put("questionId",question.getQuestionId());
+                obj.put("userAnswer",question.getQuestionAnswer());
+                obj.put("index",question.getQuestionNum());
+
+                UserQuestions.put(obj);
+            }
+
+            root.put("StartCategory",startCategory);
+            root.put("userId",userId);
+            root.put("UserQuestions",UserQuestions);
+
+            Log.d(TAG, "postUserSurvey: root:"+root);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType, root.toString());
+
+        SurvayRestApiFactory.create().postUserSurvey(body).enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                Log.d(TAG, "onResponse:postUserSurvey: "+response);
+                Log.d(TAG, "onResponse:request: "+call.request());
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                Log.d(TAG, "onFailure: postUserSurvey:"+t.toString());
+            }
+        });
+    }
 }

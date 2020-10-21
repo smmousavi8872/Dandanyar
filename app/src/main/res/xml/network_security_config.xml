@@ -3,5 +3,6 @@
   <base-config cleartextTrafficPermitted="true" />
   <domain-config>
     <domain includeSubdomains="true">http://dandaanyar.com</domain>>
+    <domain includeSubdomains="true">https://dandaanyar.com</domain>>
   </domain-config>
 </network-security-config>
