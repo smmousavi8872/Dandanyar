@@ -41,7 +41,7 @@ public interface CategoryDAO {
     @Query("SELECT * FROM categories WHERE id = :categoryId")
     LiveData<Category> getCategoryById(long categoryId);
 
-    @Query("SELECT * FROM categories")
+    @Query("SELECT * FROM categories ORDER BY category_order")
     LiveData<List<Category>> getAllCategories();
 
     @Query("DELETE from categories")

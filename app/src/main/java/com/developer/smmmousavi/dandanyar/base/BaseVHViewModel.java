@@ -1,6 +1,12 @@
 package com.developer.smmmousavi.dandanyar.base;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-public class BaseVHViewModel extends ViewModel {
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+
+public class BaseVHViewModel extends AndroidViewModel {
+    public BaseVHViewModel(@NonNull Application application) {
+        super(application);
+    }
 }

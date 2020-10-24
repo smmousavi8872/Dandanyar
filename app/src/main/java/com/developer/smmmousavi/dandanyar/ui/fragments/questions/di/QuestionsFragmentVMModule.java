@@ -1,7 +1,6 @@
 package com.developer.smmmousavi.dandanyar.ui.fragments.questions.di;
 
 import com.developer.smmmousavi.dandanyar.factory.viewmodel.di.ViewModelKey;
-import com.developer.smmmousavi.dandanyar.ui.fragments.questions.QuestionsFragmentVM;
 
 import androidx.lifecycle.ViewModel;
 import dagger.Binds;
@@ -13,7 +12,7 @@ public abstract class QuestionsFragmentVMModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(QuestionsFragmentVM.class)
-    abstract ViewModel bindQuestionFragmenVM(QuestionsFragmentVM questionsFragmentVM);
+    @ViewModelKey(com.developer.smmmousavi.dandanyar.ui.fragments.questions.QuestionsFragmentVM.class)
+    abstract ViewModel bindQuestionFragmenVM(com.developer.smmmousavi.dandanyar.ui.fragments.questions.QuestionsFragmentVM questionsFragmentVM);
 
 }

@@ -48,7 +48,6 @@ public class CategoriesFragment extends BaseDaggerFragment implements CategoryIt
     @BindView(R.id.txtCategoryLoadingContent)
     AppCompatTextView mTxtLoadingContent;
 
-
     @Inject
     RecyclerViewHelper mRvHelper;
     @Inject

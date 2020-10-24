@@ -1,16 +1,16 @@
-package com.developer.smmmousavi.clinic.ui.fragments.questions;
+package com.developer.smmmousavi.dandanyar.ui.fragments.questions;
 
 
 import android.app.Application;
 
-import com.developer.smmmousavi.clinic.base.viewmodel.BaseViewModel;
-import com.developer.smmmousavi.clinic.model.Category;
-import com.developer.smmmousavi.clinic.model.Question;
-import com.developer.smmmousavi.clinic.model.QuestionNumber;
-import com.developer.smmmousavi.clinic.network.bodies.PostQuestionBody;
-import com.developer.smmmousavi.clinic.network.util.Resource;
-import com.developer.smmmousavi.clinic.repository.CategoryRepository;
-import com.developer.smmmousavi.clinic.repository.QuestionRepository;
+import com.developer.smmmousavi.dandanyar.base.viewmodel.BaseViewModel;
+import com.developer.smmmousavi.dandanyar.model.Category;
+import com.developer.smmmousavi.dandanyar.model.Question;
+import com.developer.smmmousavi.dandanyar.model.QuestionNumber;
+import com.developer.smmmousavi.dandanyar.network.bodies.PostQuestionBody;
+import com.developer.smmmousavi.dandanyar.network.util.Resource;
+import com.developer.smmmousavi.dandanyar.repository.CategoryRepository;
+import com.developer.smmmousavi.dandanyar.repository.QuestionRepository;
 
 import java.util.List;
 

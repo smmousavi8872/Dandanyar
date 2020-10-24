@@ -2,7 +2,6 @@ package com.developer.smmmousavi.dandanyar.network.factory;
 
 
 import com.developer.smmmousavi.dandanyar.constants.Constants;
-import com.developer.smmmousavi.dandanyar.network.api.SurvayRestApi;
 import com.developer.smmmousavi.dandanyar.network.util.LiveDataCallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
@@ -17,10 +16,10 @@ public class SurvayRestApiFactory {
     private SurvayRestApiFactory() {
     }
 
-    public static SurvayRestApi create() {
+    public static com.developer.smmmousavi.dandanyar.network.api.SurvayRestApi create() {
         OkHttpClient client = provideOkHttpClientInstance();
         Retrofit retrofit = provideRetrofitInstance(client);
-        return retrofit.create(SurvayRestApi.class);
+        return retrofit.create(com.developer.smmmousavi.dandanyar.network.api.SurvayRestApi.class);
     }
 
     static OkHttpClient provideOkHttpClientInstance() {

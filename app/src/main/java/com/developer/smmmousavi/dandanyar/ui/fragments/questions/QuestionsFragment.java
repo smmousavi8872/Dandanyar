@@ -27,10 +27,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +40,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,7 +70,7 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
     AppCompatImageView mConnectionError;
 
     private long mCategoryId;
-    private QuestionsFragmentVM mViewModel;
+    private com.developer.smmmousavi.dandanyar.ui.fragments.questions.QuestionsFragmentVM mViewModel;
     private Question mQuestion;
     private String mCategoryTitle = "";
     private List<QuestionNumber> mQuestionNumbers;
@@ -127,7 +121,7 @@ public class QuestionsFragment extends BaseDaggerFragment implements QuestionNum
     }
 
     private void initViewModel() {
-        mViewModel = ViewModelProviders.of(this, mProviderFactory).get(QuestionsFragmentVM.class);
+        mViewModel = ViewModelProviders.of(this, mProviderFactory).get(com.developer.smmmousavi.dandanyar.ui.fragments.questions.QuestionsFragmentVM.class);
         mViewModel.executeGetFirstQuestion(mCategoryId);
     }
 

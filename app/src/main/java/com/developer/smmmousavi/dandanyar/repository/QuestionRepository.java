@@ -1,22 +1,22 @@
-package com.developer.smmmousavi.clinic.repository;
+package com.developer.smmmousavi.dandanyar.repository;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.developer.smmmousavi.clinic.model.Category;
-import com.developer.smmmousavi.clinic.model.Question;
-import com.developer.smmmousavi.clinic.model.QuestionNumber;
-import com.developer.smmmousavi.clinic.network.AppExecutors;
-import com.developer.smmmousavi.clinic.network.bodies.PostQuestionBody;
-import com.developer.smmmousavi.clinic.network.factory.SurvayRestApiFactory;
-import com.developer.smmmousavi.clinic.network.responses.ApiResponse;
-import com.developer.smmmousavi.clinic.network.responses.FirstQuestionResponse;
-import com.developer.smmmousavi.clinic.network.responses.PostQuestionResponse;
-import com.developer.smmmousavi.clinic.network.util.NetworkBoundResource;
-import com.developer.smmmousavi.clinic.network.util.Resource;
-import com.developer.smmmousavi.clinic.presistence.dao.CategoryDAO;
-import com.developer.smmmousavi.clinic.presistence.dao.QuestionDAO;
-import com.developer.smmmousavi.clinic.presistence.db.Database;
+import com.developer.smmmousavi.dandanyar.model.Category;
+import com.developer.smmmousavi.dandanyar.model.Question;
+import com.developer.smmmousavi.dandanyar.model.QuestionNumber;
+import com.developer.smmmousavi.dandanyar.network.AppExecutors;
+import com.developer.smmmousavi.dandanyar.network.bodies.PostQuestionBody;
+import com.developer.smmmousavi.dandanyar.network.factory.SurvayRestApiFactory;
+import com.developer.smmmousavi.dandanyar.network.responses.ApiResponse;
+import com.developer.smmmousavi.dandanyar.network.responses.FirstQuestionResponse;
+import com.developer.smmmousavi.dandanyar.network.responses.PostQuestionResponse;
+import com.developer.smmmousavi.dandanyar.network.util.NetworkBoundResource;
+import com.developer.smmmousavi.dandanyar.network.util.Resource;
+import com.developer.smmmousavi.dandanyar.presistence.dao.CategoryDAO;
+import com.developer.smmmousavi.dandanyar.presistence.dao.QuestionDAO;
+import com.developer.smmmousavi.dandanyar.presistence.db.Database;
 import com.google.gson.JsonElement;
 
 import org.json.JSONArray;

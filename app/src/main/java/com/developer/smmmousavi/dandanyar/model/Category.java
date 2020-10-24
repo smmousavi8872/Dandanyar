@@ -16,16 +16,20 @@ public class Category extends BaseModel {
     @ColumnInfo(name = "id")
     @PrimaryKey
     @NonNull
-    private long mId;
-
+    private final long mId;
 
     @SerializedName("title")
     @ColumnInfo(name = "title")
-    private String mTitle;
+    private final String mTitle;
 
-    public Category(long id, String title) {
+    @SerializedName("orderCategory")
+    @ColumnInfo(name = "category_order")
+    private int mOrder;
+
+    public Category(long id, String title, int order) {
         mId = id;
         mTitle = title;
+        mOrder = order;
     }
 
     public long getId() {
@@ -36,17 +40,36 @@ public class Category extends BaseModel {
         return mTitle;
     }
 
+    public int getOrder() {
+        return mOrder;
+    }
+
+    public void setOrder(int order) {
+        mOrder = order;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+            "mId=" + mId +
+            ", mTitle='" + mTitle + '\'' +
+            ", mOrder=" + mOrder +
+            '}';
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
         return mId == category.mId &&
+            mOrder == category.mOrder &&
             Objects.equals(mTitle, category.mTitle);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mId, mTitle);
+        return Objects.hash(mId, mTitle, mOrder);
     }
 }

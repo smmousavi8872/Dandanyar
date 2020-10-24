@@ -1,12 +1,12 @@
-package com.developer.smmmousavi.clinic.network.api;
+package com.developer.smmmousavi.dandanyar.network.api;
 
-import com.developer.smmmousavi.clinic.network.bodies.UserSignUpBody;
-import com.developer.smmmousavi.clinic.network.responses.ApiResponse;
-import com.developer.smmmousavi.clinic.network.responses.CategoriesResponse;
-import com.developer.smmmousavi.clinic.network.responses.CategoryByIdResponse;
-import com.developer.smmmousavi.clinic.network.responses.FirstQuestionResponse;
-import com.developer.smmmousavi.clinic.network.responses.PostQuestionResponse;
-import com.developer.smmmousavi.clinic.network.responses.UserResponse;
+import com.developer.smmmousavi.dandanyar.network.bodies.UserSignUpBody;
+import com.developer.smmmousavi.dandanyar.network.responses.ApiResponse;
+import com.developer.smmmousavi.dandanyar.network.responses.CategoriesResponse;
+import com.developer.smmmousavi.dandanyar.network.responses.CategoryByIdResponse;
+import com.developer.smmmousavi.dandanyar.network.responses.FirstQuestionResponse;
+import com.developer.smmmousavi.dandanyar.network.responses.PostQuestionResponse;
+import com.developer.smmmousavi.dandanyar.network.responses.UserResponse;
 import com.google.gson.JsonElement;
 
 import androidx.lifecycle.LiveData;
